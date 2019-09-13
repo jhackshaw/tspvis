@@ -1,21 +1,47 @@
-import React from "react"
-import { Link } from "gatsby"
+import React, { useState, useEffect } from "react"
+import { MarkSeries, LineSeries } from 'react-vis';
+import Layout from "../components/Layout"
+import Plot from '../components/Plot';
+import Menu from "../components/Menu";
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+function getRandomInt(min=0, max=100) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
+function randomPoints(count) {
+  return Array.from({ length: count }).map(_ => ({
+    x: getRandomInt(),
+    y: getRandomInt()
+  }))
+}
+
+
+const IndexPage = () => {
+  const [data, setData] = useState(randomPoints(10));
+
+  useEffect(() => {
+    const to = setInterval(() => {
+      setData(randomPoints(10))
+    }, 1000);
+    return () => {
+      clearInterval(to)
+    }
+  })
+
+  return (
+    <Layout>
+      <Menu />
+      <Plot>
+        <MarkSeries data={data} />
+        {/* <LineSeries data={data} /> */}
+      </Plot>
+    </Layout>
+  )
+}
+  
+
 
 export default IndexPage
