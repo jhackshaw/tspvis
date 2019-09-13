@@ -1,26 +1,39 @@
-import React, { useState, useEffect } from "react"
-import { MarkSeries, LineSeries } from 'react-vis';
+import React, { useState, useEffect, useRef } from "react"
 import Layout from "../components/Layout"
-import Plot from '../components/Plot';
+import MapPlot from '../components/MapPlot';
 import Menu from "../components/Menu";
 
 
-function getRandomInt(min=0, max=100) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+const worldBounds = [
+  [-180, 180], [-90, 90]
+]
+
+const getRandomFloat = (min, max) => {
+  return Math.random() * (max - min) + min
 }
 
-function randomPoints(count) {
+
+const randomPoints = (ne, sw, count=12) => {
+  const { lat: upperLat, lon: upperLon } = ne;
+  const { lat: lowerLat, lon: lowerLon } = sw;
+
   return Array.from({ length: count }).map(_ => ({
-    x: getRandomInt(),
-    y: getRandomInt()
+    coordinates: [
+      getRandomFloat(lowerLon, upperLon),
+      getRandomFloat(upperLat, lowerLat)
+    ]
   }))
 }
 
 
 const IndexPage = () => {
-  const [data, setData] = useState(randomPoints(10));
+  const [points, setPoints] = useState(randomPoints(...worldBounds));
+  const mapRef = useRef(null)
+
+  const randomizePoints = () => {
+    const { _ne, _sw } = mapRef.current.getBounds();
+    setPoints(randomPoints(_ne, _sw))
+  }
 
   useEffect(() => {
     const to = setInterval(() => {
@@ -33,11 +46,10 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <Menu />
-      <Plot>
-        <MarkSeries data={data} />
-        {/* <LineSeries data={data} /> */}
-      </Plot>
+      <Menu randomizePoints={randomizePoints} />
+      <MapPlot ref={mapRef}
+               points={points} />
+               
     </Layout>
   )
 }

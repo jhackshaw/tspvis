@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const SideDrawer = ({ }) => {
+const SideDrawer = ({ randomizePoints }) => {
   const classes = useStyles();
 
 
@@ -29,8 +29,8 @@ const SideDrawer = ({ }) => {
         <MenuMetrics />
       
         <Divider />
-        <ListItem>
-          <ListItemText>Best: </ListItemText>
+        <ListItem button onClick={randomizePoints}>
+          Randomize
         </ListItem>
         <ListItem>
           <ListItemText>Current: </ListItemText>
