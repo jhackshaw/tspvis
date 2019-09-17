@@ -1,11 +1,16 @@
-import React, { useState, useRef, useImperativeHandle } from 'react';
-import DeckGL, { ScatterplotLayer } from 'deck.gl';
+import React, { useRef, useImperativeHandle, useContext } from 'react';
+import DeckGL, { ScatterplotLayer, PathLayer } from 'deck.gl';
 import MapGL from 'react-map-gl';
+import StoreProvider from '../store/provider';
+import * as actions from '../store/actions';
 
-const TOKEN = 'pk.eyJ1IjoiaW50cmVwaWRldiIsImEiOiJjazBpa2M5YnowMHcyM21ubzgycW8zZHJmIn0.DCO2aRA6MJweC8HN-d_cgQ'; // Set your mapbox token here
+const TOKEN = 'pk.eyJ1IjoiaW50cmVwaWRldiIsImEiOiJjazBpa2M5YnowMHcyM21ubzgycW8zZHJmIn0.DCO2aRA6MJweC8HN-d_cgQ';
 
-const MapPlot = React.forwardRef(({ points }, ref) => {
+
+const MapPlot = React.forwardRef((props, ref) => {
   const mapGlRef = useRef();
+  const { state, dispatch } = useContext(StoreProvider);
+  const { points, bestPath, viewport } = state;
 
   useImperativeHandle(ref, () => ({
     getBounds: () => {
@@ -14,21 +19,16 @@ const MapPlot = React.forwardRef(({ points }, ref) => {
     }
   }))
 
-  const [viewportState, setViewportState] = useState({
-    longitude: 0,
-    latitude: 0,
-    zoom: 0
-  });
-
   const onViewportChanged = viewport => {
-    // console.log(viewport)
-    setViewportState(viewport)
+    dispatch(actions.setViewportState(viewport))
   }
+
+  console.log(JSON.stringify(bestPath));
 
   return (
     <MapGL
-      {...viewportState}
-      ref={ mapGlRef }
+      {...viewport}
+      ref={mapGlRef}
       width="100%"
       height="100%"
       maxPitch={0}
@@ -36,14 +36,23 @@ const MapPlot = React.forwardRef(({ points }, ref) => {
       mapboxApiAccessToken={TOKEN}
       disableTokenWarning={true}
     >
-      <DeckGL viewState={viewportState}>
-        <ScatterplotLayer data={points} 
+      <DeckGL viewState={viewport}>
+        <ScatterplotLayer id="scatter-layer"
+                          data={points}
                           pickable={true}
                           opacity={0.8}
                           radiusMinPixels={5}
                           raduisMaxPixels={8}
-                          getPosition={ d => d.coordinates }
                           />
+        <PathLayer id='path-layer'
+                   data={[bestPath]}
+                   getPath={d => d.path}
+                   getWidth={5}
+                   widthUnit='pixels'
+                   pickable={true}
+                   widthMinPixels={2}
+                   widthMaxPixels={4}
+                   />
       </DeckGL>
     </MapGL>
   );

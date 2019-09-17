@@ -21,17 +21,15 @@ const MenuMetrics = ({ curBest=0.0, evaluating=0.0 }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.wrapper}>
       <TextField
           label="Current Best"
-          className={classes.field}
+          // className={classes.field}
           margin="dense"
           disabled
           fullWidth
           value={ curBest }
           variant="outlined"
         />
-    </div>
   )
 }
 

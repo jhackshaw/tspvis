@@ -1,15 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Paper, ListItem, ListItemText, ListSubheader, Divider } from '@material-ui/core';
-import MenuHeader from './MenuHeader';
-import MenuMetrics from './MenuMetrics';
+import { Paper, Divider, Hidden } from '@material-ui/core';
+import MenuControls from './MenuControls';
 
 
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
     overflowY: 'auto',
-    flex: '0 0 400px'
+    flex: '0 0 400px',
+    padding: theme.spacing(2)
   },
   [theme.breakpoints.down('sm')]: {
     width: '100%'
@@ -17,33 +17,19 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const SideDrawer = ({ randomizePoints }) => {
+const Menu = ({ onStart, onStop }) => {
   const classes = useStyles();
-
 
   return (
     <Paper classes={{ root: classes.wrapper }}>
-        <MenuHeader />
-        <Divider />
+      <Hidden mdDown>
+         <MenuControls onStart={onStart}
+                       onStop={onStop} />
+         <Divider />
+      </Hidden>
 
-        <MenuMetrics />
-      
-        <Divider />
-        <ListItem button onClick={randomizePoints}>
-          Randomize
-        </ListItem>
-        <ListItem>
-          <ListItemText>Current: </ListItemText>
-        </ListItem>
-
-        <ListItem>
-          <ListItemText>Best: </ListItemText>
-        </ListItem>
-        <ListItem>
-          <ListItemText>Current: </ListItemText>
-        </ListItem>
     </Paper>
   )
 }
 
-export default SideDrawer;
+export default Menu;
