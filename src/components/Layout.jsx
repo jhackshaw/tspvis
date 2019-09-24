@@ -1,27 +1,31 @@
-import React from "react"
-import { ThemeProvider } from '@material-ui/styles';
-import { CssBaseline, createMuiTheme } from '@material-ui/core';
-import ContentRoot from './ContentRoot';
+import React from 'react';
+import { makeStyles } from '@material-ui/styles';
 
 
-const theme = createMuiTheme({
-  palette: {
-    type: 'light'
+const useStyles = makeStyles(theme => ({
+  container: {
+    height: '100vh',
+    display: 'flex',
+    overflow: 'hidden',
+    flexDirection: 'row'
+  },
+  [theme.breakpoints.down('sm')]: {
+    container: {
+      justifyContent: 'flex-end',
+      flexDirection: 'column-reverse'
+    }
   }
-})
+}))
 
 
-const Layout = ({ children }) => {
+const ContentRoot = ({ children }) => {
+  const classes = useStyles();
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <ContentRoot>
-        { children }
-      </ContentRoot>
-    </ThemeProvider>
+    <div className={ classes.container}>
+      { children }
+    </div>
   )
 }
 
-
-export default Layout
+export default ContentRoot;

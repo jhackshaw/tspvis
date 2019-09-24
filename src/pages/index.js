@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux';
 import Layout from "../components/Layout"
 import MapPlot from '../components/MapPlot';
@@ -14,19 +14,29 @@ const IndexPage = () => {
   const dispatch = useDispatch();
   const algorithm = useSelector(selectors.selectAlgorithm);
   const delay = useSelector(selectors.selectDelay);
+  const showIntermediatePaths = useSelector(selectors.selectShowIntermediatePaths);
   const points = useSelector(selectors.selectPoints);
 
-  const { startWork, stopWork } = useSolverWorker(dispatch);
+  const solver = useSolverWorker(dispatch, algorithm);
 
   const start = () => {
-    dispatch(actions.startingWork())
-    startWork(algorithm, { points, delay })
+    const action = actions.startSolving(points, delay, showIntermediatePaths);
+    dispatch(action)
+    solver.postMessage(action)
   }
 
   const stop = () => {
-    dispatch(actions.stoppingWork())
-    stopWork()
+    dispatch(actions.stopSolving())
+    solver.terminate();
   }
+
+  useEffect(() => {
+    solver.postMessage(actions.setDelay(delay))
+  }, [delay, solver])
+
+  useEffect(() => {
+    solver.postMessage(actions.setShowIntermediatePaths(showIntermediatePaths))
+  }, [showIntermediatePaths, solver])
 
   return (
     <Layout>

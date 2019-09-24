@@ -1,33 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import solvers from '../solvers';
 
 
-export default onSolverMessage => {
+export default (onSolverMessage, algorithm) => {
   const [solver, setSolver] = useState();
 
-  const stopWork = () => {
+  const resetSolver = () => {
     if (solver) {
       solver.terminate();
     }
+    const worker = new solvers[algorithm]();
+    worker.onmessage = ({ data }) => onSolverMessage(data);
+    worker.onerror = console.error;
+    setSolver(worker);  
   }
 
-  const startWork = (algorithm, data) => {
-    stopWork();
-    const worker = new solvers[algorithm]();
-    worker.onmessage = ({data}) => onSolverMessage(data);
-    worker.onerror = console.error;
+  useEffect(resetSolver, [algorithm, onSolverMessage])
 
-    setSolver(worker);
-    worker.postMessage(data)
-
-
-    setTimeout(() => {
-      worker.postMessage({ test: 'asdf' })
-    }, 5000)
+  const postMessage = data => {
+    if (solver) {
+      solver.postMessage(data);
+    }
   }
 
   return {
-    startWork,
-    stopWork
+    postMessage,
+    terminate: resetSolver
   }
 }

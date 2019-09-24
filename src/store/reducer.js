@@ -19,16 +19,18 @@ const usTop12 = [
 const initialViewport = {
   latitude: 39.8097343,
   longitude: -98.5556199,
-  zoom: 3
+  zoom: 4
 }
 
 
 const initialState = {
   points: usTop12,
   viewport: initialViewport,
-  algorithm: 'random',
+  algorithm: 'shortestPath',
   bestPath: [],
+  intermediatePaths: [],
   delay: 500,
+  showIntermediatePaths: false,
   running: false
 }
 
@@ -40,11 +42,21 @@ export default (state=initialState, action) => {
         ...state,
         viewport: action.viewport
       }
+    
+    case actions.SET_ALGORITHM:
+      return {
+        ...state,
+        algorithm: action.algorithm,
+        bestPath: [],
+        intermediatePaths: [],
+        delay: 500
+      }
 
     case actions.SET_BEST_PATH:
       return {
         ...state,
-        bestPath: action.path
+        bestPath: action.path,
+        intermediatePaths: []
       }
 
     case actions.SET_DELAY:
@@ -52,17 +64,39 @@ export default (state=initialState, action) => {
         ...state,
         delay: action.delay
       }
-
-    case actions.STARTING_WORK:
+    
+    case actions.SET_SHOW_INTERMEDIATE_PATHS:
       return {
         ...state,
-        running: true
+        showIntermediatePaths: action.show,
+        intermediatePaths: action.show ? state.intermediatePaths : []
+      }
+
+    case actions.SET_INTERMEDIATE_PATHS:
+      return {
+        ...state,
+        intermediatePaths: state.showIntermediatePaths ? action.paths : []
+      }
+
+    case actions.START_SOLVING:
+      return {
+        ...state,
+        running: true,
+        bestPath: []
       }
     
-    case actions.STOPPING_WORK:
+    case actions.STOP_SOLVING:
       return {
         ...state,
         running: false
+      }
+
+    case actions.RESET:
+      return {
+        ...state,
+        delay: 500,
+        bestPath: [],
+        intermediatePaths: []
       }
 
     default:
