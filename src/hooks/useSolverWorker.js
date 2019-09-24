@@ -1,38 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import solvers from '../solvers';
-import * as solverCommands from '../solvers/commands';
 
 
-export default (dispatch, algorithm) => {
+export default onSolverMessage => {
   const [solver, setSolver] = useState();
 
-  const terminateSolver = () => {
+  const stopWork = () => {
     if (solver) {
-      solver.terminate()
+      solver.terminate();
     }
   }
 
-  useEffect(() => {
+  const startWork = (algorithm, data) => {
+    stopWork();
     const worker = new solvers[algorithm]();
-
-    worker.onmessage = ({ data }) => {
-      dispatch(data)
-    };
-
-    worker.onerror = e => {
-      console.log(e.message)
-    };
+    worker.onmessage = ({data}) => onSolverMessage(data);
+    worker.onerror = console.error;
 
     setSolver(worker);
-    return terminateSolver;
-  }, [algorithm])
+    worker.postMessage(data)
 
-  const start = points => {
-    solver.postMessage(solverCommands.startSolving(points))
+
+    setTimeout(() => {
+      worker.postMessage({ test: 'asdf' })
+    }, 5000)
   }
 
   return {
-    solver,
-    start
+    startWork,
+    stopWork
   }
 }

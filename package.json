@@ -18,7 +18,9 @@
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
     "react-map-gl": "^5.0.10",
+    "react-redux": "^7.1.1",
     "react-vis": "^1.11.7",
+    "redux": "^4.0.4",
     "worker-loader": "^2.0.0"
   },
   "devDependencies": {

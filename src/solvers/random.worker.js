@@ -1,32 +1,23 @@
 /* eslint-disable no-restricted-globals */
-import * as commands from './commands';
 import * as actions from '../store/actions';
+import * as utils from './utils';
 
 
 self.onmessage = function({ data }) {
   console.log(data)
-  switch (data.cmd) {
-    case commands.SOLVE:
-      startSolving(data.points)
-      break
-  
-    default:
-      break;
-  }
+  const { points, delay } = data;
+  run(points, delay)
 }
 
-const startSolving = points => {
-  let x = 0;
-  while (x < 1000) {
-    self.postMessage(
-      actions.setBestPath(
-        points.sort(
-          () => Math.random() - 0.5
-        ).map(
-          p => p.position
-        )
-      )
-    )
-    x = x+1;
+const run = async (points, delay) => {
+  let best = null;
+  while (true) {
+    const nextPath = points.sort(() => Math.random() - 0.5);
+    const cost = utils.pathCost(nextPath);
+    if (best === null || cost < best) {
+      best = cost;
+      self.postMessage(actions.setBestPath(nextPath, cost));
+    }
+    await utils.sleep(delay)
   }
 }

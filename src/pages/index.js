@@ -1,35 +1,41 @@
-import React, { useRef, useReducer } from "react"
+import React, { useRef } from "react"
+import { useSelector, useDispatch } from 'react-redux';
 import Layout from "../components/Layout"
 import MapPlot from '../components/MapPlot';
 import Menu from "../components/Menu";
 
 import useSolverWorker from '../hooks/useSolverWorker';
-import StoreProvider from '../store/provider';
-import reducer, { initialState } from '../store/reducer';
-
+import * as selectors from '../store/selectors';
+import * as actions from '../store/actions';
 
 
 const IndexPage = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
   const mapRef = useRef(null)
+  const dispatch = useDispatch();
+  const algorithm = useSelector(selectors.selectAlgorithm);
+  const delay = useSelector(selectors.selectDelay);
+  const points = useSelector(selectors.selectPoints);
 
-  const { points, algorithm } = state;
+  const { startWork, stopWork } = useSolverWorker(dispatch);
 
+  const start = () => {
+    dispatch(actions.startingWork())
+    startWork(algorithm, { points, delay })
+  }
 
-  const { start } = useSolverWorker(dispatch, algorithm, {});
-  
+  const stop = () => {
+    dispatch(actions.stoppingWork())
+    stopWork()
+  }
 
   return (
-    <StoreProvider.Provider value={{dispatch, state}}>
-      <Layout>
-        <Menu onStart={() => start(points)} />
-        <MapPlot ref={mapRef}
-                />
-      </Layout>
-    </StoreProvider.Provider>
+    <Layout>
+      <Menu onStart={start}
+            onStop={stop} />
+      <MapPlot ref={mapRef}
+              />
+    </Layout>
   )
 }
-  
-
 
 export default IndexPage
