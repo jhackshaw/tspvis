@@ -4,13 +4,13 @@ import * as utils from './utils';
 
 
 let DELAY = 0;
-let SHOW_INTERMEDIATE = false;
+let EVALUATING_DETAIL_LEVEL = 0;
 
 self.onmessage = function({ data: action }) {
   switch (action.type) {
     case actions.START_SOLVING:
       DELAY = action.delay;
-      SHOW_INTERMEDIATE = action.showIntermediatePaths;
+      EVALUATING_DETAIL_LEVEL = action.evaluatingDetailLevel;
       run(action.points)
       break;
     
@@ -18,8 +18,8 @@ self.onmessage = function({ data: action }) {
       DELAY = action.delay;
       break;
 
-    case actions.SET_SHOW_INTERMEDIATE_PATHS:
-      SHOW_INTERMEDIATE = action.show
+    case actions.SET_EVALUATING_DETAIL_LEVEL:
+      EVALUATING_DETAIL_LEVEL = action.level
       break;
 
     default:
@@ -39,18 +39,19 @@ const run = async points => {
 
     path.push(remaining.pop());
 
-    if (SHOW_INTERMEDIATE) {
-      self.postMessage(actions.setIntermediatePath(path))
+    if (EVALUATING_DETAIL_LEVEL) {
+      self.postMessage(actions.setIntermediatePath(path, utils.pathCost(path)))
     }
 
     await utils.sleep(DELAY || 10)
   }
 
   path.push(path[0]);
-  if (SHOW_INTERMEDIATE) {
-    self.postMessage(actions.setIntermediatePath(path))
+  const cost = utils.pathCost(path);
+  if (EVALUATING_DETAIL_LEVEL) {
+    self.postMessage(actions.setIntermediatePath(path, cost))
   }
-  self.postMessage(actions.setBestPath(path));
+  self.postMessage(actions.setBestPath(path, cost));
   self.postMessage(actions.stopSolving());
   self.terminate();
 }

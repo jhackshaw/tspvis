@@ -45,7 +45,7 @@ export const haversine = (pt1, pt2) => {
   }
   dist = Math.acos(dist);
   dist = dist * 180/Math.PI;
-  return Math.abs(dist * 60 * 1.1515 * 1.609344);
+  return dist * 60 * 1.1515 * 1.609344;
 }
 
 
