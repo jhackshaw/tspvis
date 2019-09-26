@@ -37,13 +37,13 @@ const MenuPointControls = ({ onRandomizePoints }) => {
       <MenuItem title="Points">
         <ButtonGroup fullWidth variant="outlined" color="secondary" size="large" disabled={running}>
           <Button onClick={onRandomizePoints} disabled={definingPoints}>
-            <FontAwesomeIcon icon={faRandom}/>
+            <FontAwesomeIcon icon={faRandom} width="0"/>
           </Button>
           <Button onClick={onToggleDefiningPoints}>
-            <FontAwesomeIcon icon={definingPoints ? faSave : faMousePointer} />
+            <FontAwesomeIcon icon={definingPoints ? faSave : faMousePointer} width="0" />
           </Button>
           <Button disabled={definingPoints} onClick={onDefaultMap}>
-            <FontAwesomeIcon icon={faMapMarked} />
+            <FontAwesomeIcon icon={faMapMarked} width="0" />
           </Button>
         </ButtonGroup>
       </MenuItem>
