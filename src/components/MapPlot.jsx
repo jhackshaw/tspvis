@@ -15,17 +15,28 @@ const MapPlot = React.forwardRef((props, ref) => {
   const plotPaths = useSelector(selectors.selectPlotPaths);
   const viewport = useSelector(selectors.selectViewport);
   const running = useSelector(selectors.selectRunning);
+  const definingPoints = useSelector(selectors.selectDefiningPoints)
   const dispatch = useDispatch()
 
   useImperativeHandle(ref, () => ({
     getBounds: () => {
       const map = mapGlRef.current.getMap();
-      return map.getBounds();
+      const { _ne, _sw } = map.getBounds();
+      return {
+        top: _ne.lat,
+        bottom: _sw.lat,
+        left: _ne.lng,
+        right: _sw.lng 
+      }
     }
   }))
 
   const onViewportChanged = viewport => {
     dispatch(actions.setViewportState(viewport))
+  }
+
+  const onDefinedPoint = ({ lngLat }) => {
+    dispatch(actions.addDefinedPoint(lngLat))
   }
 
   return (
@@ -38,6 +49,7 @@ const MapPlot = React.forwardRef((props, ref) => {
       onViewportChange={onViewportChanged}
       mapboxApiAccessToken={TOKEN}
       disableTokenWarning={true}
+      onNativeClick={definingPoints && onDefinedPoint}
     >
       { running &&
         <LinearProgress color="secondary" />
@@ -46,12 +58,14 @@ const MapPlot = React.forwardRef((props, ref) => {
         <PathLayer id='path-layer'
                    data={plotPaths}
                    getPath={d => d.path}
-                   getWidth={5}
+                   getWidth={d => d.width}
+                   getDashArray={d => d.dashes}
                    getColor={d => d.color}
-                   widthUnit='pixels'
+                   rounded={true}
+                   widthUnit='meters'
                    pickable={true}
-                   widthMinPixels={2}
-                   widthMaxPixels={4}
+                   widthMinPixels={4}
+                   widthMaxPixels={8}
                    />
         <ScatterplotLayer id="scatter-layer"
                           data={plotPoints}
