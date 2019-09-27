@@ -1,68 +1,85 @@
 import { createSelector } from 'reselect';
+import { START_POINT_COLOR,
+         POINT_COLOR, 
+         BEST_PATH_COLOR,
+         EVALUATING_PATH_COLOR } from '../constants';
 
+
+export const selectViewport = state => state.viewport;
+
+//
+//  FOR SOLVER CONTROLS
+//
 export const selectAlgorithm = state => state.algorithm;
 
 export const selectDelay = state => state.delay;
 
 export const selectEvaluatingDetailLevel = state => state.evaluatingDetailLevel;
 
-export const selectPoints = state => state.points;
-
-export const selectBestPaths = state => state.bestPaths;
-
-export const selectBestCost = state => state.bestCost;
-
-export const selectEvaluatingCost = state => state.evaluatingCost;
-
-export const selectIntermediatePaths = state => state.intermediatePaths;
-
-export const selectViewport = state => state.viewport;
+export const selectMaxEvaluatingDetailLevel = state => state.maxEvaluatingDetailLevel;
 
 export const selectRunning = state => state.running;
 
+
+//
+// FOR DISPLAY
+//
+export const selectPoints = state => state.points;
+export const selectPointsDisplay = createSelector(
+  selectPoints,
+  points => points.map((p, idx) => ({ 
+    position: p, 
+    color: idx === 0 ? START_POINT_COLOR : POINT_COLOR 
+  }))
+)
+
+export const selectShowBestPath = state => state.showBestPath;
+export const selectBestPath = state => state.bestPath;
+export const selectBestPathDisplay = createSelector(
+  selectBestPath,
+  selectShowBestPath,
+  (path, show) => ({
+    path: show ? path : [],
+    color: BEST_PATH_COLOR,
+    width: 20
+  })
+)
+
+export const selectBestCost = state => state.bestCost;
+export const selectBestCostDisplay = createSelector(
+  selectBestCost,
+  cost => cost ? cost.toFixed(2) : ''
+)
+
+export const selectEvaluatingPaths = state => state.evaluatingPaths;
+export const selectEvaluatingPathsDisplay = createSelector(
+  selectEvaluatingPaths,
+  paths => paths.map(({ path, color }) => ({ 
+    path, 
+    color: color || EVALUATING_PATH_COLOR,
+    width: 5
+  }))
+)
+
+export const selectEvaluatingCost = state => state.evaluatingCost;
+export const selectEvaluatingCostDisplay = createSelector(
+  selectEvaluatingCost,
+  cost => cost ? cost.toFixed(2) : ''
+)
+
+export const selectPlotPaths = createSelector(
+  selectBestPathDisplay, selectEvaluatingPathsDisplay,
+  (bestPath, evaluatingPaths) => [...evaluatingPaths, bestPath]
+)
+
+
+//
+// FOR POINT CONTROLS
+//
 export const selectDefiningPoints = state => state.definingPoints;
 
 export const selectPointCount = state => state.pointCount;
 
-export const selectDisplayBestCost = createSelector(
-  selectBestCost,
-  cost => cost ? cost.toFixed(2) : 'N/A' 
-)
 
-export const selectDisplayEvaluatingCost = createSelector(
-  selectEvaluatingCost,
-  cost => cost ? cost.toFixed(2) : 'N/A'
-)
 
-export const selectPlotPoints = createSelector(
-  selectPoints,
-  points => points.map((p, idx) => ({ 
-    position: p, 
-    color: idx === 0 ? [255, 87, 34] : [41, 121, 255] 
-  }))
-)
 
-export const selectPlotBestPaths = createSelector(
-  selectBestPaths,
-  paths => paths.map(path => ({ 
-    path, 
-    color: [0, 0, 0, 200],
-    width: 20,
-    dashes: [0, 0]
-  }))
-)
-
-export const selectPlotIntermediatePaths = createSelector(
-  selectIntermediatePaths,
-  paths => paths.map(path => ({ 
-    path, 
-    color: [255, 87, 34],
-    width: 5,
-    dashes: [3, 2]
-  }))
-)
-
-export const selectPlotPaths = createSelector(
-  selectPlotBestPaths, selectPlotIntermediatePaths,
-  (bestPath, intermediatePaths) => [...bestPath, ...intermediatePaths]
-)

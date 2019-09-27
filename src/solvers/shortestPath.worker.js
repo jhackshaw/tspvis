@@ -40,7 +40,7 @@ const run = async points => {
     path.push(remaining.pop());
 
     if (EVALUATING_DETAIL_LEVEL) {
-      self.postMessage(actions.setIntermediatePath(path, utils.pathCost(path)))
+      self.postMessage(actions.setEvaluatingPath(path, utils.pathCost(path)))
     }
 
     await utils.sleep(DELAY || 10)
@@ -49,9 +49,9 @@ const run = async points => {
   path.push(path[0]);
   const cost = utils.pathCost(path);
   if (EVALUATING_DETAIL_LEVEL) {
-    self.postMessage(actions.setIntermediatePath(path, cost))
+    self.postMessage(actions.setEvaluatingPath(path, cost))
   }
   self.postMessage(actions.setBestPath(path, cost));
-  self.postMessage(actions.stopSolving());
+  self.postMessage(actions.stopSolvingAction());
   self.terminate();
 }

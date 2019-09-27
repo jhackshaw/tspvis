@@ -30,9 +30,8 @@ const IndexPage = () => {
 
 
   const start = useCallback(() => {
-    const action = actions.startSolving(points, delay, evaluatingDetailLevel);
-    dispatch(action)
-    solver.postMessage(action)
+    dispatch(actions.startSolving(points, delay, evaluatingDetailLevel));
+    solver.postMessage(actions.startSolvingAction(points, delay, evaluatingDetailLevel))
   }, [solver, dispatch, delay, points, evaluatingDetailLevel])
 
 

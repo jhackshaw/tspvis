@@ -24,11 +24,13 @@ const MenuSolverControls = ({ onStart, onStop }) => {
   const algorithm = useSelector(selectors.selectAlgorithm);
   const delay = useSelector(selectors.selectDelay);
   const evaluatingDetailLevel = useSelector(selectors.selectEvaluatingDetailLevel);
+  const maxEvaluatingDetailLevel = useSelector(selectors.selectMaxEvaluatingDetailLevel);
+  const showBestPath = useSelector(selectors.selectShowBestPath);
   const running = useSelector(selectors.selectRunning);
   const definingPoints = useSelector(selectors.selectDefiningPoints);
 
   const onAlgorithmChange = event => {
-    dispatch(actions.setAlgorthim(event.target.value))
+    dispatch(actions.setAlgorithm(event.target.value))
   }
 
   const onDelayChange = (_, newDelay) => {
@@ -40,8 +42,12 @@ const MenuSolverControls = ({ onStart, onStop }) => {
     dispatch(actions.setEvaluatingDetailLevel(level))
   }
 
+  const onShowBestPathChange = event => {
+    dispatch(actions.setShowBestPath(event.target.checked))
+  }
+
   const onReset = () => {
-    dispatch(actions.reset())
+    dispatch(actions.resetSolverState())
   }
 
   return (
@@ -57,9 +63,10 @@ const MenuSolverControls = ({ onStart, onStop }) => {
           <ListSubheader>Exhaustive</ListSubheader>
           <SelectItem value="random">Random</SelectItem>
           <SelectItem value="dfs">Depth First Search</SelectItem>
+          <SelectItem value="bandb">Branch and Bound</SelectItem>
           <ListSubheader>Heuristic</ListSubheader>
           <SelectItem value="shortestPath">Shortest Path</SelectItem>
-          <SelectItem value="twoOpt">2 Opt</SelectItem>
+          <SelectItem value="twoOpt">Two Opt Swap</SelectItem>
         </Select>
       </MenuItem>
 
@@ -90,11 +97,27 @@ const MenuSolverControls = ({ onStart, onStop }) => {
           />
       </MenuItem>
 
-      <MenuItem row title="Show Intermediate Steps">
-        <Grid item xs={6}>
+      <MenuItem row>
+        <Grid item xs={8}>
           <Typography variant="button" color="textSecondary" component="div">
-            Full Paths
+            Best Path
           </Typography>
+        </Grid>
+        <Grid item xs={4}>
+          <Switch
+            checked={showBestPath}
+            onChange={onShowBestPathChange}
+            color="secondary"
+            disabled={definingPoints}
+            />
+        </Grid>
+
+        <Grid item xs={8}>
+          <Typography variant="button" color="textSecondary" component="div">
+            Intermediate Paths
+          </Typography>
+        </Grid>
+        <Grid item xs={4}>
           <Switch
             checked={evaluatingDetailLevel > 0}
             onChange={onEvaluatingDetailLevelChange(1, 0)}
@@ -103,18 +126,25 @@ const MenuSolverControls = ({ onStart, onStop }) => {
             />
         </Grid>
 
-        <Grid item xs={6}>
-          <Typography variant="button" color="textSecondary" component="div">
-            All Steps
-          </Typography>
-          <Switch
-            checked={evaluatingDetailLevel > 1}
-            onChange={onEvaluatingDetailLevelChange(2, 1)}
-            color="secondary"
-            disabled={definingPoints}
-            />
-        </Grid>
+        { maxEvaluatingDetailLevel > 1 &&
+          <>
+          <Grid item xs={8}>
+            <Typography variant="button" color="textSecondary" component="div">
+              All Steps
+            </Typography>
+          </Grid>
+          <Grid item xs={4}>
+            <Switch
+              checked={evaluatingDetailLevel > 1}
+              onChange={onEvaluatingDetailLevelChange(2, 1)}
+              color="secondary"
+              disabled={definingPoints}
+              />
+          </Grid>
+          </>
+        }
       </MenuItem>
+
     </MenuSection>
   )
 }

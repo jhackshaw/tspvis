@@ -43,18 +43,11 @@ const setDifference = (setA, setB) => {
   return ret
 }
 
-
 const sleep = async () => {
   await utils.sleep(DELAY || 10)
 }
 
-const showEvaluating = (level, path, cost) => {
-  if (EVALUATING_DETAIL_LEVEL >= level) {
-    self.postMessage(actions.setEvaluatingPath(path, cost))
-  }
-}
-
-const dfs = async (points, path=[], visited=null, overallBest=null) => {
+const dfs = async (points, path=[], visited=null, bestCost=null) => {
   if (visited === null) {
     // initial call
     path = [points.shift()]
@@ -72,16 +65,21 @@ const dfs = async (points, path=[], visited=null, overallBest=null) => {
 
   const available = setDifference(points, visited);
 
+  const backToStart = [...path, path[0]];
+  const cost = utils.pathCost(backToStart);
+
+  if (bestCost && (cost > bestCost)) {
+    // cut this branch
+    console.log('cut', bestCost, cost)
+    return [null, null]
+  }
+
   if (available.size === 0) {
-    // evaluate a complete path
-    const backToStart = [...path, path[0]];
-    const cost = utils.pathCost(backToStart);
-
-    self.postMessage(actions.setEvaluatingPaths([
-      { path: backToStart, color: EVALUATING_SEGMENT_COLOR }
-    ], cost))
-
-    await sleep();
+    if (EVALUATING_DETAIL_LEVEL) {
+      self.postMessage(actions.setEvaluatingPaths([
+        { path: backToStart, color: EVALUATING_SEGMENT_COLOR }
+      ], cost))
+    }
 
     return [cost, backToStart] 
   }
@@ -93,21 +91,17 @@ const dfs = async (points, path=[], visited=null, overallBest=null) => {
     visited.add(p)
     path.push(p)
 
-    const [curCost, curPath] = await dfs(points, path, visited, overallBest);
+    const [curCost, curPath] = await dfs(points, path, visited, bestCost);
     
-    if (bestCost === null || curCost < bestCost) {
+    if (curCost && (bestCost === null || curCost < bestCost)) {
       bestCost = curCost;
       bestPath = curPath;
-
-      if (overallBest === null || bestCost < overallBest) {
-        // found a new best complete path
-        overallBest = bestCost
-        self.postMessage(actions.setBestPath(bestPath, bestCost))
-      }
+      self.postMessage(actions.setBestPath(bestPath, bestCost))
     }
     visited.delete(p)
     path.pop();
   }
 
+  await sleep()
   return [bestCost, bestPath]
 }

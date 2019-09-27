@@ -42,7 +42,7 @@ const run = async points => {
     }
 
     if (EVALUATING_DETAIL_LEVEL) {
-      self.postMessage(actions.setIntermediatePath(path, cost))
+      self.postMessage(actions.setEvaluatingPath(path, cost))
     }
     
     path.pop();

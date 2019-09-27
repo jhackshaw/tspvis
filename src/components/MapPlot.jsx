@@ -11,12 +11,13 @@ const TOKEN = 'pk.eyJ1IjoiaW50cmVwaWRldiIsImEiOiJjazBpa2M5YnowMHcyM21ubzgycW8zZH
 
 const MapPlot = React.forwardRef((props, ref) => {
   const mapGlRef = useRef();
-  const plotPoints = useSelector(selectors.selectPlotPoints);
+  const plotPoints = useSelector(selectors.selectPointsDisplay);
   const plotPaths = useSelector(selectors.selectPlotPaths);
   const viewport = useSelector(selectors.selectViewport);
   const running = useSelector(selectors.selectRunning);
   const definingPoints = useSelector(selectors.selectDefiningPoints)
   const dispatch = useDispatch()
+
 
   useImperativeHandle(ref, () => ({
     getBounds: () => {
@@ -58,11 +59,7 @@ const MapPlot = React.forwardRef((props, ref) => {
         <PathLayer id='path-layer'
                    data={plotPaths}
                    getPath={d => d.path}
-                   getWidth={d => d.width}
-                   getDashArray={d => d.dashes}
                    getColor={d => d.color}
-                   rounded={true}
-                   widthUnit='meters'
                    pickable={true}
                    widthMinPixels={4}
                    widthMaxPixels={8}
