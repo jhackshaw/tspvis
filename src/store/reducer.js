@@ -45,8 +45,9 @@ const algorithmDefaults = {
     maxEvaluatingDetailLevel: 2,
   },
   bandb: {
-    evaluatingDetailLevel: 1,
-    maxEvaluatingDetailLevel: 2
+    evaluatingDetailLevel: 2,
+    maxEvaluatingDetailLevel: 2,
+    showBestPath: false
   }
 }
 
@@ -66,6 +67,7 @@ const initialState = {
   evaluatingPaths: [],
   evaluatingCost: null,
   running: false,
+  startedRunningAt: null,
 
   pointCount: usTop12.length,
   definingPoints: false
@@ -129,14 +131,15 @@ export default (state=initialState, action) => {
       return {
         ...state,
         running: true,
+        startedRunningAt: Date.now(),
         pointCount: state.points.length
       }
     
     case actions.STOP_SOLVING:
-      console.log('ayooo')
       return {
         ...state,
         running: false,
+        startedRunningAt: null,
         evaluatingPaths: [],
         evaluatingCost: null
       }

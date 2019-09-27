@@ -20,6 +20,8 @@ export const selectMaxEvaluatingDetailLevel = state => state.maxEvaluatingDetail
 
 export const selectRunning = state => state.running;
 
+export const selectStartedRunningAt = state => state.startedRunningAt;
+
 
 //
 // FOR DISPLAY

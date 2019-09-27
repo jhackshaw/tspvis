@@ -47,7 +47,7 @@ const sleep = async () => {
   await utils.sleep(DELAY || 10)
 }
 
-const dfs = async (points, path=[], visited=null, bestCost=null) => {
+const dfs = async (points, path=[], visited=null, overallBest=null) => {
   if (visited === null) {
     // initial call
     path = [points.shift()]
@@ -55,22 +55,22 @@ const dfs = async (points, path=[], visited=null, bestCost=null) => {
     visited = new Set();
   }
 
+  const available = setDifference(points, visited);
+  const backToStart = [...path, path[0]];
+  const cost = utils.pathCost(backToStart);
+
   if (EVALUATING_DETAIL_LEVEL > 1 && path.length > 2) {
     self.postMessage(actions.setEvaluatingPaths([
       { path: path.slice(0, path.length - 1), color: EVALUATING_SEGMENT_COLOR },
       { path: path.slice(path.length - 2, path.length + 1), color: EVALUATING_PATH_COLOR }
-    ]))
+    ], cost))
     await sleep();
   }
 
-  const available = setDifference(points, visited);
-
-  const backToStart = [...path, path[0]];
-  const cost = utils.pathCost(backToStart);
-
-  if (bestCost && (cost > bestCost)) {
+  // console.log(overallBest, cost)
+  if (overallBest && (cost > overallBest)) {
     // cut this branch
-    console.log('cut', bestCost, cost)
+    console.log('CUT!!!!', overallBest, cost)
     return [null, null]
   }
 
@@ -91,13 +91,19 @@ const dfs = async (points, path=[], visited=null, bestCost=null) => {
     visited.add(p)
     path.push(p)
 
-    const [curCost, curPath] = await dfs(points, path, visited, bestCost);
+    const [curCost, curPath] = await dfs(points, path, visited, overallBest);
     
-    if (curCost && (bestCost === null || curCost < bestCost)) {
+    console.log(curCost)
+    if (curCost && (!bestCost || curCost < bestCost)) {
       bestCost = curCost;
       bestPath = curPath;
-      self.postMessage(actions.setBestPath(bestPath, bestCost))
+
+      if (!overallBest || bestCost < overallBest) {
+        overallBest = bestCost
+        self.postMessage(actions.setBestPath(bestPath, bestCost))
+      }
     }
+
     visited.delete(p)
     path.pop();
   }
