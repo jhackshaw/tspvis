@@ -48,12 +48,6 @@ const sleep = async () => {
   await utils.sleep(DELAY || 10)
 }
 
-const showEvaluating = (level, path, cost) => {
-  if (EVALUATING_DETAIL_LEVEL >= level) {
-    self.postMessage(actions.setEvaluatingPath(path, cost))
-  }
-}
-
 const dfs = async (points, path=[], visited=null, overallBest=null) => {
   if (visited === null) {
     // initial call
@@ -105,8 +99,16 @@ const dfs = async (points, path=[], visited=null, overallBest=null) => {
         self.postMessage(actions.setBestPath(bestPath, bestCost))
       }
     }
+      
     visited.delete(p)
     path.pop();
+
+    if (EVALUATING_DETAIL_LEVEL > 1) {
+      self.postMessage(actions.setEvaluatingPaths([
+        { path, color: EVALUATING_SEGMENT_COLOR }
+      ]))
+      await sleep();
+    }
   }
 
   return [bestCost, bestPath]
