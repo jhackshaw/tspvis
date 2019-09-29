@@ -10,6 +10,7 @@
     "@material-ui/core": "^4.4.1",
     "@material-ui/styles": "^4.4.1",
     "deck.gl": "^7.2.4",
+    "eslint-config-react-app": "^5.0.2",
     "gatsby": "^2.15.14",
     "gatsby-plugin-manifest": "^2.2.16",
     "gatsby-plugin-material-ui": "^2.1.6",

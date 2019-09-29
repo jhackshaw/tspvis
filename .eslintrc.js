@@ -4,10 +4,11 @@ module.exports = {
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": "react-app",
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+        "SharedArrayBuffer": "readonly",
+        __PATH_PREFIX__: true
     },
     "parserOptions": {
         "ecmaFeatures": {
