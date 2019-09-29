@@ -72,13 +72,13 @@ const MenuSolverControls = ({ onStart, onStop }) => {
 
       <MenuItem title="Controls">
         <ButtonGroup fullWidth variant="outlined" color="secondary" size="large">
-          <Button onClick={onStart} disabled={running || definingPoints}>
+          <Button onClick={onStart} disabled={running || definingPoints} id="start-solving">
             <FontAwesomeIcon icon={faPlay} width="0"/>
           </Button>
-          <Button onClick={onStop} disabled={!running || definingPoints}>
+          <Button onClick={onStop} disabled={!running || definingPoints} id="stop-solving">
             <FontAwesomeIcon icon={faStop} width="0" />
           </Button>
-          <Button onClick={onReset} disabled={running || definingPoints}>
+          <Button onClick={onReset} disabled={running || definingPoints} id="reset-points">
             <FontAwesomeIcon icon={faRedo} width="0" />
           </Button>
         </ButtonGroup>
@@ -109,6 +109,7 @@ const MenuSolverControls = ({ onStart, onStop }) => {
             onChange={onShowBestPathChange}
             color="secondary"
             disabled={definingPoints}
+            id="show-best-path"
             />
         </Grid>
 
@@ -123,6 +124,7 @@ const MenuSolverControls = ({ onStart, onStop }) => {
             onChange={onEvaluatingDetailLevelChange(1, 0)}
             color="secondary"
             disabled={definingPoints}
+            id="show-evaluating-paths"
             />
         </Grid>
 
@@ -139,6 +141,7 @@ const MenuSolverControls = ({ onStart, onStop }) => {
               onChange={onEvaluatingDetailLevelChange(2, 1)}
               color="secondary"
               disabled={definingPoints}
+              id="show-evaluating-steps"
               />
           </Grid>
           </>
