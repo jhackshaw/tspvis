@@ -36,14 +36,14 @@ const MenuPointControls = ({ onRandomizePoints }) => {
     <MenuSection>
       <MenuItem title="Points">
         <ButtonGroup fullWidth variant="outlined" color="secondary" size="large" disabled={running}>
-          <Button onClick={onRandomizePoints} disabled={definingPoints} id="randomize-points">
-            <FontAwesomeIcon icon={faRandom} width="0"/>
+          <Button onClick={onRandomizePoints} disabled={definingPoints} classes={{root: "gtm-randomize-points", label: "gtm-randomize-points"}}>
+            <FontAwesomeIcon icon={faRandom} width="0" className="gtm-randomize-points" />
           </Button>
-          <Button onClick={onToggleDefiningPoints} id="toggle-defining-points">
-            <FontAwesomeIcon icon={definingPoints ? faSave : faMousePointer} width="0" />
+          <Button onClick={onToggleDefiningPoints} classes={{root: "gtm-toggle-defining-points", label: "gtm-toggle-defining-points"}}>
+            <FontAwesomeIcon icon={definingPoints ? faSave : faMousePointer} width="0" className="gtm-toggle-defining-points" />
           </Button>
-          <Button disabled={definingPoints} onClick={onDefaultMap} id="goto-default-map">
-            <FontAwesomeIcon icon={faMapMarked} width="0" />
+          <Button disabled={definingPoints} onClick={onDefaultMap} classes={{root: "gtm-goto-default-map", label: "gtm-goto-default-map"}}>
+            <FontAwesomeIcon icon={faMapMarked} width="0" className="gtm-goto-default-map" />
           </Button>
         </ButtonGroup>
       </MenuItem>

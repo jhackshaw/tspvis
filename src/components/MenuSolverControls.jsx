@@ -72,14 +72,14 @@ const MenuSolverControls = ({ onStart, onStop }) => {
 
       <MenuItem title="Controls">
         <ButtonGroup fullWidth variant="outlined" color="secondary" size="large">
-          <Button onClick={onStart} disabled={running || definingPoints} id="start-solving">
-            <FontAwesomeIcon icon={faPlay} width="0"/>
+          <Button onClick={onStart} disabled={running || definingPoints} classes={{root: "gtm-start-solving", label: "gtm-start-solving"}}>
+            <FontAwesomeIcon icon={faPlay} width="0" className="gtm-start-solving" />
           </Button>
-          <Button onClick={onStop} disabled={!running || definingPoints} id="stop-solving">
-            <FontAwesomeIcon icon={faStop} width="0" />
+          <Button onClick={onStop} disabled={!running || definingPoints}  classes={{root: "gtm-stop-solving", label: "gtm-stop-solving"}}>
+            <FontAwesomeIcon icon={faStop} width="0" className="gtm-stop-solving" />
           </Button>
-          <Button onClick={onReset} disabled={running || definingPoints} id="reset-points">
-            <FontAwesomeIcon icon={faRedo} width="0" />
+          <Button onClick={onReset} disabled={running || definingPoints}  classes={{root: "gtm-reset-paths", label: "gtm-reset-paths"}}>
+            <FontAwesomeIcon icon={faRedo} width="0" className="gtm-reset-paths" />
           </Button>
         </ButtonGroup>
       </MenuItem>
