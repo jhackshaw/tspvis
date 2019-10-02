@@ -27,6 +27,7 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "typeface-roboto": "0.0.75",
     "worker-loader": "^2.0.0"
   },
   "devDependencies": {
