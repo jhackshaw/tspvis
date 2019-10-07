@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/styles';
 import { Dialog,
-         DialogTitle,
-         DialogContentText,
          DialogContent,
          Typography,
          IconButton } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
-import useIsFirstLoad from '../hooks/useIsFirstLoad';
-import { makeStyles } from '@material-ui/styles';
+import * as selectors from '../store/selectors';
+import * as actions from '../store/actions';
 
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
   closeButton: {
     position: 'absolute',
     right: theme.spacing(1),
@@ -28,42 +24,54 @@ const useStyles = makeStyles(theme => ({
 
 const IntroductionModel = props => {
   const classes = useStyles();
-  const isFirstLoad = useIsFirstLoad();
-  const [open, setOpen] = useState(isFirstLoad);
+  const dispatch = useDispatch();
+  const open = useSelector(selectors.selectSiteInfoOpen);
 
   const onClose = () => {
-    setOpen(false);
+    dispatch(actions.toggleSiteInfoOpen());
   }
 
   return (
-    <Dialog open={open || isFirstLoad}
+    <Dialog open={open}
             onClose={onClose}
             maxWidth="md"
             scroll="paper"
             keepMounted
             fullWidth
             >
-      <DialogTitle disableTypography className={classes.root}>
-      <Typography variant="h5">Traveling Salesman Problem Visualizer</Typography>
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <FontAwesomeIcon icon={faWindowClose} width="0" />
-        </IconButton>
-      </DialogTitle>
       <DialogContent>
-          <Typography variant="h6">Traveling Salesman Problem</Typography>
-          <Typography variant="body2">
-          The traveling salesman problem asks the question, "Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city and returns to the origin city?".
-          It has been studied extensively in computer science and plenty of algorithms have been presented. The goal of this application is to implement as many of the algorithms as possible, with the goal of making it easy to visualize the execution of the algorithm in real-time.
-          Traveling Salesman algorithms typically fall into 2 different categories, exhaustive and heuristic.
+          <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+              <FontAwesomeIcon icon={faWindowClose} width="0" />
+          </IconButton>
+          <Typography gutterBottom variant="h5">Traveling Salesman Problem</Typography>
+          <Typography gutterBottom variant="body1">
+          The traveling salesman problem (TSP) asks the question, "Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city and returns to the origin city?".
+          </Typography>
+          <Typography gutterBottom variant="body1">
+          It has been studied extensively in computer science and plenty of algorithms have been devised, generally classified as exhaustive or heuristic.
           </Typography>
 
+          <Typography gutterBottom variant="h6">Exhaustive</Typography>
+          <Typography variant="body1">
+          Exhaustive algorithms will always find the best possible solution by evaluating every possible path. These algorithms are typically significantly more expensive then the heuristic algorithms discussed next. The exhaustive algorithms implemented so far include:
 
-          <Typography variant="h6">Exhaustive</Typography>
-          <Typography variant="body2">
-          Exhaustive algorithms are garunteed to find the best possible solution by evaluating every possible solution. These algorithms are typically significantly more expensive then the heuristic algorithms discussed next. The exhaustive algorithms implemented so far include:
-
-          - depth first search: this algorithm brute forces every possible route and keeps track of which one had the cheapest cost (distance).
+          <ul>
+            <li>Random Paths</li>
+            <li>Depth First Search (Brute Force)</li>
+            <li>Branch and Bound (Cost)</li>
+            <li>Branch and Bound (Cost, crossings)</li>
+          </ul>
           </Typography>
+
+          <Typography gutterBottom variant="h6">Heuristic</Typography>
+          <Typography variant="body1">
+          Heuristic algorithms attempt to find a good approximation of the optimal path within a more <i>reasonable</i> amount of time. The heuristic algorithms implemented so far include:
+          </Typography>
+
+          <ul>
+            <li>Shortest Path</li>
+            <li>2-Opt Substitution</li>
+          </ul>
       </DialogContent>
     </Dialog>
   )

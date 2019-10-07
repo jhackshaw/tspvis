@@ -5,8 +5,13 @@ import { START_POINT_COLOR,
          EVALUATING_PATH_COLOR } from '../constants';
 
 
-export const selectViewport = state => state.viewport;
 
+//
+// FOR UI
+//
+export const selectSiteInfoOpen = state => state.siteInfoOpen;
+export const selectAlgInfoOpen = state => state.algInfoOpen;
+      
 //
 //  FOR SOLVER CONTROLS
 //
@@ -24,8 +29,20 @@ export const selectStartedRunningAt = state => state.startedRunningAt;
 
 
 //
-// FOR DISPLAY
+// FOR POINT CONTROLS
 //
+export const selectDefiningPoints = state => state.definingPoints;
+
+export const selectPointCount = state => state.pointCount;
+
+
+
+//
+// FOR PLOT
+//
+
+export const selectViewport = state => state.viewport;
+
 export const selectPoints = state => state.points;
 export const selectPointsDisplay = createSelector(
   selectPoints,
@@ -73,15 +90,6 @@ export const selectPlotPaths = createSelector(
   selectBestPathDisplay, selectEvaluatingPathsDisplay,
   (bestPath, evaluatingPaths) => [...evaluatingPaths, bestPath]
 )
-
-
-//
-// FOR POINT CONTROLS
-//
-export const selectDefiningPoints = state => state.definingPoints;
-
-export const selectPointCount = state => state.pointCount;
-
 
 
 

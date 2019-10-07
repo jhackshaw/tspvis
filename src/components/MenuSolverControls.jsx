@@ -1,21 +1,23 @@
 import React from 'react';
 import { ButtonGroup,
-         Button, 
+         Button,
          Slider, 
          Select,
          ListSubheader,
          MenuItem as SelectItem,
          Typography,
          Switch,
-         Grid} from '@material-ui/core';
+         Grid,
+         IconButton } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faStop, faRedo } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faStop, faRedo, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 import * as actions from '../store/actions';
 import * as selectors from '../store/selectors';
 import MenuSection from './MenuSection';
 import MenuItem from './MenuItem';
+
 
 
 
@@ -50,24 +52,39 @@ const MenuSolverControls = ({ onStart, onStop }) => {
     dispatch(actions.resetSolverState())
   }
 
+  const onShowAlgInfo = () => {
+    dispatch(actions.toggleAlgInfoOpen());
+  }
+
   return (
     <MenuSection>
       <MenuItem title="Algorithm">
-        <Select value={algorithm}
-                onChange={onAlgorithmChange}
-                disabled={running || definingPoints}
-                variant="outlined"
-                fullWidth
-                margin="dense"
-                >
-          <ListSubheader>Exhaustive</ListSubheader>
-          <SelectItem value="random">Random</SelectItem>
-          <SelectItem value="dfs">Depth First Search</SelectItem>
-          <SelectItem value="bandb">Branch and Bound</SelectItem>
-          <ListSubheader>Heuristic</ListSubheader>
-          <SelectItem value="shortestPath">Shortest Path</SelectItem>
-          <SelectItem value="twoOpt">Two Opt Swap</SelectItem>
-        </Select>
+        <Grid container alignItems="center">
+          <Grid item xs={11}>
+            <Select value={algorithm}
+                    onChange={onAlgorithmChange}
+                    disabled={running || definingPoints}
+                    variant="outlined"
+                    fullWidth
+                    margin="dense"
+                    >
+              <ListSubheader>Exhaustive</ListSubheader>
+              <SelectItem value="random">Random</SelectItem>
+              <SelectItem value="dfs">Depth First Search</SelectItem>
+              <SelectItem value="bandb">Branch and Bound</SelectItem>
+              <ListSubheader>Heuristic</ListSubheader>
+              <SelectItem value="shortestPath">Shortest Path</SelectItem>
+              <SelectItem value="twoOpt">Two Opt Swap</SelectItem>
+            </Select>
+          </Grid>
+          <Grid item xs={1}>
+            <Typography align="right" color="textSecondary">
+              <IconButton edge="end" onClick={onShowAlgInfo}>
+                <FontAwesomeIcon icon={faQuestion} size="xs" />
+              </IconButton>
+            </Typography>
+          </Grid>
+        </Grid>
       </MenuItem>
 
       <MenuItem title="Controls">

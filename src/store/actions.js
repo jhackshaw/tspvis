@@ -20,10 +20,26 @@ export const SET_POINT_COUNT = 'SET_POINT_COUNT';
 export const SET_POINTS = 'SET_POINTS';
 export const SET_DEFAULT_MAP = 'SET_DEFAULT_MAP';
 
+export const TOGGLE_SITE_INFO_OPEN = 'TOGGLE_SITE_INFO_OPEN';
+export const TOGGLE_ALG_INFO_OPEN = 'TOGGLE_ALG_INFO_OPEN';
+
 
 const getRandomPoint = (max, min) => (
   Math.random() * (max - min) + min
 )
+
+
+//
+// BASIC UI
+//
+export const toggleSiteInfoOpen = () => ({
+  type: TOGGLE_SITE_INFO_OPEN
+})
+
+export const toggleAlgInfoOpen = () => ({
+  type: TOGGLE_ALG_INFO_OPEN
+})
+
 
 //
 // MAP INTERACTION

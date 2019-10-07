@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useCallback } from "react"
 import { useSelector, useDispatch } from 'react-redux';
 import Helmet from 'react-helmet';
 import IntroductionModal from '../components/IntroductionModal';
+import AlgorithmModals from '../components/AlgorithmModals';
 import Layout from "../components/Layout"
 import MapPlot from '../components/MapPlot';
 import Menu from "../components/Menu";
@@ -58,6 +59,7 @@ const IndexPage = () => {
     <Layout>
       <Helmet title="tspvis" />
       <IntroductionModal />
+      <AlgorithmModals />
       <Menu onStart={start}
             onStop={stop}
             onRandomizePoints={onRandomizePoints} />
