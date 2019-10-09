@@ -1,47 +1,69 @@
-import React, { useState, useEffect } from "react"
-import { MarkSeries, LineSeries } from 'react-vis';
+import React, { useRef, useEffect, useCallback } from "react"
+import { useSelector, useDispatch } from 'react-redux';
+import Helmet from 'react-helmet';
 import Layout from "../components/Layout"
-import Plot from '../components/Plot';
+import MapPlot from '../components/MapPlot';
 import Menu from "../components/Menu";
 
-
-function getRandomInt(min=0, max=100) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-}
-
-function randomPoints(count) {
-  return Array.from({ length: count }).map(_ => ({
-    x: getRandomInt(),
-    y: getRandomInt()
-  }))
-}
+import useSolverWorker from '../hooks/useSolverWorker';
+import * as selectors from '../store/selectors';
+import * as actions from '../store/actions';
 
 
 const IndexPage = () => {
-  const [data, setData] = useState(randomPoints(10));
+  const mapRef = useRef(null)
+  const dispatch = useDispatch();
+  const algorithm = useSelector(selectors.selectAlgorithm);
+  const delay = useSelector(selectors.selectDelay);
+  const evaluatingDetailLevel = useSelector(selectors.selectEvaluatingDetailLevel);
+  const points = useSelector(selectors.selectPoints);
+  const pointCount = useSelector(selectors.selectPointCount);
+  const definingPoints = useSelector(selectors.selectDefiningPoints);
+
+  const solver = useSolverWorker(dispatch, algorithm);
+
+  const onRandomizePoints = useCallback(() => {
+    if (!definingPoints) {
+      const bounds = mapRef.current.getBounds();
+      dispatch(actions.randomizePoints(bounds, pointCount))
+    }
+  }, [mapRef, dispatch, pointCount, definingPoints])
+
+
+  const start = useCallback(() => {
+    dispatch(actions.startSolving(points, delay, evaluatingDetailLevel));
+    solver.postMessage(actions.startSolvingAction(points, delay, evaluatingDetailLevel))
+  }, [solver, dispatch, delay, points, evaluatingDetailLevel])
+
+
+  const stop = useCallback(() => {
+    dispatch(actions.stopSolving())
+    solver.terminate();
+  }, [solver, dispatch])
+
 
   useEffect(() => {
-    const to = setInterval(() => {
-      setData(randomPoints(10))
-    }, 1000);
-    return () => {
-      clearInterval(to)
-    }
-  })
+    solver.postMessage(actions.setDelay(delay))
+  }, [delay, solver])
+
+
+  useEffect(() => {
+    solver.postMessage(actions.setEvaluatingDetailLevel(evaluatingDetailLevel))
+  }, [evaluatingDetailLevel, solver])
+
+
+  // useUpdateEffect(onRandomizePoints, [pointCount])
 
   return (
     <Layout>
-      <Menu />
-      <Plot>
-        <MarkSeries data={data} />
-        {/* <LineSeries data={data} /> */}
-      </Plot>
+      <Helmet title="tspvis" />
+      <Menu onStart={start}
+            onStop={stop}
+            onRandomizePoints={onRandomizePoints} />
+      <MapPlot ref={mapRef}
+              />
     </Layout>
   )
 }
-  
-
 
 export default IndexPage

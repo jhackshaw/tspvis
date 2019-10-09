@@ -1,37 +1,61 @@
-import React from 'react';
-import { TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Grid, Typography } from '@material-ui/core';
+import * as selectors from '../store/selectors';
+
+import MenuSection from './MenuSection';
+import MenuItem from './MenuItem';
 
 
-const useStyles = makeStyles(theme => ({
-  wrapper: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: theme.spacing(2)
-  },
-  field: {
-    width: '90%',
-    marginTop: theme.spacing(2)
-  }
-}))
+const MenuMetrics = props => {
+  const best = useSelector(selectors.selectBestCostDisplay);
+  const evaluating = useSelector(selectors.selectEvaluatingCostDisplay);
+  const startedRunningAt = useSelector(selectors.selectStartedRunningAt);
+  const [runningFor, setRunningFor] = useState(0);
 
-const MenuMetrics = ({ curBest=0.0, evaluating=0.0 }) => {
-  const classes = useStyles();
+  useEffect(() => {
+    if (startedRunningAt) {
+      const interval = setInterval(() => {
+        setRunningFor(Math.floor((Date.now() - startedRunningAt) / 1000))
+      }, 1000)
+      return () => clearInterval(interval);
+    }
+  }, [startedRunningAt])
 
   return (
-    <div className={classes.wrapper}>
-      <TextField
-          label="Current Best"
-          className={classes.field}
-          margin="dense"
-          disabled
-          fullWidth
-          value={ curBest }
-          variant="outlined"
-        />
-    </div>
+    <MenuSection>
+      <MenuItem row>
+        <Grid item xs={6}>
+          <Typography variant="button" color="textSecondary" component="div">Current Best: </Typography>
+        </Grid>
+        <Grid item xs={4}>
+          <Typography variant="button">{ best }</Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <Typography variant="button">km</Typography>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Typography variant="button" color="textSecondary" component="div">Evaluating: </Typography>
+        </Grid>
+        <Grid item xs={4}>
+          <Typography variant="button">{ evaluating }</Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <Typography variant="button">km</Typography>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Typography variant="button" color="textSecondary" component="div">Running For: </Typography>
+        </Grid>
+        <Grid item xs={4}>
+          <Typography variant="button">{ runningFor || '' }</Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <Typography variant="button">s</Typography>
+        </Grid>
+      </MenuItem>
+    </MenuSection>
   )
 }
 
