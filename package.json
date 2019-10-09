@@ -24,7 +24,6 @@
     "react-helmet": "^5.2.1",
     "react-map-gl": "^5.0.10",
     "react-redux": "^7.1.1",
-    "react-vis": "^1.11.7",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",

@@ -5,7 +5,7 @@ import blue from '@material-ui/core/colors/blue';
 import orange from '@material-ui/core/colors/orange';
 import { Provider } from 'react-redux';
 import store from './src/store/store';
-import 'react-vis/dist/style.css'
+// import 'react-vis/dist/style.css'
 
 
 const theme = createMuiTheme({
