@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "tsp-visualizer",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Visualizer for the traveling salesman problem",
   "version": "0.1.0",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
@@ -19,11 +19,12 @@
     "gatsby-plugin-offline": "^3.0.11",
     "gatsby-plugin-react-helmet": "^3.1.7",
     "gh-pages": "^2.1.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
     "react-map-gl": "^5.0.10",
     "react-redux": "^7.1.1",
+    "react-vis": "^1.11.7",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
@@ -50,9 +51,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/jhackshaw/tspvis"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/jhackshaw/tspvis/issues"
   }
 }

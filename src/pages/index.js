@@ -64,7 +64,7 @@ const IndexPage = () => {
             onStop={stop}
             onRandomizePoints={onRandomizePoints} />
       <MapPlot ref={mapRef}
-              />
+              /> */}
     </Layout>
   )
 }
