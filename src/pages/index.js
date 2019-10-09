@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useCallback } from "react"
 import { useSelector, useDispatch } from 'react-redux';
 import Helmet from 'react-helmet';
+import IntroductionModal from '../components/IntroductionModal';
+import AlgorithmModals from '../components/AlgorithmModals';
 import Layout from "../components/Layout"
 import MapPlot from '../components/MapPlot';
 import Menu from "../components/Menu";
@@ -13,6 +15,7 @@ import * as actions from '../store/actions';
 const IndexPage = () => {
   const mapRef = useRef(null)
   const dispatch = useDispatch();
+
   const algorithm = useSelector(selectors.selectAlgorithm);
   const delay = useSelector(selectors.selectDelay);
   const evaluatingDetailLevel = useSelector(selectors.selectEvaluatingDetailLevel);
@@ -52,11 +55,11 @@ const IndexPage = () => {
   }, [evaluatingDetailLevel, solver])
 
 
-  // useUpdateEffect(onRandomizePoints, [pointCount])
-
   return (
     <Layout>
       <Helmet title="tspvis" />
+      <IntroductionModal />
+      <AlgorithmModals />
       <Menu onStart={start}
             onStop={stop}
             onRandomizePoints={onRandomizePoints} />

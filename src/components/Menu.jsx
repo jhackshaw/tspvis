@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Paper, Divider } from '@material-ui/core';
+import MenuHeader from './MenuHeader';
 import MenuSolverControls from './MenuSolverControls';
 import MenuMetrics from './MenuMetrics';
 import MenuPointControls from './MenuPointControls';
@@ -29,6 +30,8 @@ const Menu = ({ onStart, onStop, onRandomizePoints }) => {
 
   return (
     <Paper classes={{ root: classes.wrapper }}>
+        <MenuHeader />
+        <Divider />
         <MenuMetrics />
         <Divider />
         <MenuSolverControls onStart={onStart}

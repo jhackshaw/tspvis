@@ -1,10 +1,12 @@
 import React, { useRef, useImperativeHandle } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import DeckGL, { ScatterplotLayer, PathLayer } from 'deck.gl';
 import MapGL from 'react-map-gl';
+import DeckGL, { ScatterplotLayer, PathLayer } from 'deck.gl';
+import { LinearProgress } from '@material-ui/core';
 import * as actions from '../store/actions';
 import * as selectors from '../store/selectors';
-import { LinearProgress } from '@material-ui/core';
+
+
 
 const TOKEN = 'pk.eyJ1IjoiaW50cmVwaWRldiIsImEiOiJjazBpa2M5YnowMHcyM21ubzgycW8zZHJmIn0.DCO2aRA6MJweC8HN-d_cgQ';
 

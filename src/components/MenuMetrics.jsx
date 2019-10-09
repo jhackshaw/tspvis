@@ -5,9 +5,22 @@ import * as selectors from '../store/selectors';
 
 import MenuSection from './MenuSection';
 import MenuItem from './MenuItem';
+import { makeStyles } from '@material-ui/styles';
 
+
+const useStyles = makeStyles(theme => ({
+  grow: {
+    flexGrow: 1,
+    paddingRight: theme.spacing(1)
+  },
+  unit: {
+    flexShrink: 0,
+    width: '2rem'
+  }
+}))
 
 const MenuMetrics = props => {
+  const classes = useStyles();
   const best = useSelector(selectors.selectBestCostDisplay);
   const evaluating = useSelector(selectors.selectEvaluatingCostDisplay);
   const startedRunningAt = useSelector(selectors.selectStartedRunningAt);
@@ -25,34 +38,21 @@ const MenuMetrics = props => {
   return (
     <MenuSection>
       <MenuItem row>
-        <Grid item xs={6}>
-          <Typography variant="button" color="textSecondary" component="div">Current Best: </Typography>
+        <Grid item container justify="space-between">
+          <Typography display="inline" variant="button" color="textSecondary" component="div">Current Best: </Typography>
+          <Typography classes={{root: classes.grow}} align="right" display="inline" variant="button">{ best }</Typography>
+          <Typography classes={{root: classes.unit}} align="right" display="inline" variant="button">km</Typography>
         </Grid>
-        <Grid item xs={4}>
-          <Typography variant="button">{ best }</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography variant="button">km</Typography>
-        </Grid>
-
-        <Grid item xs={6}>
-          <Typography variant="button" color="textSecondary" component="div">Evaluating: </Typography>
-        </Grid>
-        <Grid item xs={4}>
-          <Typography variant="button">{ evaluating }</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography variant="button">km</Typography>
+        <Grid item container justify="space-between">
+          <Typography display="inline" variant="button" color="textSecondary" component="div">Evaluating: </Typography>
+          <Typography classes={{root: classes.grow}} align="right" display="inline" variant="button">{ evaluating }</Typography>
+          <Typography classes={{root: classes.unit}} align="right" display="inline" variant="button">km</Typography>
         </Grid>
 
-        <Grid item xs={6}>
-          <Typography variant="button" color="textSecondary" component="div">Running For: </Typography>
-        </Grid>
-        <Grid item xs={4}>
-          <Typography variant="button">{ runningFor || '' }</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography variant="button">s</Typography>
+        <Grid item container justify="space-between">
+          <Typography display="inline" variant="button" color="textSecondary" component="div">Running For: </Typography>
+          <Typography classes={{root: classes.grow}} align="right" display="inline" variant="button">{ runningFor || '' }</Typography>
+          <Typography classes={{root: classes.unit}} align="right" display="inline" variant="button">s</Typography>
         </Grid>
       </MenuItem>
     </MenuSection>

@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Traveling Salesman Problem Solver`,
+    description: ``,
+    author: `@jhackshaw`,
   },
   plugins: [
     `gatsby-plugin-material-ui`,
@@ -31,6 +31,29 @@ module.exports = {
 
       },
     },
+
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: 'categories',
+    //     path: `${__dirname}/src/content`
+    //   }
+    // },
+
+    // {
+    //   resolve: `gatsby-transformer-remark`,
+    //   options: {
+    //     plugins: [
+    //       `gatsby-remark-prismjs`,
+    //       { 
+    //         resolve: `gatsby-remark-images`,
+    //         options: {
+    //           maxWidth: 690
+    //         }
+    //       }
+    //     ]
+    //   }
+    // },
   ],
   
 }

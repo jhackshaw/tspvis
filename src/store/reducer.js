@@ -70,13 +70,27 @@ const initialState = {
   startedRunningAt: null,
 
   pointCount: usTop12.length,
-  definingPoints: false
+  definingPoints: false,
+
+  siteInfoOpen: false,
+  algInfoOpen: false
 }
 
 
 export default (state=initialState, action) => {
-  // console.log(initialState.points)
   switch (action.type) {
+    case actions.TOGGLE_SITE_INFO_OPEN:
+      return {
+        ...state,
+        siteInfoOpen: !state.siteInfoOpen
+      }
+    
+    case actions.TOGGLE_ALG_INFO_OPEN:
+      return {
+        ...state,
+        algInfoOpen: !state.algInfoOpen
+      }
+
     case actions.SET_VIEWPORT_STATE:
       return {
         ...state,
@@ -174,6 +188,7 @@ export default (state=initialState, action) => {
     case actions.SET_POINTS:
       return {
         ...state,
+        bestPath: [],
         points: action.points
       }
 
