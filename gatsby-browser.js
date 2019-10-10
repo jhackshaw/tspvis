@@ -6,7 +6,7 @@ import orange from '@material-ui/core/colors/orange';
 import { Provider } from 'react-redux';
 import store from './src/store/store';
 import 'react-vis/dist/style.css';
-import 'prismjs/themes/prism-solarizedlight.css';
+import 'prismjs/themes/prism-tomorrow.css';
 import 'typeface-roboto';
 
 
