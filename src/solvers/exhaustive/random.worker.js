@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
-import makeSolver from './makeSolver';
-import * as utils from './cost';
+import makeSolver from '../makeSolver';
+import { pathCost } from '../cost';
 
 
 
@@ -12,14 +12,17 @@ const random = async points => {
     const path = points.sort(() => Math.random() - 0.5);
     path.unshift(start);
     path.push(start);
-    const cost = utils.pathCost(path);
+    const cost = pathCost(path);
 
     if (cost < best) {
       best = cost;
       self.setBestPath(path, cost);
     }
 
-    self.setEvaluatingPath(() => ({ path, cost }));
+    self.setEvaluatingPaths(() => ({ 
+      paths: [{ path }], 
+      cost 
+    }));
     
     path.pop();
     await self.sleep();

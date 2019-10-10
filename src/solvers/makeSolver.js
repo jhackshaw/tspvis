@@ -3,8 +3,10 @@ import * as actions from '../store/actions';
 
 
 const wrapSolver = solver => async (...args) => {
+  console.log('calling solver')
   await solver(...args);
-  self.postMessage(actions.stopSolving());
+  console.log('solver finished')
+  self.postMessage(actions.stopSolvingAction());
   self.terminate();
 }
 

@@ -30,7 +30,7 @@ const algorithmDefaults = {
     evaluatingDetailLevel: 1,
     maxEvaluatingDetailLevel: 1
   },
-  twoOpt: {
+  twoOptReciprocalExchange: {
     showBestPath: false,
     evaluatingDetailLevel: 1,
     maxEvaluatingDetailLevel: 1,
@@ -44,7 +44,7 @@ const algorithmDefaults = {
     evaluatingDetailLevel: 1,
     maxEvaluatingDetailLevel: 2,
   },
-  bandb: {
+  bAndBOnCost: {
     evaluatingDetailLevel: 2,
     maxEvaluatingDetailLevel: 2,
     showBestPath: false
@@ -152,6 +152,9 @@ export default (state=initialState, action) => {
     case actions.STOP_SOLVING:
       return {
         ...state,
+        // points: state.bestPath ? 
+        //           state.bestPath.slice(0, state.bestPath.length - 1) : 
+        //           state.points,
         running: false,
         startedRunningAt: null,
         evaluatingPaths: [],

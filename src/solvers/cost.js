@@ -1,7 +1,7 @@
 
 
-
-export const haversine = (pt1, pt2) => {
+// haversine great circle distance
+export const distance = (pt1, pt2) => {
   const [lng1, lat1] = pt1;
   const [lng2, lat2] = pt2;
   if ((lat1 === lat2) && (lng1 === lng2)) {
@@ -27,6 +27,6 @@ export const haversine = (pt1, pt2) => {
 
 export const pathCost = path => {
   return path.slice(0, -1)
-             .map((point, idx) => haversine(point, path[idx+1]))
+             .map((point, idx) => distance(point, path[idx+1]))
              .reduce((a, b) => a+b, 0)
 }

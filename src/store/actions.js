@@ -121,9 +121,9 @@ export const stopSolving = () => dispatch => {
 //
 export const setEvaluatingPath = (path, cost) => ({
   type: SET_EVALUATING_PATHS,
-  paths: [{
+  paths: [
     path
-  }],
+  ],
   cost
 })
 

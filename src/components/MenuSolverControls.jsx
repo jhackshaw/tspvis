@@ -71,10 +71,10 @@ const MenuSolverControls = ({ onStart, onStop }) => {
               <ListSubheader>Exhaustive</ListSubheader>
               <SelectItem value="random">Random</SelectItem>
               <SelectItem value="dfs">Depth First Search</SelectItem>
-              <SelectItem value="bandb">Branch and Bound</SelectItem>
+              <SelectItem value="bAndBOnCost">Branch and Bound on Cost</SelectItem>
               <ListSubheader>Heuristic</ListSubheader>
               <SelectItem value="shortestPath">Shortest Path</SelectItem>
-              <SelectItem value="twoOpt">Two Opt Swap</SelectItem>
+              <SelectItem value="twoOptReciprocalExchange">Two-Opt Reciprocal Exchange</SelectItem>
             </Select>
           </Grid>
           <Grid item xs={1}>

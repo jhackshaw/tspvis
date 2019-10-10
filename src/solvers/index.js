@@ -1,15 +1,15 @@
-import random from './random.worker.js';
-import shortestPath from './shortestPath.worker.js';
-import dfs from './dfs.worker.js';
-import twoOpt from './twoOpt.worker.js';
-import bandb from './bandb.worker.js';
+import random from './exhaustive/random.worker.js';
+import dfs from './exhaustive/dfs.worker.js';
+import bAndBOnCost from './exhaustive/bAndBOnCost.worker.js';
 
+import shortestPath from './heuristic/shortestPath.worker.js';
+import twoOptReciprocalExchange from './heuristic/twoOptReciprocalExchange.worker.js';
 
 export default {
   random,
   dfs,
-  bandb,
+  bAndBOnCost,
   
   shortestPath,
-  twoOpt
+  twoOptReciprocalExchange
 }
