@@ -80,7 +80,7 @@ export const stopSolvingAction = () => ({
 
 
 export const setAlgorithm = algorithm => dispatch => {
-  dispatch(resetSolverState())
+  dispatch(resetEvaluatingStateAction())
   dispatch(setAlgorithmAction(algorithm))  
 }
 
@@ -105,7 +105,7 @@ export const resetSolverState = () => dispatch => {
 }
 
 export const startSolving = (...args) => dispatch => {
-  dispatch(resetSolverState())
+  dispatch(resetEvaluatingStateAction())
   dispatch(startSolvingAction(...args))
 }
 

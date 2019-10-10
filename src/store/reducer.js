@@ -100,8 +100,8 @@ export default (state=initialState, action) => {
     case actions.RESET_EVALUATING_STATE:
       return {
         ...state,
-        intermediatePaths: [],
-        intermediateCost: null
+        evaluatingPaths: [],
+        evaluatingCost: null
       }
 
     case actions.RESET_BEST_PATH_STATE:
@@ -152,9 +152,9 @@ export default (state=initialState, action) => {
     case actions.STOP_SOLVING:
       return {
         ...state,
-        // points: state.bestPath ? 
-        //           state.bestPath.slice(0, state.bestPath.length - 1) : 
-        //           state.points,
+        points: state.bestPath ? 
+                  state.bestPath.slice(0, state.bestPath.length - 1) : 
+                  state.points,
         running: false,
         startedRunningAt: null,
         evaluatingPaths: [],
