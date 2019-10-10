@@ -34,7 +34,9 @@ const MenuSolverControls = ({ onStart, onStop }) => {
   const definingPoints = useSelector(selectors.selectDefiningPoints);
 
   const onAlgorithmChange = event => {
-    dispatch(actions.setAlgorithm(event.target.value))
+    const solverKey = event.target.value;
+    const { defaults } = algorithms.find(alg => alg.solverKey === solverKey);
+    dispatch(actions.setAlgorithm(solverKey, defaults))
   }
 
   const onDelayChange = (_, newDelay) => {

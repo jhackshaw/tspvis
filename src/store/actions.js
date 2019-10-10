@@ -61,9 +61,10 @@ const resetBestPathStateAction = () => ({
   type: RESET_BEST_PATH_STATE
 })
 
-const setAlgorithmAction = algorithm => ({
+const setAlgorithmAction = (algorithm, defaults) => ({
   type: SET_ALGORITHM,
-  algorithm
+  algorithm,
+  defaults
 })
 
 
@@ -79,9 +80,9 @@ export const stopSolvingAction = () => ({
 })
 
 
-export const setAlgorithm = algorithm => dispatch => {
+export const setAlgorithm = (algorithm, defaults={}) => dispatch => {
   dispatch(resetEvaluatingStateAction())
-  dispatch(setAlgorithmAction(algorithm))  
+  dispatch(setAlgorithmAction(algorithm, defaults))  
 }
 
 export const setDelay = delay => ({

@@ -3,6 +3,10 @@ type: algorithm
 solverKey: twoOptReciprocalExchange
 friendlyName: Two Opt Reciprocal Exchange
 class: heuristic
+defaults:
+  showBestPath: false
+  evaluatingDetailLevel: 1
+  maxEvaluatingDetailLevel: 1
 ---
 
 When deploying a set of services using docker-compose, it’s a good idea to have a separate repository to avoid cloning all of the code into your production environment.

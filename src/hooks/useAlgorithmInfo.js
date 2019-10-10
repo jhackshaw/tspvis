@@ -11,6 +11,11 @@ export default () => {
               solverKey
               type
               class
+              defaults {
+                showBestPath
+                evaluatingDetailLevel
+                maxEvaluatingDetailLevel
+              }
             }
             html
           }

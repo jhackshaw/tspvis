@@ -23,34 +23,6 @@ const initialViewport = {
   zoom: 4
 }
 
-
-const algorithmDefaults = {
-  shortestPath: {
-    showBestPath: true,
-    evaluatingDetailLevel: 1,
-    maxEvaluatingDetailLevel: 1
-  },
-  twoOptReciprocalExchange: {
-    showBestPath: false,
-    evaluatingDetailLevel: 1,
-    maxEvaluatingDetailLevel: 1,
-  },
-  random: {
-    showBestPath: true,
-    evaluatingDetailLevel: 1,
-    maxEvaluatingDetailLevel: 1,
-  },
-  dfs: {
-    evaluatingDetailLevel: 1,
-    maxEvaluatingDetailLevel: 2,
-  },
-  bAndBOnCost: {
-    evaluatingDetailLevel: 2,
-    maxEvaluatingDetailLevel: 2,
-    showBestPath: false
-  }
-}
-
 const initialState = {
   points: usTop12.sort(() => Math.random() + 0.5),
   viewport: initialViewport,
@@ -117,8 +89,8 @@ export default (state=initialState, action) => {
     case actions.SET_ALGORITHM:
       return {
         ...state,
+        ...action.defaults,
         algorithm: action.algorithm,
-        ...algorithmDefaults[action.algorithm]
       }
 
     case actions.SET_DELAY:

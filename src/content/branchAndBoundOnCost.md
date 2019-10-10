@@ -3,6 +3,10 @@ type: algorithm
 solverKey: branchAndBoundOnCost
 friendlyName: Branch and Bound on Cost
 class: exhaustive
+defaults:
+  showBestPath: false
+  evaluatingDetailLevel: 2
+  maxEvaluatingDetailLevel: 2
 ---
 
 When deploying a set of services using docker-compose, it’s a good idea to have a separate repository to avoid cloning all of the code into your production environment.
