@@ -17,13 +17,15 @@ import * as actions from '../store/actions';
 import * as selectors from '../store/selectors';
 import MenuSection from './MenuSection';
 import MenuItem from './MenuItem';
+import useAlgorithmInfo from '../hooks/useAlgorithmInfo';
 
 
 
 
 const MenuSolverControls = ({ onStart, onStop }) => {
   const dispatch = useDispatch()
-  const algorithm = useSelector(selectors.selectAlgorithm);
+  const algorithms = useAlgorithmInfo();
+  const selectedAlgorithm = useSelector(selectors.selectAlgorithm);
   const delay = useSelector(selectors.selectDelay);
   const evaluatingDetailLevel = useSelector(selectors.selectEvaluatingDetailLevel);
   const maxEvaluatingDetailLevel = useSelector(selectors.selectMaxEvaluatingDetailLevel);
@@ -61,7 +63,7 @@ const MenuSolverControls = ({ onStart, onStop }) => {
       <MenuItem title="Algorithm">
         <Grid container alignItems="center">
           <Grid item xs={11}>
-            <Select value={algorithm}
+            <Select value={selectedAlgorithm}
                     onChange={onAlgorithmChange}
                     disabled={running || definingPoints}
                     variant="outlined"
@@ -69,12 +71,23 @@ const MenuSolverControls = ({ onStart, onStop }) => {
                     margin="dense"
                     >
               <ListSubheader>Exhaustive</ListSubheader>
-              <SelectItem value="random">Random</SelectItem>
-              <SelectItem value="dfs">Depth First Search</SelectItem>
-              <SelectItem value="bAndBOnCost">Branch and Bound on Cost</SelectItem>
+              { algorithms.filter(alg => alg.class === "exhaustive")
+                          .map(alg => (
+                <SelectItem value={alg.solverKey}
+                            key={alg.solverKey}
+                            >
+                  { alg.friendlyName }
+                </SelectItem>
+              ))}
               <ListSubheader>Heuristic</ListSubheader>
-              <SelectItem value="shortestPath">Shortest Path</SelectItem>
-              <SelectItem value="twoOptReciprocalExchange">Two-Opt Reciprocal Exchange</SelectItem>
+              { algorithms.filter(alg => alg.class === "heuristic")
+                          .map(alg => (
+                <SelectItem value={alg.solverKey}
+                            key={alg.solverKey}
+                            >
+                  { alg.friendlyName }
+                </SelectItem>
+              ))}
             </Select>
           </Grid>
           <Grid item xs={1}>

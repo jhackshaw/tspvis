@@ -1,7 +1,9 @@
 ---
-name: test
+type: algorithm
+solverKey: depthFirstSearch
+friendlyName: Depth First Search (Brute Force)
+class: exhaustive
 ---
-
 
 When deploying a set of services using docker-compose, it’s a good idea to have a separate repository to avoid cloning all of the code into your production environment.
 
@@ -75,5 +77,4 @@ A simplified travis-ci configuration from [termninja](https://www.term.ninja) is
 
 
 Hopefully this helps someone else as there was less documentation out there than I expected when setting this up. Let me know how it goes below, thanks!
-
 

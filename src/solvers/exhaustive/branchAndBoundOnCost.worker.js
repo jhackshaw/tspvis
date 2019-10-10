@@ -15,7 +15,7 @@ const setDifference = (setA, setB) => {
   return ret
 }
 
-const bAndBOnCost = async (points, path=[], visited=null, overallBest=Infinity) => {
+const branchAndBoundOnCost = async (points, path=[], visited=null, overallBest=Infinity) => {
   if (visited === null) {
     // initial call
     path = [points.shift()]
@@ -73,7 +73,7 @@ const bAndBOnCost = async (points, path=[], visited=null, overallBest=Infinity) 
     path.push(p)
 
     // recurse
-    const [curCost, curPath] = await bAndBOnCost(points, path, visited, overallBest);
+    const [curCost, curPath] = await branchAndBoundOnCost(points, path, visited, overallBest);
     
     
     if (curCost && (!bestCost || curCost < bestCost)) {
@@ -101,4 +101,4 @@ const bAndBOnCost = async (points, path=[], visited=null, overallBest=Infinity) 
 
 
 
-makeSolver(bAndBOnCost);
+makeSolver(branchAndBoundOnCost);

@@ -32,28 +32,22 @@ module.exports = {
       },
     },
 
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     name: 'categories',
-    //     path: `${__dirname}/src/content`
-    //   }
-    // },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: 'content',
+        path: `${__dirname}/src/content`
+      }
+    },
 
-    // {
-    //   resolve: `gatsby-transformer-remark`,
-    //   options: {
-    //     plugins: [
-    //       `gatsby-remark-prismjs`,
-    //       { 
-    //         resolve: `gatsby-remark-images`,
-    //         options: {
-    //           maxWidth: 690
-    //         }
-    //       }
-    //     ]
-    //   }
-    // },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          `gatsby-remark-prismjs`
+        ]
+      }
+    }
   ],
 
 }
