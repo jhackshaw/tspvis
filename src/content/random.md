@@ -4,7 +4,6 @@ solverKey: random
 friendlyName: Random
 class: exhaustive
 defaults:
-  showBestPath: false
   evaluatingDetailLevel: 1
   maxEvaluatingDetailLevel: 1
 ---

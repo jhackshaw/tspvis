@@ -4,7 +4,6 @@ solverKey: twoOptInversion
 friendlyName: Two Opt Inversion
 class: heuristic
 defaults:
-  showBestPath: false
   evaluatingDetailLevel: 1
   maxEvaluatingDetailLevel: 1
 ---

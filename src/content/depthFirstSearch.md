@@ -4,7 +4,6 @@ solverKey: depthFirstSearch
 friendlyName: Depth First Search (Brute Force)
 class: exhaustive
 defaults:
-  showBestPath: false
   evaluatingDetailLevel: 2
   maxEvaluatingDetailLevel: 2
 ---

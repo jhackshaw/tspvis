@@ -4,7 +4,6 @@ solverKey: shortestPath
 friendlyName: Shortest Path
 class: heuristic
 defaults:
-  showBestPath: true
   evaluatingDetailLevel: 1
   maxEvaluatingDetailLevel: 1
 ---

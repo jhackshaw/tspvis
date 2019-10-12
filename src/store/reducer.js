@@ -116,6 +116,7 @@ export default (state=initialState, action) => {
     case actions.START_SOLVING:
       return {
         ...state,
+        showBestPath: false,
         running: true,
         startedRunningAt: Date.now(),
         pointCount: state.points.length

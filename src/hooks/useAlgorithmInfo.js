@@ -12,7 +12,6 @@ export default () => {
               type
               class
               defaults {
-                showBestPath
                 evaluatingDetailLevel
                 maxEvaluatingDetailLevel
               }

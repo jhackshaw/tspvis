@@ -4,7 +4,6 @@ solverKey: twoOptReciprocalExchange
 friendlyName: Two Opt Reciprocal Exchange
 class: heuristic
 defaults:
-  showBestPath: false
   evaluatingDetailLevel: 1
   maxEvaluatingDetailLevel: 1
 ---

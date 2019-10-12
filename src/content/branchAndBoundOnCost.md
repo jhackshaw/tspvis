@@ -4,7 +4,6 @@ solverKey: branchAndBoundOnCost
 friendlyName: Branch and Bound on Cost
 class: exhaustive
 defaults:
-  showBestPath: false
   evaluatingDetailLevel: 2
   maxEvaluatingDetailLevel: 2
 ---
