@@ -127,10 +127,9 @@ export default (state=initialState, action) => {
         points: state.bestPath ? 
                   state.bestPath.slice(0, state.bestPath.length - 1) : 
                   state.points,
+        showBestPath: true,
         running: false,
-        startedRunningAt: null,
-        evaluatingPaths: [],
-        evaluatingCost: null
+        startedRunningAt: null
       }
 
     //
