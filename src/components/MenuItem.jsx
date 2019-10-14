@@ -16,7 +16,7 @@ const MenuItem = ({ children, title='', row=false }) => {
 
   return (
     <div className={classes.item}>
-      <Grid item container direction={row ? "row" : "column"}>
+      <Grid item container direction={row ? "row" : "column"} alignItems={row ? "center" : ""}>
         { title &&
           <Grid item xs={12}>
             <Typography gutterBottom 

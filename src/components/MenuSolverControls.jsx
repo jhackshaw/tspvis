@@ -130,12 +130,12 @@ const MenuSolverControls = ({ onStart, onStop }) => {
       </MenuItem>
 
       <MenuItem row>
-        <Grid item xs={8}>
+        <Grid item xs={10}>
           <Typography variant="button" color="textSecondary" component="div">
             Best Path
           </Typography>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={2}>
           <Switch
             checked={showBestPath}
             onChange={onShowBestPathChange}
@@ -145,12 +145,12 @@ const MenuSolverControls = ({ onStart, onStop }) => {
             />
         </Grid>
 
-        <Grid item xs={8}>
+        <Grid item xs={10}>
           <Typography variant="button" color="textSecondary" component="div">
             Intermediate Paths
           </Typography>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={2}>
           <Switch
             checked={evaluatingDetailLevel > 0}
             onChange={onEvaluatingDetailLevelChange(1, 0)}
@@ -162,12 +162,12 @@ const MenuSolverControls = ({ onStart, onStop }) => {
 
         { maxEvaluatingDetailLevel > 1 &&
           <>
-          <Grid item xs={8}>
+          <Grid item xs={10}>
             <Typography variant="button" color="textSecondary" component="div">
               All Steps
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={2}>
             <Switch
               checked={evaluatingDetailLevel > 1}
               onChange={onEvaluatingDetailLevelChange(2, 1)}
