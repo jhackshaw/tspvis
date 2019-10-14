@@ -11,7 +11,6 @@ import * as selectors from '../store/selectors';
 import * as actions from '../store/actions';
 import useIntroductionInfo from '../hooks/useIntroductionInfo';
 
-
 const useStyles = makeStyles(theme => ({
   closeButton: {
     position: 'absolute',

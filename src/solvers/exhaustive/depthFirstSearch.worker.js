@@ -30,12 +30,14 @@ const dfs = async (points, path=[], visited=null, overallBest=null) => {
   }), 2)
   await self.sleep();
 
-
+  // figure out what points are left from this point
   const available = setDifference(points, visited);
 
   if (available.size === 0) {
-    // evaluate a complete path
+    // this must be a complete path
     const backToStart = [...path, path[0]];
+
+    // calculate the cost of this path
     const cost = pathCost(backToStart);
 
     self.setEvaluatingPath(() => ({
@@ -44,19 +46,24 @@ const dfs = async (points, path=[], visited=null, overallBest=null) => {
 
     await self.sleep();
 
+    // return both the cost and the path where we're at
     return [cost, backToStart] 
   }
 
 
   let [bestCost, bestPath] = [null, null];
 
+  // for every point yet to be visited along this path
   for (const p of available) {
+
+    // go to that point
     visited.add(p)
     path.push(p)
 
-    // recurse
+    // RECURSE - go through all the possible points from that point
     const [curCost, curPath] = await dfs(points, path, visited, overallBest);
     
+    // if that path is better, keep it
     if (bestCost === null || curCost < bestCost) {
       [bestCost, bestPath] = [curCost, curPath];
       
@@ -66,7 +73,8 @@ const dfs = async (points, path=[], visited=null, overallBest=null) => {
         self.setBestPath(bestPath, bestCost);
       }
     }
-      
+    
+    // go back up and make that point available again
     visited.delete(p)
     path.pop();
 

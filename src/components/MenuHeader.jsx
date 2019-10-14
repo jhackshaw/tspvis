@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Grid, Typography, IconButton } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHandHoldingUsd, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHandHoldingUsd, faInfoCircle, faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { makeStyles } from '@material-ui/styles';
 import MenuSection from './MenuSection'
@@ -32,7 +32,9 @@ const MenuHeader = props => {
   return (
     <MenuSection>
       <Grid container justify="space-between" alignItems="center">
-        <Typography gutterBottom display="inline" variant="button" classes={{root: classes.title}}>TSPVIS</Typography>
+        <Typography gutterBottom display="inline" variant="button" classes={{root: classes.title}}>
+          <FontAwesomeIcon icon={faBriefcase} /> TSPVIS
+        </Typography>
         <Typography gutterBottom display="inline" color="textSecondary">
           <IconButton onClick={() => {}}>
             <FontAwesomeIcon icon={faHandHoldingUsd} size="xs" width="0" />

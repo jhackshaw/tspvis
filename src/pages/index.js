@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from "react"
+import React, { useRef, useEffect, useCallback, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux';
 import Helmet from 'react-helmet';
 import IntroductionModal from '../components/IntroductionModal';
@@ -10,13 +10,16 @@ import Menu from "../components/Menu";
 import useSolverWorker from '../hooks/useSolverWorker';
 import * as selectors from '../store/selectors';
 import * as actions from '../store/actions';
+import useAlgorithmInfo from "../hooks/useAlgorithmInfo";
 
 
 const IndexPage = () => {
   const mapRef = useRef(null)
   const dispatch = useDispatch();
+  const [algTitle, setAlgTitle] = useState("")
 
   const algorithm = useSelector(selectors.selectAlgorithm);
+  const algorithmInfo = useAlgorithmInfo();
   const delay = useSelector(selectors.selectDelay);
   const evaluatingDetailLevel = useSelector(selectors.selectEvaluatingDetailLevel);
   const points = useSelector(selectors.selectPoints);
@@ -54,17 +57,21 @@ const IndexPage = () => {
     solver.postMessage(actions.setEvaluatingDetailLevel(evaluatingDetailLevel))
   }, [evaluatingDetailLevel, solver])
 
+  useEffect(() => {
+    const alg = algorithmInfo.find(alg => alg.solverKey === algorithm);
+    setAlgTitle(alg.friendlyName)
+  }, [algorithm, algorithmInfo])
 
   return (
     <Layout>
-      <Helmet title="tspvis" />
+      <Helmet title={`TSP | ${algTitle}`} />
       <IntroductionModal />
       <AlgorithmModals />
       <Menu onStart={start}
             onStop={stop}
             onRandomizePoints={onRandomizePoints} />
       <MapPlot ref={mapRef}
-              /> */}
+              />
     </Layout>
   )
 }

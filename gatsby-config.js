@@ -17,21 +17,17 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/favicon.png`,
       },
     },
     {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {
         id: "GTM-PS28HLQ",
-  
-        // Include GTM in development.
-        // Defaults to false meaning GTM will only be loaded in production.
         includeInDevelopment: false,
 
       },
     },
-
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -39,7 +35,6 @@ module.exports = {
         path: `${__dirname}/src/content`
       }
     },
-
     {
       resolve: `gatsby-transformer-remark`,
       options: {

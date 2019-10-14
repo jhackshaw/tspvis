@@ -23,13 +23,17 @@ const branchAndBoundOnCost = async (points, path=[], visited=null, overallBest=I
     visited = new Set();
   }
 
+  // figure out which points are left
   const available = setDifference(points, visited);
+
+  // calculate the cost, from here, to go home
   const backToStart = [...path, path[0]];
   const cost = pathCost(backToStart);
   
 
   if (cost > overallBest) {
-    // cut this branch
+    // we may not be done, but have already traveled further than the best path
+    // no reason to continue
     self.setEvaluatingPaths(() => ({
       paths: [
         { path: path.slice(0, path.length - 1), color: EVALUATING_SEGMENT_COLOR },
@@ -42,8 +46,8 @@ const branchAndBoundOnCost = async (points, path=[], visited=null, overallBest=I
     return [null, null]
   }
 
+  // still cheaper than the best, keep going deeper, and deeper, and deeper...
   else {
-    // continue down this branch 
     self.setEvaluatingPaths(() => ({
       paths: [
         { path: path.slice(0, path.length - 1), color: EVALUATING_SEGMENT_COLOR },
@@ -56,7 +60,7 @@ const branchAndBoundOnCost = async (points, path=[], visited=null, overallBest=I
   await self.sleep();
 
   if (available.size === 0) {
-    // at the end of a branch
+    // at the end of the path, return where we're at
     self.setEvaluatingPath(() => ({
       path: { path: backToStart, color: EVALUATING_SEGMENT_COLOR },
       cost
@@ -68,23 +72,28 @@ const branchAndBoundOnCost = async (points, path=[], visited=null, overallBest=I
 
   let [bestCost, bestPath] = [null, null];
 
+  // for every point yet to be visited along this path
   for (const p of available) {
+
+    // go to that point
     visited.add(p)
     path.push(p)
 
-    // recurse
+    // RECURSE - go through all the possible points from that point
     const [curCost, curPath] = await branchAndBoundOnCost(points, path, visited, overallBest);
     
-    
+    // if that path is better and complete, keep it
     if (curCost && (!bestCost || curCost < bestCost)) {
       [bestCost, bestPath] = [curCost, curPath];
 
       if (!overallBest || bestCost < overallBest) {
+        // found a new best complete path
         overallBest = bestCost
         self.setBestPath(bestPath, bestCost);
       }
     }
 
+    // go back up and make that point available again
     visited.delete(p)
     path.pop();
 

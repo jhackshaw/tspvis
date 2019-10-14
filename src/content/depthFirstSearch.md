@@ -8,76 +8,83 @@ defaults:
   maxEvaluatingDetailLevel: 2
 ---
 
-When deploying a set of services using docker-compose, it’s a good idea to have a separate repository to avoid cloning all of the code into your production environment.
+# Depth First Search (Brute Force)
 
-I finally got [termninja](https://www.term.ninja) set up correctly with continuous integration and docker-compose on digital ocean, and I thought I’d document the setup.
+This is an exhaustive, brute-force algorithm. It is guarunteed to find the best possible path, however depending on the number of points in the traveling salesman problem it is likely impractical. For example, 
 
-## Production repository
+  - With 10 points there are 181,400 paths to evaluate. 
+  - With 11 points, there are 1,814,000.
+  - With 12 points there are 19,960,000.
+  - With 20 points there are 60,820,000,000,000,000, give or take.
+  - With 25 points there are 310,200,000,000,000,000,000,000, give or take.
 
-A typical docker-compose project has a ```docker-compose.yml``` at the root of the project, and all of the code for the images as subfolders.
+This is factorial growth, and it quickly makes the TSP impractical to brute force. That is why heuristics exist to give a good approximation of the best path, but it is very difficult to determine without a doubt what the best path is for a reasonably sized traveling salesman problem.
 
-[development folder structure]
+This is a recursive, depth-first-search algorithm, as follows:
 
-This works great for development - it’s easy to set up volumes and edit the code alongside the images. In production, however, it doesn’t make sense to clone the entire repository just to get to the docker-compose.yml file and start services.
+  1. From the starting point
+  2. For all other points not visited
+  3. If there are no points left return the current cost/path
+  4. Else, go to every remaining point and
 
-The solution I prefer is to have a separate repository set-up, in this case termninja-docker, that contains only the docker-compose.yml and any production specific configuration.
+:
 
-[production folder structure]
-
-## Deployment
-
-With this structure in place, deployments are accomplished using a container registry (like [docker hub](docker.com/hub)). It’s free to use for public images, and easy to push with docker-compose.
-
-The docker-compose.yml in both the development repo and the production repo should be setup to track the container registry.
-
-[tagged docker-compose]
-
-
-## Building and pushing images
-
-Once the docker-compose.yml file is setup to track the appropriate image from the container registry, building images is simple.
-
-```docker-compose build [service-name]```
-
-Pushing the updated image is equally simple
-
-```docker-compose push [service-name]```
-
-## Pulling latest images
-
-From the production environment, once the production docker-compose.yml is setup to track the container registry images, updating is simple
-
-```docker-compose down```
-```docker-compose pull [service-name]```
-```docker-compose up```
+  1. Mark that point as visited
+  2. "**recurse**" through those paths (go back to 1. )
 
 
-All of this seems very intuitive, but I’ve come across several projects where deployments are setup to:
-clone the development repo
-build and start images
+## The code
 
-This process is time consuming (more downtime) and results in unnecessary code residing on the server.
+```javascript
+const dfs = async (points, path=[], visited=null, overallBest=null) => {
+  if (visited === null) {
+    // initial call
+    path = [points.shift()]
+    points = new Set(points);
+    visited = new Set();
+  }
+
+  // figure out what points are left from this point
+  const available = setDifference(points, visited);
+
+  if (available.size === 0) {
+    // this must be a complete path
+    const backToStart = [...path, path[0]];
+
+    // calculate the cost of this path
+    const cost = pathCost(backToStart);
+
+    // return both the cost and the path where we're at
+    return [cost, backToStart] 
+  }
 
 
-## Continuous integration
+  let [bestCost, bestPath] = [null, null];
 
-Once this process is in place, I recommend setting up continuous integration to perform these functions automatically on every commit to the master branch in the development repo. 
+  // for every point yet to be visited along this path
+  for (const p of available) {
 
-A simplified travis-ci configuration from [termninja](https://www.term.ninja) is below. It performs the following steps on every commit.
-  1. Clone the repository (automatic for travis)
-  2. Login to docker hub using credentials provided through the [travis environment](https://www.travis-ci.com/environment) - ```docker login```
-  3. Build the services - ```docker-compose build games api```
-  4. Push the images - ```docker-compose push games api```
-  5. Decrypt private production SSH key*
-  6. SSH to production environmnet
-  7. Stop services - ```docker-compose down```
-  8. Pull updated images - ```docker-compose pull games api```
-  9. Start service - ```docker-compose up```
+    // go to that point
+    visited.add(p)
+    path.push(p)
 
-[travis-ci.yml]
-
-*Note that the ssh keys for the production server must be [encrypted](https://travis-ci.com/ssh-keys).
-
-
-Hopefully this helps someone else as there was less documentation out there than I expected when setting this up. Let me know how it goes below, thanks!
-
+    // RECURSE - go through all the possible points from that point
+    const [curCost, curPath] = await dfs(points, path, visited, overallBest);
+    
+    // if that path is better, keep it
+    if (bestCost === null || curCost < bestCost) {
+      [bestCost, bestPath] = [curCost, curPath];
+      
+      if (overallBest === null || bestCost < overallBest) {
+        // found a new best complete path
+        overallBest = bestCost
+      }
+    }
+    
+    // go back up and make that point available again
+    visited.delete(p)
+    path.pop();
+  }
+  return [bestCost, bestPath]
+}
+```
