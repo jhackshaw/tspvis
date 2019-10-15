@@ -10,7 +10,7 @@ defaults:
 
 # Depth First Search (Brute Force)
 
-This is an exhaustive, brute-force algorithm. It is guarunteed to find the best possible path, however depending on the number of points in the traveling salesman problem it is likely impractical. For example, 
+This is an exhaustive, brute-force algorithm. It is guaranteed to find the best possible path, however depending on the number of points in the traveling salesman problem it is likely impractical. For example, 
 
   - With 10 points there are 181,400 paths to evaluate. 
   - With 11 points, there are 1,814,000.
