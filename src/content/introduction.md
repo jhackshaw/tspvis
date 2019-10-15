@@ -14,7 +14,6 @@ Exhaustive algorithms will always find the best possible solution by evaluating 
   - Random Paths
   - Depth First Search (Brute Force)
   - Branch and Bound (Cost)
-  - Branch and Bound (Cost, crossings)
 
 #### Heuristic
 
@@ -29,25 +28,24 @@ Some of the main things to keep in mind when using this site:
   - These are not intended to be ultra-effecient - although these algorithms visualize and demonstrate how to solve the traveling salesman problem, much more effecient means are available outside of the browser.
 
 ## FAQ
-*in order of most frequently asked*
 
-**Javascript is for wussy's, use a manly language like C (better yet, rust)**
+**Javascript is slow, use a manly language like C (better yet, rust)**
 
 The point of this is not to be an efficient means to solve real-world traveling salesman problems, but to be an interactive learning experience for those looking to familiarize themselves with common algorithms.
 
-**You're implementations are stupid**
+**You're implementation is ineffecient**
 
-I'm open to pull requests that improve the efficiency of the algorithms demonstrated
+I'm open to pull requests that improve the efficiency of the algorithms demonstrated, or suggestions on how to make them better.
 
 **I heard about, or have an idea for, an algorithm that I want simulated**
 
-Finally, a question! I'm open to pull-requests. If javascript isn't your thing, reach out to me on [github](https://github.com/jhackshaw/tspvis) and I will help you introduce it to tspvis.
+Finally, a question! I'm open to pull-requests. If javascript isn't your thing, reach out to me on [github](https://github.com/jhackshaw/tspvis) and I will help you introduce it to the site.
 
 **I'm still not getting it**
 
 There are lots of resources out there - this is an extensivly studied problem. Open an issue on github [here](https://github.com/jhackshaw/tspvis/issues) and I promise I will respond with resources for further study.
 
-**Neato, how does it work**
+**How does it work**
 
 These are the main tools used to build this site:
 
@@ -57,3 +55,5 @@ These are the main tools used to build this site:
    - [material-ui](https://material-ui.com/)
    - [deck.gl](https://deck.gl/#/)
    - [mapbox](https://www.mapbox.com/)
+
+The source code is [here](https://github.com/jhackshaw/tspvis)

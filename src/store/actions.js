@@ -1,3 +1,4 @@
+import gtmEmit from './emitCustomEvent';
 export const SET_VIEWPORT_STATE = 'SET_VIEWPORT_STATE';
 
 export const RESET_EVALUATING_STATE = 'RESET_EVALUATING_STATE';
@@ -81,6 +82,7 @@ export const stopSolvingAction = () => ({
 
 
 export const setAlgorithm = (algorithm, defaults={}) => dispatch => {
+  gtmEmit('select-algorithm', { detail: { algorithm }})
   dispatch(resetEvaluatingStateAction())
   dispatch(setAlgorithmAction(algorithm, defaults))  
 }
@@ -101,16 +103,20 @@ export const setShowBestPath = show => ({
 })
 
 export const resetSolverState = () => dispatch => {
+  gtmEmit('reset-state')
   dispatch(resetEvaluatingStateAction())
   dispatch(resetBestPathStateAction())
 }
 
-export const startSolving = (...args) => dispatch => {
+export const startSolving = (...args) => (dispatch, getState) => {
+  const { algorithm } = getState();
+  gtmEmit('start-solving', { detail: { algorithm }})
   dispatch(resetEvaluatingStateAction())
   dispatch(startSolvingAction(...args))
 }
 
 export const stopSolving = () => dispatch => {
+  gtmEmit('stop-solving')
   dispatch(resetEvaluatingStateAction())
   dispatch(stopSolvingAction())
 }
