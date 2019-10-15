@@ -49,7 +49,7 @@ const IndexPage = () => {
 
 
   useEffect(() => {
-    solver.postMessage(actions.setDelay(delay))
+    solver.postMessage(actions.setDelayAction(delay))
   }, [delay, solver])
 
 

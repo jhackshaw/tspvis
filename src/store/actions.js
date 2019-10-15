@@ -33,13 +33,28 @@ const getRandomPoint = (max, min) => (
 //
 // BASIC UI
 //
-export const toggleSiteInfoOpen = () => ({
-  type: TOGGLE_SITE_INFO_OPEN
-})
+export const toggleSiteInfoOpen = () => (dispatch, getState) => {
+  const { siteInfoOpen } = getState();
+  if (!siteInfoOpen) {
+    gtmEmit({ event: 'open-site-info' })
+  }
+  dispatch({
+    type: TOGGLE_SITE_INFO_OPEN
+  })
+}
 
-export const toggleAlgInfoOpen = () => ({
-  type: TOGGLE_ALG_INFO_OPEN
-})
+export const toggleAlgInfoOpen = () => (dispatch, getState) => {
+  const { algorithm, algInfoOpen } = getState();
+  if (!algInfoOpen) {
+    gtmEmit({
+      event: 'open-algorithm-info',
+      algorithm
+    })
+  }
+  dispatch({
+    type: TOGGLE_ALG_INFO_OPEN
+  })
+}
 
 
 //
@@ -82,15 +97,26 @@ export const stopSolvingAction = () => ({
 
 
 export const setAlgorithm = (algorithm, defaults={}) => dispatch => {
-  gtmEmit('select-algorithm', { detail: { algorithm }})
+  gtmEmit({
+    event: 'select-algorithm',
+    algorithm
+  })
   dispatch(resetEvaluatingStateAction())
   dispatch(setAlgorithmAction(algorithm, defaults))  
 }
 
-export const setDelay = delay => ({
+export const setDelayAction = delay => ({
   type: SET_DELAY,
   delay
 })
+
+export const setDelay = delay => dispatch => {
+  gtmEmit({
+    event: 'set-delay',
+    delay
+  })
+  dispatch(setDelayAction(delay));
+}
 
 export const setEvaluatingDetailLevel = level => ({
   type: SET_EVALUATING_DETAIL_LEVEL,
@@ -103,20 +129,23 @@ export const setShowBestPath = show => ({
 })
 
 export const resetSolverState = () => dispatch => {
-  gtmEmit('reset-state')
+  gtmEmit({ event: 'reset-solver' })
   dispatch(resetEvaluatingStateAction())
   dispatch(resetBestPathStateAction())
 }
 
 export const startSolving = (...args) => (dispatch, getState) => {
   const { algorithm } = getState();
-  gtmEmit('start-solving', { detail: { algorithm }})
+  gtmEmit({
+    event: 'start-solving',
+    algorithm
+  })
   dispatch(resetEvaluatingStateAction())
   dispatch(startSolvingAction(...args))
 }
 
 export const stopSolving = () => dispatch => {
-  gtmEmit('stop-solving')
+  gtmEmit({ event: 'stop-solving' })
   dispatch(resetEvaluatingStateAction())
   dispatch(stopSolvingAction())
 }
@@ -170,8 +199,14 @@ const startDefiningPointsAction = () => ({
   type: START_DEFINING_POINTS
 })
 
+const stopDefiningPointsAction = () => ({
+  type: STOP_DEFINING_POINTS
+})
 
 export const startDefiningPoints = () => dispatch => {
+  gtmEmit({
+    event: 'start-defining-points'
+  })
   dispatch(resetSolverState())
   dispatch(startDefiningPointsAction())
 }
@@ -181,11 +216,20 @@ export const addDefinedPoint = point => ({
   point
 })
 
-export const stopDefiningPoints = () => ({
-  type: STOP_DEFINING_POINTS
-})
+export const stopDefiningPoints = () => (dispatch, getState) => {
+  const { pointCount } = getState()
+  gtmEmit({
+    event: 'stop-defining-points',
+    pointCount
+  })
+  dispatch(stopDefiningPointsAction());
+}
 
 export const setPointCount = count => dispatch => {
+  gtmEmit({
+    event: 'set-point-count',
+    pointCount: count
+  })
   dispatch(resetSolverState())
   dispatch(setPointCountAction(count))
 }
@@ -196,10 +240,18 @@ export const randomizePoints = bounds => (dispatch, getState) => {
   const points = Array.from({ length: pointCount }).map(
     _ => [getRandomPoint(right, left), getRandomPoint(top, bottom) ]
   )
+
+  gtmEmit({
+    event: 'randomize-points',
+    pointCount
+  })
   dispatch(setPointsAction(points))
 }
 
 export const setDefaultMap = (...args) => dispatch => {
+  gtmEmit({
+    event: 'set-default-map'
+  })
   dispatch(resetSolverState())
   dispatch(setDefaultMapAction())
 }
