@@ -3,9 +3,7 @@ import * as actions from '../store/actions';
 
 
 const wrapSolver = solver => async (...args) => {
-  console.log('calling solver')
   await solver(...args);
-  console.log('solver finished')
   self.postMessage(actions.stopSolvingAction());
   self.terminate();
 }
@@ -16,7 +14,8 @@ export const makeSolver = solver => {
 
   self.solverConfig = {
     detailLevel: 0,
-    delay: 10
+    delay: 10,
+    fullSpeed: false
   };
 
 
@@ -24,14 +23,14 @@ export const makeSolver = solver => {
     self.postMessage(actions.setBestPath(...args))
   }
 
-  self.setEvaluatingPaths = (getPaths, level=0) => {
+  self.setEvaluatingPaths = (getPaths, level=1) => {
     if (self.solverConfig.detailLevel >= level) {
       const { paths, cost } = getPaths();
       self.postMessage(actions.setEvaluatingPaths(paths, cost));
     }
   }
 
-  self.setEvaluatingPath = (getPath, level=0) => {
+  self.setEvaluatingPath = (getPath, level=1) => {
     if (self.solverConfig.detailLevel >= level) {
       const { path, cost } = getPath();
       self.postMessage(actions.setEvaluatingPath(path, cost)); 
@@ -39,7 +38,9 @@ export const makeSolver = solver => {
   }
 
   self.sleep = () => {
-    const duration = self.solverConfig.delay || 10;
+    const duration = self.solverConfig.fullSpeed ?
+                        0 :
+                        self.solverConfig.delay || 10; 
     return new Promise(resolve => {
       setTimeout(resolve, duration)
     })
@@ -51,6 +52,7 @@ export const makeSolver = solver => {
 
         self.solverConfig.delay = action.delay;
         self.solverConfig.detailLevel = action.evaluatingDetailLevel;
+        self.solverConfig.fullSpeed = action.fullSpeed;
         run(action.points)
         break;
       
@@ -62,6 +64,10 @@ export const makeSolver = solver => {
         self.solverConfig.detailLevel = action.level
         break;
   
+      case actions.GO_FULL_SPEED:
+        self.solverConfig.fullSpeed = true;
+        break;
+
       default:
         throw new Error(`invalid action sent to solver ${action.type}`);
     }

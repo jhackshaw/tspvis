@@ -25,6 +25,8 @@ export const selectMaxEvaluatingDetailLevel = state => state.maxEvaluatingDetail
 
 export const selectRunning = state => state.running;
 
+export const selectFullSpeed = state => state.fullSpeed;
+
 export const selectStartedRunningAt = state => state.startedRunningAt;
 
 

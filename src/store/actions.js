@@ -9,6 +9,7 @@ export const SET_DELAY = 'SET_DELAY';
 export const SET_EVALUATING_DETAIL_LEVEL = 'SET_EVALUATING_DETAIL_LEVEL';
 export const SET_SHOW_BEST_PATH = 'SET_SHOW_BEST_PATH';
 export const START_SOLVING = 'START_SOLVING';
+export const GO_FULL_SPEED = 'GO_FULL_SPEED';
 export const STOP_SOLVING = 'STOP_SOLVING';
 
 export const SET_BEST_PATH = 'SET_BEST_PATH';
@@ -83,18 +84,21 @@ const setAlgorithmAction = (algorithm, defaults) => ({
   defaults
 })
 
-
 export const startSolvingAction = (points, delay, evaluatingDetailLevel) => ({
   type: START_SOLVING,
   points,
   delay,
-  evaluatingDetailLevel
+  evaluatingDetailLevel,
+  fullSpeed: false
+})
+
+export const goFullSpeedAction = () => ({
+  type: GO_FULL_SPEED
 })
 
 export const stopSolvingAction = () => ({
   type: STOP_SOLVING
 })
-
 
 export const setAlgorithm = (algorithm, defaults={}) => dispatch => {
   gtmEmit({
@@ -142,6 +146,13 @@ export const startSolving = (...args) => (dispatch, getState) => {
   })
   dispatch(resetEvaluatingStateAction())
   dispatch(startSolvingAction(...args))
+}
+
+export const goFullSpeed = () => (dispatch, getState) => {
+  gtmEmit({
+    event: 'go-full-speed'
+  })
+  dispatch(goFullSpeedAction());
 }
 
 export const stopSolving = () => dispatch => {

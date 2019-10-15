@@ -42,11 +42,15 @@ const IndexPage = () => {
   }, [solver, dispatch, delay, points, evaluatingDetailLevel])
 
 
+  const fullSpeed = useCallback(() => {
+    dispatch(actions.goFullSpeed());
+    solver.postMessage(actions.goFullSpeedAction());
+  }, [solver, dispatch])
+
   const stop = useCallback(() => {
     dispatch(actions.stopSolving())
     solver.terminate();
   }, [solver, dispatch])
-
 
   useEffect(() => {
     solver.postMessage(actions.setDelayAction(delay))
@@ -68,6 +72,7 @@ const IndexPage = () => {
       <IntroductionModal />
       <AlgorithmModals />
       <Menu onStart={start}
+            onFullSpeed={fullSpeed}
             onStop={stop}
             onRandomizePoints={onRandomizePoints} />
       <MapPlot ref={mapRef}

@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 export default () => {
   const { allMarkdownRemark: { edges: algorithms }} = useStaticQuery(graphql`
     query AlgorithmModalsQuery {
-      allMarkdownRemark(filter: {frontmatter: {type: {eq: "algorithm"}}}) {
+      allMarkdownRemark(filter: {frontmatter: {type: {eq: "algorithm"}}}, sort: {fields: frontmatter___friendlyName}) {
         edges {
           node {
             frontmatter {

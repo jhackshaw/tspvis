@@ -39,6 +39,7 @@ const initialState = {
   evaluatingPaths: [],
   evaluatingCost: null,
   running: false,
+  fullSpeed: false,
   startedRunningAt: null,
 
   pointCount: usTop12.length,
@@ -122,6 +123,12 @@ export default (state=initialState, action) => {
         pointCount: state.points.length
       }
     
+    case actions.GO_FULL_SPEED:
+      return {
+        ...state,
+        fullSpeed: true
+      }
+
     case actions.STOP_SOLVING:
       return {
         ...state,
@@ -130,6 +137,7 @@ export default (state=initialState, action) => {
                   state.points,
         showBestPath: true,
         running: false,
+        fullSpeed: false,
         startedRunningAt: null
       }
 

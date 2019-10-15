@@ -11,7 +11,7 @@ import { ButtonGroup,
          IconButton } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faStop, faRedo, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faStop, faRedo, faQuestion, faFastForward } from '@fortawesome/free-solid-svg-icons';
 
 import * as actions from '../store/actions';
 import * as selectors from '../store/selectors';
@@ -22,7 +22,7 @@ import useAlgorithmInfo from '../hooks/useAlgorithmInfo';
 
 
 
-const MenuSolverControls = ({ onStart, onStop }) => {
+const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
   const dispatch = useDispatch()
   const algorithms = useAlgorithmInfo();
   const selectedAlgorithm = useSelector(selectors.selectAlgorithm);
@@ -31,6 +31,7 @@ const MenuSolverControls = ({ onStart, onStop }) => {
   const maxEvaluatingDetailLevel = useSelector(selectors.selectMaxEvaluatingDetailLevel);
   const showBestPath = useSelector(selectors.selectShowBestPath);
   const running = useSelector(selectors.selectRunning);
+  const fullSpeed = useSelector(selectors.selectFullSpeed);
   const definingPoints = useSelector(selectors.selectDefiningPoints);
 
   const onAlgorithmChange = event => {
@@ -104,8 +105,8 @@ const MenuSolverControls = ({ onStart, onStop }) => {
 
       <MenuItem title="Controls">
         <ButtonGroup fullWidth variant="outlined" color="secondary" size="large">
-          <Button onClick={onStart} disabled={running || definingPoints}>
-            <FontAwesomeIcon icon={faPlay} width="0" />
+          <Button onClick={running ? onFullSpeed : onStart} disabled={definingPoints || fullSpeed}>
+            <FontAwesomeIcon icon={running ? faFastForward : faPlay} width="0" />
           </Button>
           <Button onClick={onStop} disabled={!running || definingPoints}>
             <FontAwesomeIcon icon={faStop} width="0" />
@@ -125,7 +126,7 @@ const MenuSolverControls = ({ onStart, onStop }) => {
           max={5000}
           valueLabelDisplay="auto"
           color="secondary"
-          disabled={definingPoints}
+          disabled={definingPoints || fullSpeed}
           />
       </MenuItem>
 
@@ -140,7 +141,7 @@ const MenuSolverControls = ({ onStart, onStop }) => {
             checked={showBestPath}
             onChange={onShowBestPathChange}
             color="secondary"
-            disabled={definingPoints}
+            disabled={definingPoints || fullSpeed}
             id="show-best-path"
             />
         </Grid>
@@ -155,7 +156,7 @@ const MenuSolverControls = ({ onStart, onStop }) => {
             checked={evaluatingDetailLevel > 0}
             onChange={onEvaluatingDetailLevelChange(1, 0)}
             color="secondary"
-            disabled={definingPoints}
+            disabled={definingPoints || fullSpeed}
             id="show-evaluating-paths"
             />
         </Grid>
@@ -172,7 +173,7 @@ const MenuSolverControls = ({ onStart, onStop }) => {
               checked={evaluatingDetailLevel > 1}
               onChange={onEvaluatingDetailLevelChange(2, 1)}
               color="secondary"
-              disabled={definingPoints}
+              disabled={definingPoints || fullSpeed}
               id="show-evaluating-steps"
               />
           </Grid>

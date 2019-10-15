@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const Menu = ({ onStart, onStop, onRandomizePoints }) => {
+const Menu = ({ onStart, onFullSpeed, onStop, onRandomizePoints }) => {
   const classes = useStyles();
 
 
@@ -35,7 +35,8 @@ const Menu = ({ onStart, onStop, onRandomizePoints }) => {
         <MenuMetrics />
         <Divider />
         <MenuSolverControls onStart={onStart}
-                            onStop={onStop} />
+                            onStop={onStop}
+                            onFullSpeed={onFullSpeed} />
         <Divider />
         <MenuPointControls onRandomizePoints={onRandomizePoints} />
     </Paper>
