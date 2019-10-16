@@ -1,5 +1,5 @@
 
-![](https://gph.is/g/4bWNjyo)
+![](https://gph.is/g/4bWNjyo.gif)
 
 # Traveling Salesman Problem
 
