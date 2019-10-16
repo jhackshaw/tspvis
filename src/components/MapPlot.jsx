@@ -33,7 +33,7 @@ const MapPlot = React.forwardRef((props, ref) => {
         top: _ne.lat,
         bottom: _sw.lat,
         left: _ne.lng,
-        right: _sw.lng 
+        right: _sw.lng
       }
     }
   }))
@@ -57,6 +57,7 @@ const MapPlot = React.forwardRef((props, ref) => {
       mapboxApiAccessToken={TOKEN}
       disableTokenWarning={true}
       onNativeClick={definingPoints && onDefinedPoint}
+      doubleClickZoom={false}
     >
       { running &&
         <LinearProgress color="secondary" />
