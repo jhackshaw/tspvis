@@ -1,7 +1,7 @@
 
-![](https://media.giphy.com/media/LPkQ56C9z0iSv9Hs9D/giphy.gif)
-
 # Traveling Salesman Problem
+
+![](https://media.giphy.com/media/LPkQ56C9z0iSv9Hs9D/giphy.gif)
 
 The traveling salesman problem (TSP) asks the question, "Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city and returns to the origin city?".
 
