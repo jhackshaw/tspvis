@@ -7,7 +7,8 @@ The traveling salesman problem (TSP) asks the question, "Given a list of cities 
 
 ### This project
 
-  - The goal of this site is to be an **educational** resource to help visualize, learn, and develop different algorithms for the traveling salesman problem in a way that's easily accessible
+  - Live at [tspvis.com](https://tspvis.com)
+  - The goal of this project is to be an **educational** resource to help visualize, learn, and develop different algorithms for the traveling salesman problem in a way that's easily accessible
   - As you apply different algorithms, the current best path is saved and used as input to whatever you run next. (e.g. shortest path first -> branch and bound)
 
 ### Exhaustive algorithms
