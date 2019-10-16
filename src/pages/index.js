@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useCallback, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux';
-import Helmet from 'react-helmet';
 import IntroductionModal from '../components/IntroductionModal';
 import AlgorithmModals from '../components/AlgorithmModals';
 import Layout from "../components/Layout"
 import MapPlot from '../components/MapPlot';
 import Menu from "../components/Menu";
+import SEO from '../components/SEO';
 
 import useSolverWorker from '../hooks/useSolverWorker';
 import * as selectors from '../store/selectors';
@@ -68,7 +68,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <Helmet title={`TSP | ${algTitle}`} />
+      <SEO subtitle={algTitle} />
       <IntroductionModal />
       <AlgorithmModals />
       <Menu onStart={start}

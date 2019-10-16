@@ -76,7 +76,7 @@ const MenuPointControls = ({ onRandomizePoints }) => {
     <MenuSection>
       <MenuItem title="Points">
         <ButtonGroup fullWidth variant="outlined" color="secondary" size="large" disabled={running}>
-          <Button onClick={onRandomizePoints} disabled={definingPoints}>
+          <Button onClick={onRandomizePoints} disabled={definingPoints || pointCount < 3}>
             <FontAwesomeIcon icon={faRandom} width="0" />
           </Button>
           <Button onClick={onToggleDefiningPoints}>
