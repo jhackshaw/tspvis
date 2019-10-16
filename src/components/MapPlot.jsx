@@ -1,5 +1,7 @@
 import React, { useRef, useImperativeHandle } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTheme } from '@material-ui/styles';
+import { useMediaQuery } from '@material-ui/core';
 import MapGL from 'react-map-gl';
 import DeckGL, { ScatterplotLayer, PathLayer } from 'deck.gl';
 import { LinearProgress } from '@material-ui/core';
@@ -12,6 +14,8 @@ const TOKEN = 'pk.eyJ1IjoiaW50cmVwaWRldiIsImEiOiJjazBpa2M5YnowMHcyM21ubzgycW8zZH
 
 
 const MapPlot = React.forwardRef((props, ref) => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const mapGlRef = useRef();
   const plotPoints = useSelector(selectors.selectPointsDisplay);
   const plotPaths = useSelector(selectors.selectPlotPaths);
@@ -47,7 +51,7 @@ const MapPlot = React.forwardRef((props, ref) => {
       {...viewport}
       ref={mapGlRef}
       width="100%"
-      height="100%"
+      height={ matches ? "50%" : "100%" }
       maxPitch={0}
       onViewportChange={onViewportChanged}
       mapboxApiAccessToken={TOKEN}
