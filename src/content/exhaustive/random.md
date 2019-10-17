@@ -1,8 +1,7 @@
 ---
-type: algorithm
+type: exhaustive
 solverKey: random
 friendlyName: Random
-class: exhaustive
 defaults:
   evaluatingDetailLevel: 1
   maxEvaluatingDetailLevel: 1

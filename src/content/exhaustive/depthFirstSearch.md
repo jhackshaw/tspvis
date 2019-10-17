@@ -1,8 +1,7 @@
 ---
-type: algorithm
+type: exhaustive
 solverKey: depthFirstSearch
 friendlyName: Depth First Search (Brute Force)
-class: exhaustive
 defaults:
   evaluatingDetailLevel: 2
   maxEvaluatingDetailLevel: 2

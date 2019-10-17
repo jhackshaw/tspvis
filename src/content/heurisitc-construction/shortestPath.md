@@ -1,8 +1,7 @@
 ---
-type: algorithm
 solverKey: shortestPath
 friendlyName: Shortest Path
-class: heuristic
+type: heuristic-construction
 defaults:
   evaluatingDetailLevel: 1
   maxEvaluatingDetailLevel: 1

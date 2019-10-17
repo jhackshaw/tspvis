@@ -1,8 +1,7 @@
 ---
-type: algorithm
+type: exhaustive
 solverKey: branchAndBoundOnCost
 friendlyName: Branch and Bound on Cost
-class: exhaustive
 defaults:
   evaluatingDetailLevel: 2
   maxEvaluatingDetailLevel: 2

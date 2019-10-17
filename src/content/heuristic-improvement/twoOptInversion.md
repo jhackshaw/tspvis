@@ -1,8 +1,7 @@
 ---
-type: algorithm
+type: heuristic-improvement
 solverKey: twoOptInversion
 friendlyName: Two Opt Inversion
-class: heuristic
 defaults:
   evaluatingDetailLevel: 1
   maxEvaluatingDetailLevel: 1

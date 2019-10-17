@@ -1,8 +1,7 @@
 ---
-type: algorithm
+type: heuristic-improvement
 solverKey: twoOptReciprocalExchange
 friendlyName: Two Opt Reciprocal Exchange
-class: heuristic
 defaults:
   evaluatingDetailLevel: 1
   maxEvaluatingDetailLevel: 1

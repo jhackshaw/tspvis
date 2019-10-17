@@ -1,8 +1,7 @@
 ---
-type: algorithm
 solverKey: arbitraryInsertion
 friendlyName: Arbitrary Insertion
-class: heuristic
+type: heuristic-construction
 defaults:
   evaluatingDetailLevel: 1
   maxEvaluatingDetailLevel: 1
