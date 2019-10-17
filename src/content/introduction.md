@@ -20,10 +20,17 @@ Exhaustive algorithms will always find the best possible solution by evaluating 
 
 ### Heuristic algorithms
 
-Heuristic algorithms attempt to find a good approximation of the optimal path within a more *reasonable* amount of time. They can be further broken down as constructive and improvement, where constructive algorithms "build" a path (e.g. shortest path), and improvement algorithms take an existing path and try to make it better (e.g. 2-opt inversion)  The heuristic algorithms implemented so far include:
+Heuristic algorithms attempt to find a good approximation of the optimal path within a more *reasonable* amount of time.
+
+**Construction** - Build a path (e.g. shortest path)
   - Shortest Path
+  - Arbitrary Insertion
+  - Furthest Insertion
+
+**Improvement** - Attempt to take an existing constructed path and improve on it
   - 2-Opt Inversion
   - 2-Opt Reciprcal Exchange
+
 
 ## Dependencies
 
