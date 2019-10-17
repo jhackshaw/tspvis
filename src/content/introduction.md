@@ -9,7 +9,7 @@ The traveling salesman problem (TSP) asks the question, "Given a list of cities 
 ### This project
 
   - The goal of this site is to be an **educational** resource to help visualize, learn, and develop different algorithms for the traveling salesman problem in a way that's easily accessible
-  - As you apply different algorithms, the current best path is saved and used as input to whatever you run next. (e.g. shortest path first -> branch and bound)
+  - As you apply different algorithms, the current best path is saved and used as input to whatever you run next. (e.g. shortest path first -> branch and bound). The order in which you apply different algorithms to the problem is sometimes referred to the meta-heuristic strategy.
 
 ### Exhaustive algorithms
           
@@ -25,7 +25,7 @@ Heuristic algorithms attempt to find a good approximation of the optimal path wi
   - 2-Opt Inversion
   - 2-Opt Reciprcal Exchange
 
-## Stack
+## Dependencies
 
 These are the main tools used to build this site:
 
@@ -37,11 +37,6 @@ These are the main tools used to build this site:
    - [mapbox](https://www.mapbox.com/)
 
 
-## Set up locally / contributing
+## Contributing
 
-  1. git clone https://github.com/jhackshaw/tspvis
-  2. cd tspvis
-  3. npm install
-  4. gatsby develop
-
-Pull requests are always welcome! Feel free to raise any ideas, suggestions, or bugs as an issue. 
+Pull requests are always welcome! Also, feel free to raise any ideas, suggestions, or bugs as an issue. 
