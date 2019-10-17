@@ -4,6 +4,7 @@ import branchAndBoundOnCost from './exhaustive/branchAndBoundOnCost.worker';
 
 import shortestPath from './heuristic/shortestPath.worker';
 import arbitraryInsertion from './heuristic/arbitraryInsertion.worker';
+import furthestInsertion from './heuristic/furthestInsertion.worker';
 
 import twoOptInversion from './heuristic/twoOptInversion.worker';
 import twoOptReciprocalExchange from './heuristic/twoOptReciprocalExchange.worker';
@@ -16,6 +17,7 @@ export default {
   
   shortestPath,
   arbitraryInsertion,
+  furthestInsertion,
 
   twoOptInversion,
   twoOptReciprocalExchange

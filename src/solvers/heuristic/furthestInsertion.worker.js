@@ -3,7 +3,7 @@ import makeSolver from '../makeSolver';
 import { pathCost, distance } from '../cost';
 
 
-const arbitraryInsertion = async points => {
+const furthestInsertion = async points => {
   // from the starting point
   const path = [points.shift()];
 
@@ -13,7 +13,7 @@ const arbitraryInsertion = async points => {
   points.sort((a, b) => (
     distance(path[0], b) -
     distance(path[0], a)
-  ));
+    ));
   path.push(points.pop());
 
   self.setEvaluatingPaths(() => ({
@@ -21,20 +21,35 @@ const arbitraryInsertion = async points => {
     cost: pathCost(path)
   }))
 
-  // randomly sort points - this is the order they will be added
-  // to the path
-  points.sort(() => Math.random() - 0.5);
 
   while (points.length > 0) {
     //
-    // SELECTION - choose a next point randomly
+    // SELECTION - furthest point from the path
     //
-    const nextPoint = points.pop();
+    let [selectedDistance, selectedIdx] = [0, null];
+    for (const [freePointIdx, freePoint] of points.entries()) {
 
+      // find the minimum distance to the path for freePoint
+      let [bestCostToPath, costToPathIdx] = [Infinity, null];
+      for (const pathPoint of path) {
+        const dist = distance(freePoint, pathPoint);
+        if (dist < bestCostToPath) {
+          [bestCostToPath, costToPathIdx] = [dist, freePointIdx]
+        } 
+      }
+
+      // if this point is further from the path than the currently selected
+      if (bestCostToPath > selectedDistance) {
+        [selectedDistance, selectedIdx] = [bestCostToPath, costToPathIdx];
+      }
+    }    
+    
+    // get the next point to add
+    const [ nextPoint ] = points.splice(selectedIdx, 1);
 
     //
     // INSERTION - find the insertion spot that minimizes distance
-    //    
+    //
     let [bestCost, bestIdx] = [Infinity, null];
     for (let i=1; i<path.length; i++) {
       const insertionCost = pathCost([
@@ -69,4 +84,4 @@ const arbitraryInsertion = async points => {
 
 }
 
-makeSolver(arbitraryInsertion);
+makeSolver(furthestInsertion);

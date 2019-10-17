@@ -28,7 +28,9 @@ const arbitraryInsertion = async points => {
   // from the starting point
   const path = [points.shift()];
 
-  // first go to the nearest point 
+  //
+  // INITIALIZATION - go to the nearest point
+  //
   points.sort((a, b) => (
     distance(path[0], b) -
     distance(path[0], a)
@@ -40,11 +42,14 @@ const arbitraryInsertion = async points => {
   points.sort(() => Math.random() - 0.5);
 
   while (points.length > 0) {
-    // get the next point to add
+    //
+    // SELECTION - choose a next point randomly
+    //
     const nextPoint = points.pop();
 
-    // find the point p in the path that minimizes the distance
-    // (p => nextPoint) + (nextPoint -> p+1)
+    //
+    // INSERTION -find the insertion spot that minimizes distance
+    //
     let [bestCost, bestIdx] = [Infinity, null];
     for (let i=1; i<path.length; i++) {
       const insertionCost = pathCost([
@@ -54,14 +59,10 @@ const arbitraryInsertion = async points => {
         [bestCost, bestIdx] = [insertionCost, i];
       }
     }
-
-    // insert that point where it's cheapest
     path.splice(bestIdx, 0, nextPoint);
   }
 
   // return to start after visiting all other points
   path.push(path[0]);
 }
-
-makeSolver(arbitraryInsertion);
 ```
