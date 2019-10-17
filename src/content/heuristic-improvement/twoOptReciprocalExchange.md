@@ -1,5 +1,6 @@
 ---
 type: heuristic-improvement
+order: 2
 solverKey: twoOptReciprocalExchange
 friendlyName: Two Opt Reciprocal Exchange
 defaults:

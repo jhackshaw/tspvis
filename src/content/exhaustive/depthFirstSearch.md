@@ -1,5 +1,6 @@
 ---
 type: exhaustive
+order: 1
 solverKey: depthFirstSearch
 friendlyName: Depth First Search (Brute Force)
 defaults:

@@ -1,5 +1,6 @@
 ---
 type: heuristic-improvement
+order: 1
 solverKey: twoOptInversion
 friendlyName: Two Opt Inversion
 defaults:

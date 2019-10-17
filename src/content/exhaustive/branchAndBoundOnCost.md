@@ -1,5 +1,6 @@
 ---
 type: exhaustive
+order: 2
 solverKey: branchAndBoundOnCost
 friendlyName: Branch and Bound on Cost
 defaults:

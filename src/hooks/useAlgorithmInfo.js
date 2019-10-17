@@ -8,11 +8,12 @@ export default () => {
           frontmatter: {type: {in: ["exhaustive", "heuristic-construction", "heuristic-improvement"]}}
         }, 
         sort: {
-          fields: frontmatter___friendlyName
+          fields: frontmatter___order
         }) {
         edges {
           node {
             frontmatter {
+              order
               friendlyName
               solverKey
               type
