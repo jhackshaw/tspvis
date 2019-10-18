@@ -133,7 +133,6 @@ export const setShowBestPath = show => ({
 })
 
 export const resetSolverState = () => dispatch => {
-  gtmEmit({ event: 'reset-solver' })
   dispatch(resetEvaluatingStateAction())
   dispatch(resetBestPathStateAction())
 }
