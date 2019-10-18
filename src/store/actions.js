@@ -255,6 +255,7 @@ export const randomizePoints = bounds => (dispatch, getState) => {
     event: 'randomize-points',
     pointCount
   })
+  dispatch(resetSolverState())
   dispatch(setPointsAction(points))
 }
 

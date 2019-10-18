@@ -171,7 +171,6 @@ export default (state=initialState, action) => {
     case actions.SET_POINTS:
       return {
         ...state,
-        bestPath: [],
         points: action.points
       }
 
