@@ -14,7 +14,7 @@ const SEO = ({ subtitle }) => {
       <meta property="og:title" content={`Traveling Salesman Problem Visualizer`} />
       <meta property="og:url" content="https://tspvis.com" />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content="https://imgur.com/a/u3gUMUf" />
+      <meta property="og:image" content="https://i.imgur.com/F1cgYHm.png" />
       <meta property="og:type" content="website" />
     </Helmet>
   )
