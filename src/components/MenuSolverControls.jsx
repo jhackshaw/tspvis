@@ -73,15 +73,6 @@ const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
                     fullWidth
                     margin="dense"
                     >
-              <ListSubheader>Exhaustive</ListSubheader>
-              { algorithms.filter(alg => alg.type === "exhaustive")
-                          .map(alg => (
-                <SelectItem value={alg.solverKey}
-                            key={alg.solverKey}
-                            >
-                  { alg.friendlyName }
-                </SelectItem>
-              ))}
               <ListSubheader>Heuristic Construction</ListSubheader>
               { algorithms.filter(alg => alg.type === "heuristic-construction")
                           .map(alg => (
@@ -93,6 +84,15 @@ const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
               ))}
               <ListSubheader>Heuristic Improvement</ListSubheader>
               { algorithms.filter(alg => alg.type === "heuristic-improvement")
+                          .map(alg => (
+                <SelectItem value={alg.solverKey}
+                            key={alg.solverKey}
+                            >
+                  { alg.friendlyName }
+                </SelectItem>
+              ))}
+              <ListSubheader>Exhaustive</ListSubheader>
+              { algorithms.filter(alg => alg.type === "exhaustive")
                           .map(alg => (
                 <SelectItem value={alg.solverKey}
                             key={alg.solverKey}

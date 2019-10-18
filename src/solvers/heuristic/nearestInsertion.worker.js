@@ -1,29 +1,7 @@
----
-type: heuristic-construction
-order: 4
-solverKey: furthestInsertion
-friendlyName: Furthest Insertion
-defaults:
-  evaluatingDetailLevel: 1
-  maxEvaluatingDetailLevel: 1
----
+/* eslint-disable no-restricted-globals */
+import makeSolver from '../makeSolver';
+import { pathCost, distance } from '../cost';
 
-
-# Furthest Insertion
-
-This is a heuristic construction algorithm. It chooses the furthest point from the path to add to it, and then figures out where the best place to put it will be.
-
-  1. From the starting point
-  2. First, go to the closest point
-  3. Choose the point that is furthest from any of the points on the path
-  4. Find the cheapest place to add it in the path
-  4. Chosen point is no longer an "available point"
-  5. Continue from #3 until there are no available points, and then return to the start.
-
-
-## The code
-
-```javascript
 
 const furthestInsertion = async points => {
   // from the starting point
@@ -38,10 +16,17 @@ const furthestInsertion = async points => {
     ));
   path.push(points.pop());
 
+  self.setEvaluatingPaths(() => ({
+    paths: [{ path }],
+    cost: pathCost(path)
+  }))
+
+  await self.sleep();
+
 
   while (points.length > 0) {
     //
-    // SELECTION - furthest point from the path
+    // SELECTION - nearest point to the path
     //
     let [selectedDistance, selectedIdx] = [0, null];
     for (const [freePointIdx, freePoint] of points.entries()) {
@@ -55,11 +40,13 @@ const furthestInsertion = async points => {
         } 
       }
 
-      // if this point is further from the path than the currently selected
-      if (bestCostToPath > selectedDistance) {
+      // if this point is closer to the path than the currently selected
+      if (bestCostToPath < selectedDistance) {
         [selectedDistance, selectedIdx] = [bestCostToPath, costToPathIdx];
       }
     }    
+    
+    // get the next point to add
     const [ nextPoint ] = points.splice(selectedIdx, 1);
 
     //
@@ -75,9 +62,28 @@ const furthestInsertion = async points => {
       }
     }
     path.splice(bestIdx, 0, nextPoint);
+
+
+    self.setEvaluatingPaths(() => ({
+      paths: [{ path }],
+      cost: pathCost(path)
+    }))
+
+    await self.sleep();
   }
 
   // return to start after visiting all other points
   path.push(path[0]);
+  const cost = pathCost(path);
+
+  self.setEvaluatingPaths(() => ({
+    paths: [{ path }],
+    cost
+  }))
+  await self.sleep();
+
+  self.setBestPath(path, cost)
+
 }
-```
+
+makeSolver(furthestInsertion);

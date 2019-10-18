@@ -1,8 +1,8 @@
 ---
 type: heuristic-construction
-order: 4
-solverKey: furthestInsertion
-friendlyName: Furthest Insertion
+order: 3
+solverKey: nearestInsertion
+friendlyName: Nearest Insertion
 defaults:
   evaluatingDetailLevel: 1
   maxEvaluatingDetailLevel: 1
@@ -15,7 +15,7 @@ This is a heuristic construction algorithm. It chooses the furthest point from t
 
   1. From the starting point
   2. First, go to the closest point
-  3. Choose the point that is furthest from any of the points on the path
+  3. Choose the point that is **nearest** to the current path
   4. Find the cheapest place to add it in the path
   4. Chosen point is no longer an "available point"
   5. Continue from #3 until there are no available points, and then return to the start.
@@ -41,9 +41,9 @@ const furthestInsertion = async points => {
 
   while (points.length > 0) {
     //
-    // SELECTION - furthest point from the path
+    // SELECTION - nearest point to the path
     //
-    let [selectedDistance, selectedIdx] = [0, null];
+    let [selectedDistance, selectedIdx] = [Infinity, null];
     for (const [freePointIdx, freePoint] of points.entries()) {
 
       // find the minimum distance to the path for freePoint
@@ -55,8 +55,8 @@ const furthestInsertion = async points => {
         } 
       }
 
-      // if this point is further from the path than the currently selected
-      if (bestCostToPath > selectedDistance) {
+      // if this point is closer to the path than the currently selected
+      if (bestCostToPath < selectedDistance) {
         [selectedDistance, selectedIdx] = [bestCostToPath, costToPathIdx];
       }
     }    

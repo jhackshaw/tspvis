@@ -21,6 +21,8 @@ const furthestInsertion = async points => {
     cost: pathCost(path)
   }))
 
+  await self.sleep();
+
 
   while (points.length > 0) {
     //
