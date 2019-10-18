@@ -11,7 +11,7 @@ defaults:
 
 # Furthest Insertion
 
-This is a heuristic construction algorithm. It chooses the furthest point from the path to add to it, and then figures out where the best place to put it will be.
+This is a heuristic construction algorithm. It selects the closest point to the path, and then figures out where the best place to put it will be.
 
   1. From the starting point
   2. First, go to the closest point
@@ -25,7 +25,7 @@ This is a heuristic construction algorithm. It chooses the furthest point from t
 
 ```javascript
 
-const furthestInsertion = async points => {
+const nearestInsertion = async points => {
   // from the starting point
   const path = [points.shift()];
 
@@ -45,21 +45,15 @@ const furthestInsertion = async points => {
     //
     let [selectedDistance, selectedIdx] = [Infinity, null];
     for (const [freePointIdx, freePoint] of points.entries()) {
-
-      // find the minimum distance to the path for freePoint
-      let [bestCostToPath, costToPathIdx] = [Infinity, null];
       for (const pathPoint of path) {
         const dist = distance(freePoint, pathPoint);
-        if (dist < bestCostToPath) {
-          [bestCostToPath, costToPathIdx] = [dist, freePointIdx]
-        } 
+        if (dist < selectedDistance) {
+          [selectedDistance, selectedIdx] = [dist, freePointIdx]
+        }
       }
-
-      // if this point is closer to the path than the currently selected
-      if (bestCostToPath < selectedDistance) {
-        [selectedDistance, selectedIdx] = [bestCostToPath, costToPathIdx];
-      }
-    }    
+    }
+    
+    // get the next point to add
     const [ nextPoint ] = points.splice(selectedIdx, 1);
 
     //
@@ -75,9 +69,11 @@ const furthestInsertion = async points => {
       }
     }
     path.splice(bestIdx, 0, nextPoint);
+
   }
 
   // return to start after visiting all other points
   path.push(path[0]);
 }
+
 ```

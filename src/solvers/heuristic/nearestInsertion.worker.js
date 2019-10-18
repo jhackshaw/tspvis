@@ -3,7 +3,7 @@ import makeSolver from '../makeSolver';
 import { pathCost, distance } from '../cost';
 
 
-const furthestInsertion = async points => {
+const nearestInsertion = async points => {
   // from the starting point
   const path = [points.shift()];
 
@@ -23,28 +23,19 @@ const furthestInsertion = async points => {
 
   await self.sleep();
 
-
   while (points.length > 0) {
     //
     // SELECTION - nearest point to the path
     //
-    let [selectedDistance, selectedIdx] = [0, null];
+    let [selectedDistance, selectedIdx] = [Infinity, null];
     for (const [freePointIdx, freePoint] of points.entries()) {
-
-      // find the minimum distance to the path for freePoint
-      let [bestCostToPath, costToPathIdx] = [Infinity, null];
       for (const pathPoint of path) {
         const dist = distance(freePoint, pathPoint);
-        if (dist < bestCostToPath) {
-          [bestCostToPath, costToPathIdx] = [dist, freePointIdx]
-        } 
+        if (dist < selectedDistance) {
+          [selectedDistance, selectedIdx] = [dist, freePointIdx]
+        }
       }
-
-      // if this point is closer to the path than the currently selected
-      if (bestCostToPath < selectedDistance) {
-        [selectedDistance, selectedIdx] = [bestCostToPath, costToPathIdx];
-      }
-    }    
+    }
     
     // get the next point to add
     const [ nextPoint ] = points.splice(selectedIdx, 1);
@@ -86,4 +77,4 @@ const furthestInsertion = async points => {
 
 }
 
-makeSolver(furthestInsertion);
+makeSolver(nearestInsertion);
