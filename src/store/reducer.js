@@ -132,7 +132,7 @@ export default (state=initialState, action) => {
     case actions.STOP_SOLVING:
       return {
         ...state,
-        points: state.bestPath ? 
+        points: state.bestPath.length > 0 ? 
                   state.bestPath.slice(0, state.bestPath.length - 1) : 
                   state.points,
         showBestPath: true,
