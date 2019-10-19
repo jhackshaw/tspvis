@@ -32,7 +32,7 @@ const MenuHeader = props => {
   return (
     <MenuSection>
       <Grid container justify="space-between" alignItems="center">
-        <Typography gutterBottom display="inline" variant="button" classes={{root: classes.title}}>
+        <Typography gutterBottom display="inline" variant="button" component="h1" classes={{root: classes.title}}>
           <FontAwesomeIcon icon={faBriefcase} width="0" /> TSPVIS
         </Typography>
         <Typography gutterBottom display="inline" color="textSecondary">
