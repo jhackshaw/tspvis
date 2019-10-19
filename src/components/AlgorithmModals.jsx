@@ -42,6 +42,7 @@ const AlgorithmModals = props => {
               maxWidth="md"
               scroll="paper"
               keepMounted
+              disablePortal
               fullWidth
               >
         <DialogContent>

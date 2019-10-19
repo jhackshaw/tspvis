@@ -8,7 +8,7 @@ const SEO = ({ subtitle }) => {
 
   return (
 
-    <Helmet title={`${subtitle} | Traveling Salesman Problem Visualizer`}>
+    <Helmet title={`${subtitle}${subtitle ? ' | ' : ''}Traveling Salesman Problem Visualizer`}>
       <meta name="description" content={description} />
 
       <meta property="og:title" content={`Traveling Salesman Problem Visualizer`} />

@@ -37,6 +37,7 @@ const IntroductionModel = props => {
             maxWidth="md"
             scroll="paper"
             keepMounted
+            disablePortal
             fullWidth
             >
       <DialogContent>
