@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Grid, Typography, IconButton } from '@material-ui/core';
+import { Grid, Typography, IconButton, Tooltip } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingUsd, faInfoCircle, faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -36,17 +36,23 @@ const MenuHeader = props => {
           <FontAwesomeIcon icon={faBriefcase} width="0" /> TSPVIS
         </Typography>
         <Typography gutterBottom display="inline" color="textSecondary">
-          <IconButton onClick={() => {}}>
-            <FontAwesomeIcon icon={faHandHoldingUsd} size="xs" width="0" />
-          </IconButton>
+          <Tooltip title="Support this site">
+            <IconButton onClick={() => {}}>
+              <FontAwesomeIcon icon={faHandHoldingUsd} size="xs" width="0" />
+            </IconButton>
+          </Tooltip>
 
-          <IconButton target="_blank" href="https://github.com/jhackshaw/tspvis">
-            <FontAwesomeIcon icon={faGithub} size="xs" width="0" />
-          </IconButton>
+          <Tooltip title="Source code">
+            <IconButton target="_blank" href="https://github.com/jhackshaw/tspvis">
+              <FontAwesomeIcon icon={faGithub} size="xs" width="0" />
+            </IconButton>
+          </Tooltip>
 
-          <IconButton onClick={onOpenSiteInfo} edge="end">
-            <FontAwesomeIcon icon={faInfoCircle} size="xs" width="0" />
-          </IconButton>
+          <Tooltip title="General site information">
+            <IconButton onClick={onOpenSiteInfo} edge="end">
+              <FontAwesomeIcon icon={faInfoCircle} size="xs" width="0" />
+            </IconButton>
+          </Tooltip>
         </Typography>
       </Grid>
       <Typography variant="subtitle2" color="textSecondary">Visualize the execution of different algorithms for solving the traveling salesman problem</Typography>
