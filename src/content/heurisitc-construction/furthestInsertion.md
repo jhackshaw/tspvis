@@ -11,7 +11,7 @@ defaults:
 
 # Furthest Insertion
 
-This is a heuristic construction algorithm. It chooses the furthest point from the path to add to it, and then figures out where the best place to put it will be.
+This is a heuristic construction algorithm. It selects the furthest point from the path, and then figures out where the best place to put it will be.
 
   1. From the starting point
   2. First, go to the closest point

@@ -2,13 +2,14 @@ import random from './exhaustive/random.worker';
 import depthFirstSearch from './exhaustive/depthFirstSearch.worker';
 import branchAndBoundOnCost from './exhaustive/branchAndBoundOnCost.worker';
 
-import shortestPath from './heuristic/shortestPath.worker';
-import arbitraryInsertion from './heuristic/arbitraryInsertion.worker';
-import nearestInsertion from './heuristic/nearestInsertion.worker';
-import furthestInsertion from './heuristic/furthestInsertion.worker';
+import shortestPath from './heuristic-construction/shortestPath.worker';
+import arbitraryInsertion from './heuristic-construction/arbitraryInsertion.worker';
+import nearestInsertion from './heuristic-construction/nearestInsertion.worker';
+import furthestInsertion from './heuristic-construction/furthestInsertion.worker';
+import convexHull from './heuristic-construction/convexHull.worker';
 
-import twoOptInversion from './heuristic/twoOptInversion.worker';
-import twoOptReciprocalExchange from './heuristic/twoOptReciprocalExchange.worker';
+import twoOptInversion from './heuristic-improvement/twoOptInversion.worker';
+import twoOptReciprocalExchange from './heuristic-improvement/twoOptReciprocalExchange.worker';
 
 
 export default {
@@ -20,6 +21,7 @@ export default {
   arbitraryInsertion,
   furthestInsertion,
   nearestInsertion,
+  convexHull,
 
   twoOptInversion,
   twoOptReciprocalExchange

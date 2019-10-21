@@ -1,19 +1,11 @@
 /* eslint-disable no-restricted-globals */
 import makeSolver from '../makeSolver';
-import { pathCost } from '../cost';
+import { pathCost, setDifference } from '../cost';
 
 import { EVALUATING_PATH_COLOR,
          EVALUATING_ERROR_COLOR,
          EVALUATING_SEGMENT_COLOR } from '../../constants';
 
-
-const setDifference = (setA, setB) => {
-  const ret = new Set(setA);
-  setB.forEach(p => {
-    ret.delete(p)
-  })
-  return ret
-}
 
 const branchAndBoundOnCost = async (points, path=[], visited=null, overallBest=Infinity) => {
   if (visited === null) {

@@ -11,7 +11,7 @@ defaults:
 
 # Arbitrary Insertion
 
-This is a heuristic construction algorithm. It chooses a random next point to add to the path, and then figures out where the best place to put it will be.
+This is a heuristic construction algorithm. It select a random point, and then figures out where the best place to put it will be.
 
   1. From the starting point
   2. First, go to the closest point

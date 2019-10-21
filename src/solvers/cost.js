@@ -30,3 +30,21 @@ export const pathCost = path => {
              .map((point, idx) => distance(point, path[idx+1]))
              .reduce((a, b) => a+b, 0)
 }
+
+
+export const orientation = (p, q, r) => {
+  const val = (q[0] - p[0]) * (r[1] - q[1]) -
+              (q[1] - p[1]) * (r[0] - q[0]);
+  if (val === 0) {
+    return 0;
+  }
+  return val > 0 ? 1 : 2;
+}
+
+export const setDifference = (setA, setB) => {
+  const ret = new Set(setA);
+  setB.forEach(p => {
+    ret.delete(p)
+  })
+  return ret
+}

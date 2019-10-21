@@ -11,7 +11,7 @@ defaults:
 
 # Shortest Path
 
-This is a heuristic, greedy algorithm. It continually chooses the best looking option from the current state.
+This is a heuristic, greedy algorithm also known as nearest neighbor. It continually chooses the best looking option from the current state.
 
   1. From the starting point
   2. sort the remaining available points based on cost (distance)
