@@ -270,4 +270,14 @@ export const setDefaultMap = (...args) => dispatch => {
 
 
 
+export const goToKoFi = () => {
+  gtmEmit({
+    event: 'go-to-kofi'
+  })
+}
 
+export const goToSource = () => {
+  gtmEmit({
+    event: 'go-to-source'
+  })
+}

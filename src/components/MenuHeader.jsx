@@ -29,6 +29,14 @@ const MenuHeader = props => {
     dispatch(actions.toggleSiteInfoOpen());
   }
 
+  const onGoToKoFi = () => {
+    actions.goToKoFi();
+  }
+
+  const onGoToSource = () => {
+    actions.goToSource();
+  }
+
   return (
     <MenuSection>
       <Grid container justify="space-between" alignItems="center">
@@ -37,13 +45,13 @@ const MenuHeader = props => {
         </Typography>
         <Typography gutterBottom display="inline" color="textSecondary">
           <Tooltip title="Support this site">
-            <IconButton onClick={() => {}}>
+            <IconButton target="_blank" href="https://ko-fi.com/tspvis#" onClick={onGoToKoFi}>
               <FontAwesomeIcon icon={faHandHoldingUsd} size="xs" width="0" />
             </IconButton>
           </Tooltip>
 
           <Tooltip title="Source code">
-            <IconButton target="_blank" href="https://github.com/jhackshaw/tspvis">
+            <IconButton target="_blank" href="https://github.com/jhackshaw/tspvis" onClick={onGoToSource}>
               <FontAwesomeIcon icon={faGithub} size="xs" width="0" />
             </IconButton>
           </Tooltip>
