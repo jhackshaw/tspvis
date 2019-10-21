@@ -29,8 +29,8 @@ const MenuHeader = props => {
     dispatch(actions.toggleSiteInfoOpen());
   }
 
-  const onGoToKoFi = () => {
-    actions.goToKoFi();
+  const onGoToSupport = () => {
+    actions.goToSupport();
   }
 
   const onGoToSource = () => {
@@ -45,7 +45,7 @@ const MenuHeader = props => {
         </Typography>
         <Typography gutterBottom display="inline" color="textSecondary">
           <Tooltip title="Support this site">
-            <IconButton target="_blank" href="https://ko-fi.com/tspvis#" onClick={onGoToKoFi}>
+            <IconButton target="_blank" href="https://www.buymeacoffee.com/tspvis" onClick={onGoToSupport}>
               <FontAwesomeIcon icon={faHandHoldingUsd} size="xs" width="0" />
             </IconButton>
           </Tooltip>
