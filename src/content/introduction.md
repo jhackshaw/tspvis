@@ -26,6 +26,8 @@ Heuristic algorithms attempt to find a good approximation of the optimal path wi
   - Shortest Path
   - Arbitrary Insertion
   - Furthest Insertion
+  - Nearest Insertion
+  - Convex Hull Insertion *(best performing)*
 
 **Improvement** - Attempt to take an existing constructed path and improve on it
   - 2-Opt Inversion
