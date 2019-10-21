@@ -24,7 +24,7 @@ It could be worthwhile to try this algorithm prior to 2-opt inversion because of
   4. If the new path is cheaper (shorter), keep it and continue searching. Remember that we found a better path.
   5. If not, revert the path and continue searching.
 
-## The code
+## Implementation
 
 ```javascript
 const twoOptReciprocalExchange = async path => {

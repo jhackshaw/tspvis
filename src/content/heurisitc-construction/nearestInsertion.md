@@ -21,7 +21,7 @@ This is a heuristic construction algorithm. It selects the closest point to the 
   5. Continue from #3 until there are no available points, and then return to the start.
 
 
-## The code
+## Implementation
 
 ```javascript
 

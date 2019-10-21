@@ -7,19 +7,6 @@ module.exports = {
   plugins: [
     `gatsby-plugin-material-ui`,
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-offline`,
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/favicon.png`,
-      },
-    },
     {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {
@@ -42,7 +29,20 @@ module.exports = {
           `gatsby-remark-prismjs`
         ]
       }
-    }
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `tsp visualizer`,
+        short_name: `starter`,
+        start_url: `/`,
+        background_color: `#663399`,
+        theme_color: `#663399`,
+        display: `tspvis`,
+        icon: `src/images/favicon.png`,
+      },
+    },
+    `gatsby-plugin-offline`,
   ],
 
 }

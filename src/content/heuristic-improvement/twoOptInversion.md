@@ -21,7 +21,7 @@ It is also known as 2-opt, 2-opt mutation, and cross-aversion. The general goal 
   4. If the new path is cheaper (shorter), keep it and continue searching. Remember that we found a better path.
   5. If not, revert the path and continue searching.
 
-## The code
+## Implementation
 
 ```javascript
 const twoOptInversion = async path => {

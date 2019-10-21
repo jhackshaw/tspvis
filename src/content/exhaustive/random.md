@@ -19,7 +19,7 @@ I consider it exhaustive because if it runs for infinity, eventually it will enc
   3. If it's better, keep it
   4. If not, ditch it and keep going
 
-## The code
+## Implementation
 
 ```javascript
 const random = async points => {

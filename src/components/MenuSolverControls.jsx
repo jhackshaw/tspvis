@@ -8,8 +8,7 @@ import { ButtonGroup,
          Typography,
          Switch,
          Grid,
-         IconButton, 
-         Tooltip} from '@material-ui/core';
+         IconButton } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faStop, faRedo, faQuestion, faFastForward } from '@fortawesome/free-solid-svg-icons';
@@ -67,7 +66,6 @@ const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
       <MenuItem title="Algorithm">
         <Grid container alignItems="center">
           <Grid item xs={11}>
-            <Tooltip title="Select an algorithm">
               <Select value={selectedAlgorithm}
                       onChange={onAlgorithmChange}
                       disabled={running || definingPoints}
@@ -103,15 +101,12 @@ const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
                   </SelectItem>
                 ))}
               </Select>
-            </Tooltip>
           </Grid>
           <Grid item xs={1}>
             <Typography align="right" color="textSecondary">
-              <Tooltip title={`Information about selected algorithm`}>
-                <IconButton edge="end" onClick={onShowAlgInfo}>
-                  <FontAwesomeIcon icon={faQuestion} size="xs" />
-                </IconButton>
-              </Tooltip>
+              <IconButton edge="end" onClick={onShowAlgInfo}>
+                <FontAwesomeIcon icon={faQuestion} size="xs" />
+              </IconButton>
             </Typography>
           </Grid>
         </Grid>
@@ -119,91 +114,77 @@ const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
 
       <MenuItem title="Controls">
         <ButtonGroup fullWidth variant="outlined" color="secondary" size="large">
-          <Tooltip title={running ? 'Go full speed (cannot undo)' : 'Start solving'}>
-            <Button onClick={running ? onFullSpeed : onStart} disabled={definingPoints || fullSpeed}>
-              <FontAwesomeIcon icon={running ? faFastForward : faPlay} width="0" />
-            </Button>
-          </Tooltip>
-          <Tooltip title="Stop solving">
-            <Button onClick={onStop} disabled={!running || definingPoints}>
-              <FontAwesomeIcon icon={faStop} width="0" />
-            </Button>
-          </Tooltip>
-          <Tooltip title="Rest solver state">
-            <Button onClick={onReset} disabled={running || definingPoints}>
-              <FontAwesomeIcon icon={faRedo} width="0" />
-            </Button>
-          </Tooltip>
+          <Button onClick={running ? onFullSpeed : onStart} disabled={definingPoints || fullSpeed}>
+            <FontAwesomeIcon icon={running ? faFastForward : faPlay} width="0" />
+          </Button>
+          <Button onClick={onStop} disabled={!running || definingPoints}>
+            <FontAwesomeIcon icon={faStop} width="0" />
+          </Button>
+          <Button onClick={onReset} disabled={running || definingPoints}>
+            <FontAwesomeIcon icon={faRedo} width="0" />
+          </Button>
         </ButtonGroup>
       </MenuItem>
 
       <MenuItem title="Delay">
-        <Tooltip title="Change delay between solver steps">
-          <Slider
-            value={delay}
-            onChange={onDelayChange}
-            step={100}
-            min={0}
-            max={5000}
-            valueLabelDisplay="auto"
-            color="secondary"
-            disabled={definingPoints || fullSpeed}
-            />
-        </Tooltip>
+        <Slider
+          value={delay}
+          onChange={onDelayChange}
+          step={100}
+          min={0}
+          max={3000}
+          valueLabelDisplay="auto"
+          color="secondary"
+          disabled={definingPoints || fullSpeed}
+          />
       </MenuItem>
 
       <MenuItem row>
         <Grid item xs={10}>
           <Typography variant="button" color="textSecondary" component="div">
-            Best Path
+            Show Best Path
           </Typography>
         </Grid>
         <Grid item xs={2}>
-          <Tooltip title="Plot the current best path">
-            <Switch
-              checked={showBestPath}
-              onChange={onShowBestPathChange}
-              color="secondary"
-              disabled={definingPoints || fullSpeed}
-              id="show-best-path"
-              />
-          </Tooltip>
+          <Switch
+            checked={showBestPath}
+            onChange={onShowBestPathChange}
+            color="secondary"
+            disabled={definingPoints || fullSpeed}
+            id="show-best-path"
+            />
         </Grid>
 
         <Grid item xs={10}>
           <Typography variant="button" color="textSecondary" component="div">
-            Intermediate Paths
+            Show Evaluated Paths
           </Typography>
         </Grid>
         <Grid item xs={2}>
-          <Tooltip title="Show the paths being evaluated by the algorithm">
-            <Switch
-              checked={evaluatingDetailLevel > 0}
-              onChange={onEvaluatingDetailLevelChange(1, 0)}
-              color="secondary"
-              disabled={definingPoints || fullSpeed}
-              id="show-evaluating-paths"
-              />
-          </Tooltip>
+          <Switch
+            checked={evaluatingDetailLevel > 0}
+            onChange={onEvaluatingDetailLevelChange(1, 0)}
+            color="secondary"
+            disabled={definingPoints || fullSpeed}
+            id="show-evaluating-paths"
+            />
         </Grid>
 
         { maxEvaluatingDetailLevel > 1 &&
           <>
           <Grid item xs={10}>
             <Typography variant="button" color="textSecondary" component="div">
-              All Steps
+              Show Evaluated Steps
             </Typography>
           </Grid>
           <Grid item xs={2}>
-            <Tooltip title="Show more detail for the evaluated paths">
-              <Switch
-                checked={evaluatingDetailLevel > 1}
-                onChange={onEvaluatingDetailLevelChange(2, 1)}
-                color="secondary"
-                disabled={definingPoints || fullSpeed}
-                id="show-evaluating-steps"
-                />
-            </Tooltip>
+            <Switch
+              checked={evaluatingDetailLevel > 1}
+              onChange={onEvaluatingDetailLevelChange(2, 1)}
+              color="secondary"
+              disabled={definingPoints || fullSpeed}
+              id="show-evaluating-steps"
+              />
           </Grid>
           </>
         }

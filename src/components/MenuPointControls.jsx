@@ -5,8 +5,7 @@ import { ButtonGroup,
          Slider,
          Grid,
          Typography, 
-         makeStyles,
-         Tooltip} from '@material-ui/core';
+         makeStyles } from '@material-ui/core';
 import { faRandom, faSave, faMousePointer, faMapMarked } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -77,37 +76,29 @@ const MenuPointControls = ({ onRandomizePoints }) => {
     <MenuSection>
       <MenuItem title="Points">
         <ButtonGroup fullWidth variant="outlined" color="secondary" size="large" disabled={running}>
-          <Tooltip title={`Create ${pointCount} random points within current viewport`}>
-            <Button onClick={onRandomizePoints} disabled={definingPoints || pointCount < 3}>
-              <FontAwesomeIcon icon={faRandom} width="0" />
-            </Button>
-          </Tooltip>
-          <Tooltip title={definingPoints ? "Save manually defined points" : "Start defining points manually on the map"}>
-            <Button onClick={onToggleDefiningPoints}>
-              <FontAwesomeIcon icon={definingPoints ? faSave : faMousePointer} width="0" />
-            </Button>
-          </Tooltip>
-          <Tooltip title="Reset points to the default">
-            <Button disabled={definingPoints} onClick={onDefaultMap}>
-              <FontAwesomeIcon icon={faMapMarked} width="0" />
-            </Button>
-          </Tooltip>
+          <Button onClick={onRandomizePoints} disabled={definingPoints || pointCount < 3}>
+            <FontAwesomeIcon icon={faRandom} width="0" />
+          </Button>
+          <Button onClick={onToggleDefiningPoints}>
+            <FontAwesomeIcon icon={definingPoints ? faSave : faMousePointer} width="0" />
+          </Button>
+          <Button disabled={definingPoints} onClick={onDefaultMap}>
+            <FontAwesomeIcon icon={faMapMarked} width="0" />
+          </Button>
         </ButtonGroup>
       </MenuItem>
 
-      <MenuItem title="Number of points">
-        <Tooltip title="Select number of random points to create">
-          <Slider
-              value={pointCount}
-              onChange={onPointCountChange}
-              step={1}
-              min={3}
-              max={200}
-              valueLabelDisplay="auto"
-              color="secondary"
-              disabled={running || definingPoints}
-              />
-        </Tooltip>
+      <MenuItem title="Number of random points">
+        <Slider
+            value={pointCount}
+            onChange={onPointCountChange}
+            step={1}
+            min={3}
+            max={200}
+            valueLabelDisplay="auto"
+            color="secondary"
+            disabled={running || definingPoints}
+            />
       </MenuItem>
       <MenuItem row>
         <Grid item container justify="space-between">

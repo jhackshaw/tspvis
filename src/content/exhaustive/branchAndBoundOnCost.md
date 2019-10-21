@@ -29,7 +29,7 @@ For example, imagine:
 Implementation is very similar to depth first search, with the exception that we cut paths that are already longer than the current best.
 
 
-## The code
+## Implementation
 
 ```javascript
 const branchAndBoundOnCost = async (points, path=[], visited=null, overallBest=Infinity) => {

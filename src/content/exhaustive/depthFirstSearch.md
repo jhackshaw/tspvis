@@ -33,7 +33,7 @@ This is a recursive, depth-first-search algorithm, as follows:
   2. "**recurse**" through those paths (go back to 1. )
 
 
-## The code
+## Implementation
 
 ```javascript
 const dfs = async (points, path=[], visited=null, overallBest=null) => {

@@ -20,7 +20,7 @@ This is a heuristic, greedy algorithm. It continually chooses the best looking o
   5. Continue this way until there are no available points, and then return to the start.
 
 
-## The code
+## Implementation
 
 ```javascript
 const shortestPath = async points => {

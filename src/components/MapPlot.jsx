@@ -1,4 +1,4 @@
-import React, { useRef, useImperativeHandle } from 'react';
+import React, { useRef, useImperativeHandle, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from '@material-ui/styles';
 import { useMediaQuery } from '@material-ui/core';
@@ -37,6 +37,15 @@ const MapPlot = React.forwardRef((props, ref) => {
       }
     }
   }))
+
+  useEffect(() => {
+    if (matches) {
+      dispatch(actions.setViewportState({
+        ...viewport,
+        zoom: 2
+      }))
+    }
+  }, [matches, dispatch]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const onViewportChanged = viewport => {
     dispatch(actions.setViewportState(viewport))

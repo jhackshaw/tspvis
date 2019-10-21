@@ -16,7 +16,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'nowrap',
-    alginItems: 'flex-start'
+    alginItems: 'flex-start',
+    zIndex: 100
   },
   [theme.breakpoints.down('sm')]: {
     width: '100%'
