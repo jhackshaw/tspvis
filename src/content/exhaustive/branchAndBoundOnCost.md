@@ -1,8 +1,8 @@
 ---
 type: exhaustive
-order: 2
+order: 3
 solverKey: branchAndBoundOnCost
-friendlyName: Branch and Bound on Cost
+friendlyName: Branch and Bound (Cost)
 defaults:
   evaluatingDetailLevel: 2
   maxEvaluatingDetailLevel: 2

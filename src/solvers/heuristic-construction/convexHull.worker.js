@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import makeSolver from '../makeSolver';
-import { pathCost, orientation } from '../cost';
+import { pathCost, counterClockWise } from '../cost';
 import { EVALUATING_PATH_COLOR, EVALUATING_SEGMENT_COLOR } from '../../constants';
 
 
@@ -33,7 +33,7 @@ const convexHull = async points => {
       }), 2)
       await self.sleep();
 
-      if (!selectedPoint || orientation(curPoint, p, selectedPoint) === 2) {
+      if (!selectedPoint || counterClockWise(curPoint, p, selectedPoint)) {
         // this point is counterclockwise with respect to the current hull 
         // and selected point (e.g. more counterclockwise)
         [selectedIdx, selectedPoint] = [idx, p]

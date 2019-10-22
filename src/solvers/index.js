@@ -1,6 +1,7 @@
 import random from './exhaustive/random.worker';
 import depthFirstSearch from './exhaustive/depthFirstSearch.worker';
 import branchAndBoundOnCost from './exhaustive/branchAndBoundOnCost.worker';
+import branchAndBoundOnCostAndCross from './exhaustive/branchAndBoundOnCostAndCross.worker';
 
 import shortestPath from './heuristic-construction/shortestPath.worker';
 import arbitraryInsertion from './heuristic-construction/arbitraryInsertion.worker';
@@ -16,6 +17,7 @@ export default {
   random,
   depthFirstSearch,
   branchAndBoundOnCost,
+  branchAndBoundOnCostAndCross,
   
   shortestPath,
   arbitraryInsertion,
