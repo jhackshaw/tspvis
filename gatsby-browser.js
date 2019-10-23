@@ -26,3 +26,7 @@ export const wrapRootElement = ({ element }) => (
     </Provider>
   </ThemeProvider>
 )
+
+export const onServiceWorkerUpdateReady = () => {
+  window.location.reload()
+}
