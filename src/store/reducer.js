@@ -126,6 +126,9 @@ export default (state=initialState, action) => {
     case actions.GO_FULL_SPEED:
       return {
         ...state,
+        showBestPath: true,
+        evaluatingDetailLevel: 0,
+        evaluatingPaths: [],
         fullSpeed: true
       }
 

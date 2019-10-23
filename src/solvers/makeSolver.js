@@ -65,6 +65,7 @@ export const makeSolver = solver => {
         break;
   
       case actions.GO_FULL_SPEED:
+        self.solverConfig.evaluatingDetailLevel = 0;
         self.solverConfig.fullSpeed = true;
         break;
 
