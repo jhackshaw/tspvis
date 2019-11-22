@@ -268,14 +268,6 @@ export const setDefaultMap = (...args) => dispatch => {
 }
 
 
-
-
-export const goToSupport = () => {
-  gtmEmit({
-    event: 'go-to-support'
-  })
-}
-
 export const goToSource = () => {
   gtmEmit({
     event: 'go-to-source'
