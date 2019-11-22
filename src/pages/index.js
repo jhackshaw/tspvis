@@ -35,12 +35,10 @@ const IndexPage = () => {
     }
   }, [mapRef, dispatch, pointCount, definingPoints])
 
-
   const start = useCallback(() => {
     dispatch(actions.startSolving(points, delay, evaluatingDetailLevel));
     solver.postMessage(actions.startSolvingAction(points, delay, evaluatingDetailLevel))
   }, [solver, dispatch, delay, points, evaluatingDetailLevel])
-
 
   const fullSpeed = useCallback(() => {
     dispatch(actions.goFullSpeed());
@@ -52,10 +50,10 @@ const IndexPage = () => {
     solver.terminate();
   }, [solver, dispatch])
 
+  
   useEffect(() => {
     solver.postMessage(actions.setDelayAction(delay))
   }, [delay, solver])
-
 
   useEffect(() => {
     solver.postMessage(actions.setEvaluatingDetailLevel(evaluatingDetailLevel))
