@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e21365cc-96a9-4649-9ad2-a35bb42d4a9f/deploy-status)](https://app.netlify.com/sites/tspvis/deploys)
+
 
 # Traveling Salesman Problem
 
