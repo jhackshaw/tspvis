@@ -8,7 +8,6 @@ defaults:
   maxEvaluatingDetailLevel: 2
 ---
 
-
 # Branch and Bound on Cost
 
 This is a recursive algorithm, similar to depth first search, that is guaranteed to find the optimal solution.
@@ -19,34 +18,36 @@ While evaluating paths, if at any point the current solution is already more exp
 
 For example, imagine:
 
-  1. A -> B -> C -> D -> E -> A was already found with a cost of 100.
-  2. We are evaluating A -> C -> E, which has a cost of 110. There is **no point** evaluating the remaining solutions.
-  3. Instead of continuing to evaluate all of the child solutions from here, we can go down a different path, eliminating candidates not worth evaluating:
-      - ```A -> C -> E -> D -> B -> A```
-      - ```A -> C -> E -> B -> D -> A```
-
+1. A -> B -> C -> D -> E -> A was already found with a cost of 100.
+2. We are evaluating A -> C -> E, which has a cost of 110. There is **no point** evaluating the remaining solutions.
+3. Instead of continuing to evaluate all of the child solutions from here, we can go down a different path, eliminating candidates not worth evaluating:
+   - `A -> C -> E -> D -> B -> A`
+   - `A -> C -> E -> B -> D -> A`
 
 Implementation is very similar to depth first search, with the exception that we cut paths that are already longer than the current best.
-
 
 ## Implementation
 
 ```javascript
-const branchAndBoundOnCost = async (points, path=[], visited=null, overallBest=Infinity) => {
+const branchAndBoundOnCost = async (
+  points,
+  path = [],
+  visited = null,
+  overallBest = Infinity
+) => {
   if (visited === null) {
     // initial call
     path = [points.shift()]
-    points = new Set(points);
-    visited = new Set();
+    points = new Set(points)
+    visited = new Set()
   }
 
   // figure out which points are left
-  const available = setDifference(points, visited);
+  const available = setDifference(points, visited)
 
   // calculate the cost, from here, to go home
-  const backToStart = [...path, path[0]];
-  const cost = pathCost(backToStart);
-  
+  const backToStart = [...path, path[0]]
+  const cost = pathCost(backToStart)
 
   if (cost > overallBest) {
     // we may not be done, but have already traveled further than the best path
@@ -58,35 +59,39 @@ const branchAndBoundOnCost = async (points, path=[], visited=null, overallBest=I
 
   if (available.size === 0) {
     // at the end of the path, return where we're at
-    return [cost, backToStart] 
+    return [cost, backToStart]
   }
 
-  let [bestCost, bestPath] = [null, null];
+  let [bestCost, bestPath] = [null, null]
 
   // for every point yet to be visited along this path
   for (const p of available) {
-
     // go to that point
     visited.add(p)
     path.push(p)
 
     // RECURSE - go through all the possible points from that point
-    const [curCost, curPath] = await branchAndBoundOnCost(points, path, visited, overallBest);
-    
+    const [curCost, curPath] = await branchAndBoundOnCost(
+      points,
+      path,
+      visited,
+      overallBest
+    )
+
     // if that path is better and complete, keep it
     if (curCost && (!bestCost || curCost < bestCost)) {
-      [bestCost, bestPath] = [curCost, curPath];
+      ;[bestCost, bestPath] = [curCost, curPath]
 
       if (!overallBest || bestCost < overallBest) {
         // found a new best complete path
         overallBest = bestCost
-        self.setBestPath(bestPath, bestCost);
+        self.setBestPath(bestPath, bestCost)
       }
     }
 
     // go back up and make that point available again
     visited.delete(p)
-    path.pop();
+    path.pop()
   }
 
   return [bestCost, bestPath]

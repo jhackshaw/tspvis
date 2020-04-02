@@ -1,9 +1,13 @@
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql } from "gatsby"
 
 export default () => {
-  const { allMarkdownRemark: { edges: introductions }} = useStaticQuery(graphql`
+  const {
+    allMarkdownRemark: { edges: introductions }
+  } = useStaticQuery(graphql`
     query IntroductionModalQuery {
-      allMarkdownRemark(filter: {frontmatter: {type: {eq: "introduction"}}}) {
+      allMarkdownRemark(
+        filter: { frontmatter: { type: { eq: "introduction" } } }
+      ) {
         edges {
           node {
             html
@@ -13,6 +17,5 @@ export default () => {
     }
   `)
 
-  return introductions[0].node.html;
-
+  return introductions[0].node.html
 }

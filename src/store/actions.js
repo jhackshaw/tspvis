@@ -1,43 +1,39 @@
-import gtmEmit from './emitCustomEvent';
-export const SET_VIEWPORT_STATE = 'SET_VIEWPORT_STATE';
+import gtmEmit from "./emitCustomEvent"
+export const SET_VIEWPORT_STATE = "SET_VIEWPORT_STATE"
 
-export const RESET_EVALUATING_STATE = 'RESET_EVALUATING_STATE';
-export const RESET_BEST_PATH_STATE = 'RESET_BEST_PATH_STATE';
+export const RESET_EVALUATING_STATE = "RESET_EVALUATING_STATE"
+export const RESET_BEST_PATH_STATE = "RESET_BEST_PATH_STATE"
 
-export const SET_ALGORITHM = 'SET_ALGORITHM';
-export const SET_DELAY = 'SET_DELAY';
-export const SET_EVALUATING_DETAIL_LEVEL = 'SET_EVALUATING_DETAIL_LEVEL';
-export const SET_SHOW_BEST_PATH = 'SET_SHOW_BEST_PATH';
-export const START_SOLVING = 'START_SOLVING';
-export const GO_FULL_SPEED = 'GO_FULL_SPEED';
-export const STOP_SOLVING = 'STOP_SOLVING';
+export const SET_ALGORITHM = "SET_ALGORITHM"
+export const SET_DELAY = "SET_DELAY"
+export const SET_EVALUATING_DETAIL_LEVEL = "SET_EVALUATING_DETAIL_LEVEL"
+export const SET_SHOW_BEST_PATH = "SET_SHOW_BEST_PATH"
+export const START_SOLVING = "START_SOLVING"
+export const GO_FULL_SPEED = "GO_FULL_SPEED"
+export const STOP_SOLVING = "STOP_SOLVING"
 
-export const SET_BEST_PATH = 'SET_BEST_PATH';
-export const SET_EVALUATING_PATHS = 'SET_EVALUATING_PATHS';
+export const SET_BEST_PATH = "SET_BEST_PATH"
+export const SET_EVALUATING_PATHS = "SET_EVALUATING_PATHS"
 
-export const START_DEFINING_POINTS = 'START_DEFINING_POINTS';
-export const ADD_DEFINED_POINT = 'ADD_DEFINED_POINT';
-export const STOP_DEFINING_POINTS = 'STOP_DEFINING_POINTS';
-export const SET_POINT_COUNT = 'SET_POINT_COUNT';
-export const SET_POINTS = 'SET_POINTS';
-export const SET_DEFAULT_MAP = 'SET_DEFAULT_MAP';
+export const START_DEFINING_POINTS = "START_DEFINING_POINTS"
+export const ADD_DEFINED_POINT = "ADD_DEFINED_POINT"
+export const STOP_DEFINING_POINTS = "STOP_DEFINING_POINTS"
+export const SET_POINT_COUNT = "SET_POINT_COUNT"
+export const SET_POINTS = "SET_POINTS"
+export const SET_DEFAULT_MAP = "SET_DEFAULT_MAP"
 
-export const TOGGLE_SITE_INFO_OPEN = 'TOGGLE_SITE_INFO_OPEN';
-export const TOGGLE_ALG_INFO_OPEN = 'TOGGLE_ALG_INFO_OPEN';
+export const TOGGLE_SITE_INFO_OPEN = "TOGGLE_SITE_INFO_OPEN"
+export const TOGGLE_ALG_INFO_OPEN = "TOGGLE_ALG_INFO_OPEN"
 
-
-const getRandomPoint = (max, min) => (
-  Math.random() * (max - min) + min
-)
-
+const getRandomPoint = (max, min) => Math.random() * (max - min) + min
 
 //
 // BASIC UI
 //
 export const toggleSiteInfoOpen = () => (dispatch, getState) => {
-  const { siteInfoOpen } = getState();
+  const { siteInfoOpen } = getState()
   if (!siteInfoOpen) {
-    gtmEmit({ event: 'open-site-info' })
+    gtmEmit({ event: "open-site-info" })
   }
   dispatch({
     type: TOGGLE_SITE_INFO_OPEN
@@ -45,10 +41,10 @@ export const toggleSiteInfoOpen = () => (dispatch, getState) => {
 }
 
 export const toggleAlgInfoOpen = () => (dispatch, getState) => {
-  const { algorithm, algInfoOpen } = getState();
+  const { algorithm, algInfoOpen } = getState()
   if (!algInfoOpen) {
     gtmEmit({
-      event: 'open-algorithm-info',
+      event: "open-algorithm-info",
       algorithm
     })
   }
@@ -57,7 +53,6 @@ export const toggleAlgInfoOpen = () => (dispatch, getState) => {
   })
 }
 
-
 //
 // MAP INTERACTION
 //
@@ -65,7 +60,6 @@ export const setViewportState = viewport => ({
   type: SET_VIEWPORT_STATE,
   viewport
 })
-
 
 //
 // SOLVER CONTROLS
@@ -100,13 +94,13 @@ export const stopSolvingAction = () => ({
   type: STOP_SOLVING
 })
 
-export const setAlgorithm = (algorithm, defaults={}) => dispatch => {
+export const setAlgorithm = (algorithm, defaults = {}) => dispatch => {
   gtmEmit({
-    event: 'select-algorithm',
+    event: "select-algorithm",
     algorithm
   })
   dispatch(resetEvaluatingStateAction())
-  dispatch(setAlgorithmAction(algorithm, defaults))  
+  dispatch(setAlgorithmAction(algorithm, defaults))
 }
 
 export const setDelayAction = delay => ({
@@ -116,10 +110,10 @@ export const setDelayAction = delay => ({
 
 export const setDelay = delay => dispatch => {
   gtmEmit({
-    event: 'set-delay',
+    event: "set-delay",
     delay
   })
-  dispatch(setDelayAction(delay));
+  dispatch(setDelayAction(delay))
 }
 
 export const setEvaluatingDetailLevel = level => ({
@@ -138,9 +132,9 @@ export const resetSolverState = () => dispatch => {
 }
 
 export const startSolving = (...args) => (dispatch, getState) => {
-  const { algorithm } = getState();
+  const { algorithm } = getState()
   gtmEmit({
-    event: 'start-solving',
+    event: "start-solving",
     algorithm
   })
   dispatch(resetEvaluatingStateAction())
@@ -149,30 +143,25 @@ export const startSolving = (...args) => (dispatch, getState) => {
 
 export const goFullSpeed = () => (dispatch, getState) => {
   gtmEmit({
-    event: 'go-full-speed'
+    event: "go-full-speed"
   })
-  dispatch(goFullSpeedAction());
+  dispatch(goFullSpeedAction())
 }
 
 export const stopSolving = () => dispatch => {
-  gtmEmit({ event: 'stop-solving' })
+  gtmEmit({ event: "stop-solving" })
   dispatch(resetEvaluatingStateAction())
   dispatch(stopSolvingAction())
 }
-
-
 
 //
 // SOLVER ACTIONS
 //
 export const setEvaluatingPath = (path, cost) => ({
   type: SET_EVALUATING_PATHS,
-  paths: [
-    path
-  ],
+  paths: [path],
   cost
 })
-
 
 export const setEvaluatingPaths = (paths, cost) => ({
   type: SET_EVALUATING_PATHS,
@@ -186,7 +175,6 @@ export const setBestPath = (path, cost) => ({
   cost
 })
 
-
 //
 // POINT CONTROLS
 //
@@ -196,8 +184,8 @@ const setDefaultMapAction = () => ({
 })
 
 const setPointsAction = points => ({
-    type: SET_POINTS,
-    points
+  type: SET_POINTS,
+  points
 })
 
 const setPointCountAction = count => ({
@@ -215,7 +203,7 @@ const stopDefiningPointsAction = () => ({
 
 export const startDefiningPoints = () => dispatch => {
   gtmEmit({
-    event: 'start-defining-points'
+    event: "start-defining-points"
   })
   dispatch(resetSolverState())
   dispatch(startDefiningPointsAction())
@@ -229,15 +217,15 @@ export const addDefinedPoint = point => ({
 export const stopDefiningPoints = () => (dispatch, getState) => {
   const { pointCount } = getState()
   gtmEmit({
-    event: 'stop-defining-points',
+    event: "stop-defining-points",
     pointCount
   })
-  dispatch(stopDefiningPointsAction());
+  dispatch(stopDefiningPointsAction())
 }
 
 export const setPointCount = count => dispatch => {
   gtmEmit({
-    event: 'set-point-count',
+    event: "set-point-count",
     pointCount: count
   })
   dispatch(resetSolverState())
@@ -246,13 +234,14 @@ export const setPointCount = count => dispatch => {
 
 export const randomizePoints = bounds => (dispatch, getState) => {
   const { pointCount } = getState()
-  const { top, bottom, left, right } = bounds;
-  const points = Array.from({ length: pointCount }).map(
-    _ => [getRandomPoint(right, left), getRandomPoint(top, bottom) ]
-  )
+  const { top, bottom, left, right } = bounds
+  const points = Array.from({ length: pointCount }).map(_ => [
+    getRandomPoint(right, left),
+    getRandomPoint(top, bottom)
+  ])
 
   gtmEmit({
-    event: 'randomize-points',
+    event: "randomize-points",
     pointCount
   })
   dispatch(resetSolverState())
@@ -261,15 +250,14 @@ export const randomizePoints = bounds => (dispatch, getState) => {
 
 export const setDefaultMap = (...args) => dispatch => {
   gtmEmit({
-    event: 'set-default-map'
+    event: "set-default-map"
   })
   dispatch(resetSolverState())
   dispatch(setDefaultMapAction())
 }
 
-
 export const goToSource = () => {
   gtmEmit({
-    event: 'go-to-source'
+    event: "go-to-source"
   })
 }

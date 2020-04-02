@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Traveling Salesman Problem Solver`,
     description: ``,
-    author: `@jhackshaw`,
+    author: `@jhackshaw`
   },
   plugins: [
     `gatsby-plugin-material-ui`,
@@ -11,23 +11,20 @@ module.exports = {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {
         id: "GTM-PS28HLQ",
-        includeInDevelopment: false,
-
-      },
+        includeInDevelopment: false
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: 'content',
+        name: "content",
         path: `${__dirname}/src/content`
       }
     },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        plugins: [
-          `gatsby-remark-prismjs`
-        ]
+        plugins: [`gatsby-remark-prismjs`]
       }
     },
     {
@@ -39,10 +36,9 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `tspvis`,
-        icon: `src/images/favicon.png`,
-      },
+        icon: `src/images/favicon.png`
+      }
     },
-    `gatsby-plugin-offline`,
-  ],
-
+    `gatsby-plugin-offline`
+  ]
 }

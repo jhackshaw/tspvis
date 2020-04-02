@@ -1,7 +1,6 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/styles';
-import { Grid } from '@material-ui/core';
-
+import React from "react"
+import { makeStyles } from "@material-ui/styles"
+import { Grid } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   section: {
@@ -10,15 +9,15 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const MenuSection = ({ children }) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <div className={classes.section}>
       <Grid container direction="column" wrap="nowrap">
-        { children }
+        {children}
       </Grid>
     </div>
   )
 }
 
-export default MenuSection;
+export default MenuSection

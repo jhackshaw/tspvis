@@ -1,36 +1,35 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from "react"
+import { useSelector, useDispatch } from "react-redux"
 
-import useAlgorithmInfo from '../hooks/useAlgorithmInfo';
-import * as selectors from '../store/selectors';
-import * as actions from '../store/actions';
+import useAlgorithmInfo from "../hooks/useAlgorithmInfo"
+import * as selectors from "../store/selectors"
+import * as actions from "../store/actions"
 
-import InformationModal from './InformationModal';
-
+import InformationModal from "./InformationModal"
 
 const AlgorithmModals = props => {
-  const dispatch = useDispatch();
-  const algorithms = useAlgorithmInfo();
-  const selectedAlgorithm = useSelector(selectors.selectAlgorithm);
-  const open = useSelector(selectors.selectAlgInfoOpen);
+  const dispatch = useDispatch()
+  const algorithms = useAlgorithmInfo()
+  const selectedAlgorithm = useSelector(selectors.selectAlgorithm)
+  const open = useSelector(selectors.selectAlgInfoOpen)
 
   const onClose = () => {
-    dispatch(actions.toggleAlgInfoOpen());
+    dispatch(actions.toggleAlgInfoOpen())
   }
 
   return (
     <>
-    { algorithms.map(alg => (
-      <InformationModal key={alg.solverKey} 
-                        open={open && selectedAlgorithm === alg.solverKey}
-                        onClose={onClose}
-                        >
-          <div dangerouslySetInnerHTML={{__html: alg.html }} />
-      </InformationModal>
-    ))}
+      {algorithms.map(alg => (
+        <InformationModal
+          key={alg.solverKey}
+          open={open && selectedAlgorithm === alg.solverKey}
+          onClose={onClose}
+        >
+          <div dangerouslySetInnerHTML={{ __html: alg.html }} />
+        </InformationModal>
+      ))}
     </>
   )
 }
 
-
-export default AlgorithmModals;
+export default AlgorithmModals

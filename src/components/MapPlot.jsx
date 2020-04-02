@@ -1,34 +1,31 @@
-import React, { useRef, useImperativeHandle, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useTheme } from '@material-ui/styles';
-import { useMediaQuery } from '@material-ui/core';
-import MapGL from 'react-map-gl';
-import DeckGL, { ScatterplotLayer, PathLayer } from 'deck.gl';
-import { LinearProgress } from '@material-ui/core';
-import * as actions from '../store/actions';
-import * as selectors from '../store/selectors';
+import React, { useRef, useImperativeHandle, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { useTheme } from "@material-ui/styles"
+import { useMediaQuery } from "@material-ui/core"
+import MapGL from "react-map-gl"
+import DeckGL, { ScatterplotLayer, PathLayer } from "deck.gl"
+import { LinearProgress } from "@material-ui/core"
+import * as actions from "../store/actions"
+import * as selectors from "../store/selectors"
 
-
-
-const TOKEN = 'pk.eyJ1IjoiaW50cmVwaWRldiIsImEiOiJjazBpa2M5YnowMHcyM21ubzgycW8zZHJmIn0.DCO2aRA6MJweC8HN-d_cgQ';
-
+const TOKEN =
+  "pk.eyJ1IjoiaW50cmVwaWRldiIsImEiOiJjazBpa2M5YnowMHcyM21ubzgycW8zZHJmIn0.DCO2aRA6MJweC8HN-d_cgQ"
 
 const MapPlot = React.forwardRef((props, ref) => {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('sm'));
-  const mapGlRef = useRef();
-  const plotPoints = useSelector(selectors.selectPointsDisplay);
-  const plotPaths = useSelector(selectors.selectPlotPaths);
-  const viewport = useSelector(selectors.selectViewport);
-  const running = useSelector(selectors.selectRunning);
+  const theme = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.down("sm"))
+  const mapGlRef = useRef()
+  const plotPoints = useSelector(selectors.selectPointsDisplay)
+  const plotPaths = useSelector(selectors.selectPlotPaths)
+  const viewport = useSelector(selectors.selectViewport)
+  const running = useSelector(selectors.selectRunning)
   const definingPoints = useSelector(selectors.selectDefiningPoints)
   const dispatch = useDispatch()
 
-
   useImperativeHandle(ref, () => ({
     getBounds: () => {
-      const map = mapGlRef.current.getMap();
-      const { _ne, _sw } = map.getBounds();
+      const map = mapGlRef.current.getMap()
+      const { _ne, _sw } = map.getBounds()
       return {
         top: _ne.lat,
         bottom: _sw.lat,
@@ -40,10 +37,12 @@ const MapPlot = React.forwardRef((props, ref) => {
 
   useEffect(() => {
     if (matches) {
-      dispatch(actions.setViewportState({
-        ...viewport,
-        zoom: 2
-      }))
+      dispatch(
+        actions.setViewportState({
+          ...viewport,
+          zoom: 2
+        })
+      )
     }
   }, [matches, dispatch]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -60,7 +59,7 @@ const MapPlot = React.forwardRef((props, ref) => {
       {...viewport}
       ref={mapGlRef}
       width="100%"
-      height={ matches ? "50%" : "100%" }
+      height={matches ? "50%" : "100%"}
       maxPitch={0}
       onViewportChange={onViewportChanged}
       mapboxApiAccessToken={TOKEN}
@@ -68,29 +67,29 @@ const MapPlot = React.forwardRef((props, ref) => {
       onNativeClick={definingPoints && onDefinedPoint}
       doubleClickZoom={false}
     >
-      { running &&
-        <LinearProgress color="secondary" />
-      }
+      {running && <LinearProgress color="secondary" />}
       <DeckGL viewState={viewport}>
-        <PathLayer id='path-layer'
-                   data={plotPaths}
-                   getPath={d => d.path}
-                   getColor={d => d.color}
-                   pickable={true}
-                   widthMinPixels={4}
-                   widthMaxPixels={8}
-                   />
-        <ScatterplotLayer id="scatter-layer"
-                          data={plotPoints}
-                          pickable={true}
-                          opacity={0.8}
-                          getFillColor={p => p.color}
-                          radiusMinPixels={6}
-                          raduisMaxPixels={8}
-                          />
+        <PathLayer
+          id="path-layer"
+          data={plotPaths}
+          getPath={d => d.path}
+          getColor={d => d.color}
+          pickable={true}
+          widthMinPixels={4}
+          widthMaxPixels={8}
+        />
+        <ScatterplotLayer
+          id="scatter-layer"
+          data={plotPoints}
+          pickable={true}
+          opacity={0.8}
+          getFillColor={p => p.color}
+          radiusMinPixels={6}
+          raduisMaxPixels={8}
+        />
       </DeckGL>
     </MapGL>
-  );
+  )
 })
 
-export default MapPlot;
+export default MapPlot

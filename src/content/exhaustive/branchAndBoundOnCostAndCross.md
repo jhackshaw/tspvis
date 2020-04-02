@@ -8,7 +8,6 @@ defaults:
   maxEvaluatingDetailLevel: 2
 ---
 
-
 # Branch and Bound (Cost, Intersections)
 
 This is the same as branch and bound on cost, with an additional heuristic added to further minimize the search space.
@@ -16,7 +15,6 @@ This is the same as branch and bound on cost, with an additional heuristic added
 While traversing paths, if at any point the path intersects (crosses over) itself, than backtrack and try the next way. It's been proven that an optimal path will never contain crossings.
 
 Implementation is almost identical to branch and bound on cost only, with the added heuristic below:
-
 
 ## Implementation
 
@@ -28,7 +26,7 @@ const counterClockWise = (p, q, r) => {
 }
 
 const intersects = (a, b, c, d) => {
-  return counterClockWise(a, c, d) !== counterClockWise(b, c, d) && 
+  return counterClockWise(a, c, d) !== counterClockWise(b, c, d) &&
          counterClockWise(a, b, c) !== counterClockWise(a, b, d)
 }
 

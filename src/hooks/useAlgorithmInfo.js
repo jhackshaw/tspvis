@@ -1,15 +1,24 @@
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql } from "gatsby"
 
 export default () => {
-  const { allMarkdownRemark: { edges: algorithms }} = useStaticQuery(graphql`
+  const {
+    allMarkdownRemark: { edges: algorithms }
+  } = useStaticQuery(graphql`
     query AlgorithmModalsQuery {
       allMarkdownRemark(
         filter: {
-          frontmatter: {type: {in: ["exhaustive", "heuristic-construction", "heuristic-improvement"]}}
-        }, 
-        sort: {
-          fields: frontmatter___order
-        }) {
+          frontmatter: {
+            type: {
+              in: [
+                "exhaustive"
+                "heuristic-construction"
+                "heuristic-improvement"
+              ]
+            }
+          }
+        }
+        sort: { fields: frontmatter___order }
+      ) {
         edges {
           node {
             frontmatter {
