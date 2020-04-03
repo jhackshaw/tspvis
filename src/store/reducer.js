@@ -26,10 +26,10 @@ const initialViewport = {
 const initialState = {
   points: usTop12.sort(() => Math.random() + 0.5),
   viewport: initialViewport,
-  algorithm: "nearestNeighbor",
-  delay: 200,
-  evaluatingDetailLevel: 1,
-  maxEvaluatingDetailLevel: 1,
+  algorithm: "convexHull",
+  delay: 100,
+  evaluatingDetailLevel: 2,
+  maxEvaluatingDetailLevel: 2,
   showBestPath: true,
 
   bestPath: [],

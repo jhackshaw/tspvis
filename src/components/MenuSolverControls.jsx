@@ -148,9 +148,9 @@ const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
         <Slider
           value={delay}
           onChange={onDelayChange}
-          step={100}
+          step={25}
           min={0}
-          max={3000}
+          max={250}
           valueLabelDisplay="auto"
           color="secondary"
           disabled={definingPoints || fullSpeed}
