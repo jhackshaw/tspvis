@@ -26,7 +26,7 @@ const initialViewport = {
 const initialState = {
   points: usTop12.sort(() => Math.random() + 0.5),
   viewport: initialViewport,
-  algorithm: "shortestPath",
+  algorithm: "nearestNeighbor",
   delay: 200,
   evaluatingDetailLevel: 1,
   maxEvaluatingDetailLevel: 1,

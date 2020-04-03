@@ -1,14 +1,14 @@
 ---
 type: heuristic-construction
 order: 1
-solverKey: shortestPath
-friendlyName: Shortest Path
+solverKey: nearestNeighbor
+friendlyName: Nearest Neighbor
 defaults:
   evaluatingDetailLevel: 1
   maxEvaluatingDetailLevel: 1
 ---
 
-# Shortest Path
+# Nearest Neighbor
 
 This is a heuristic, greedy algorithm also known as nearest neighbor. It continually chooses the best looking option from the current state.
 
@@ -21,7 +21,7 @@ This is a heuristic, greedy algorithm also known as nearest neighbor. It continu
 ## Implementation
 
 ```javascript
-const shortestPath = async points => {
+const nearestNeighbor = async points => {
   const path = [points.shift()]
 
   while (points.length > 0) {

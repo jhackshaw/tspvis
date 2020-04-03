@@ -3,7 +3,7 @@ import depthFirstSearch from "./exhaustive/depthFirstSearch.worker"
 import branchAndBoundOnCost from "./exhaustive/branchAndBoundOnCost.worker"
 import branchAndBoundOnCostAndCross from "./exhaustive/branchAndBoundOnCostAndCross.worker"
 
-import shortestPath from "./heuristic-construction/shortestPath.worker"
+import nearestNeighbor from "./heuristic-construction/nearestNeighbor.worker"
 import arbitraryInsertion from "./heuristic-construction/arbitraryInsertion.worker"
 import nearestInsertion from "./heuristic-construction/nearestInsertion.worker"
 import furthestInsertion from "./heuristic-construction/furthestInsertion.worker"
@@ -18,7 +18,7 @@ export default {
   branchAndBoundOnCost,
   branchAndBoundOnCostAndCross,
 
-  shortestPath,
+  nearestNeighbor,
   arbitraryInsertion,
   furthestInsertion,
   nearestInsertion,

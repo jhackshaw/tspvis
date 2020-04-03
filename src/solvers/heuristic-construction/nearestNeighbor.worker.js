@@ -2,7 +2,7 @@
 import makeSolver from "../makeSolver"
 import { pathCost, distance } from "../cost"
 
-const shortestPath = async points => {
+const nearestNeighbor = async points => {
   const path = [points.shift()]
 
   while (points.length > 0) {
@@ -37,4 +37,4 @@ const shortestPath = async points => {
   self.setBestPath(path, cost)
 }
 
-makeSolver(shortestPath)
+makeSolver(nearestNeighbor)
