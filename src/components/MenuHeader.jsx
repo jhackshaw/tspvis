@@ -27,10 +27,6 @@ const MenuHeader = props => {
     dispatch(actions.toggleSiteInfoOpen())
   }
 
-  const onGoToSource = () => {
-    actions.goToSource()
-  }
-
   return (
     <MenuSection>
       <Grid container justify="space-between" alignItems="center">
@@ -48,7 +44,6 @@ const MenuHeader = props => {
             <IconButton
               target="_blank"
               href="https://github.com/jhackshaw/tspvis"
-              onClick={onGoToSource}
             >
               <FontAwesomeIcon icon={faGithub} size="xs" width="0" />
             </IconButton>

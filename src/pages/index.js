@@ -45,7 +45,7 @@ const IndexPage = () => {
 
   const fullSpeed = useCallback(() => {
     dispatch(actions.goFullSpeed())
-    solver.postMessage(actions.goFullSpeedAction())
+    solver.postMessage(actions.goFullSpeed())
   }, [solver, dispatch])
 
   const stop = useCallback(() => {
@@ -54,7 +54,7 @@ const IndexPage = () => {
   }, [solver, dispatch])
 
   useEffect(() => {
-    solver.postMessage(actions.setDelayAction(delay))
+    solver.postMessage(actions.setDelay(delay))
   }, [delay, solver])
 
   useEffect(() => {

@@ -30,28 +30,13 @@ const getRandomPoint = (max, min) => Math.random() * (max - min) + min
 //
 // BASIC UI
 //
-export const toggleSiteInfoOpen = () => (dispatch, getState) => {
-  const { siteInfoOpen } = getState()
-  if (!siteInfoOpen) {
-    gtmEmit({ event: "open-site-info" })
-  }
-  dispatch({
-    type: TOGGLE_SITE_INFO_OPEN
-  })
-}
+export const toggleSiteInfoOpen = () => ({
+  type: TOGGLE_SITE_INFO_OPEN
+})
 
-export const toggleAlgInfoOpen = () => (dispatch, getState) => {
-  const { algorithm, algInfoOpen } = getState()
-  if (!algInfoOpen) {
-    gtmEmit({
-      event: "open-algorithm-info",
-      algorithm
-    })
-  }
-  dispatch({
-    type: TOGGLE_ALG_INFO_OPEN
-  })
-}
+export const toggleAlgInfoOpen = () => ({
+  type: TOGGLE_ALG_INFO_OPEN
+})
 
 //
 // MAP INTERACTION
@@ -86,35 +71,19 @@ export const startSolvingAction = (points, delay, evaluatingDetailLevel) => ({
   fullSpeed: false
 })
 
-export const goFullSpeedAction = () => ({
-  type: GO_FULL_SPEED
-})
-
 export const stopSolvingAction = () => ({
   type: STOP_SOLVING
 })
 
 export const setAlgorithm = (algorithm, defaults = {}) => dispatch => {
-  gtmEmit({
-    event: "select-algorithm",
-    algorithm
-  })
   dispatch(resetEvaluatingStateAction())
   dispatch(setAlgorithmAction(algorithm, defaults))
 }
 
-export const setDelayAction = delay => ({
+export const setDelay = delay => ({
   type: SET_DELAY,
   delay
 })
-
-export const setDelay = delay => dispatch => {
-  gtmEmit({
-    event: "set-delay",
-    delay
-  })
-  dispatch(setDelayAction(delay))
-}
 
 export const setEvaluatingDetailLevel = level => ({
   type: SET_EVALUATING_DETAIL_LEVEL,
@@ -132,24 +101,21 @@ export const resetSolverState = () => dispatch => {
 }
 
 export const startSolving = (...args) => (dispatch, getState) => {
-  const { algorithm } = getState()
+  const { algorithm, pointCount } = getState()
   gtmEmit({
     event: "start-solving",
-    algorithm
+    algorithm,
+    pointCount
   })
   dispatch(resetEvaluatingStateAction())
   dispatch(startSolvingAction(...args))
 }
 
-export const goFullSpeed = () => (dispatch, getState) => {
-  gtmEmit({
-    event: "go-full-speed"
-  })
-  dispatch(goFullSpeedAction())
-}
+export const goFullSpeed = () => ({
+  type: GO_FULL_SPEED
+})
 
 export const stopSolving = () => dispatch => {
-  gtmEmit({ event: "stop-solving" })
   dispatch(resetEvaluatingStateAction())
   dispatch(stopSolvingAction())
 }
@@ -178,7 +144,6 @@ export const setBestPath = (path, cost) => ({
 //
 // POINT CONTROLS
 //
-
 const setDefaultMapAction = () => ({
   type: SET_DEFAULT_MAP
 })
@@ -197,14 +162,7 @@ const startDefiningPointsAction = () => ({
   type: START_DEFINING_POINTS
 })
 
-const stopDefiningPointsAction = () => ({
-  type: STOP_DEFINING_POINTS
-})
-
 export const startDefiningPoints = () => dispatch => {
-  gtmEmit({
-    event: "start-defining-points"
-  })
   dispatch(resetSolverState())
   dispatch(startDefiningPointsAction())
 }
@@ -214,20 +172,11 @@ export const addDefinedPoint = point => ({
   point
 })
 
-export const stopDefiningPoints = () => (dispatch, getState) => {
-  const { pointCount } = getState()
-  gtmEmit({
-    event: "stop-defining-points",
-    pointCount
-  })
-  dispatch(stopDefiningPointsAction())
-}
+export const stopDefiningPoints = () => ({
+  type: STOP_DEFINING_POINTS
+})
 
 export const setPointCount = count => dispatch => {
-  gtmEmit({
-    event: "set-point-count",
-    pointCount: count
-  })
   dispatch(resetSolverState())
   dispatch(setPointCountAction(count))
 }
@@ -239,25 +188,11 @@ export const randomizePoints = bounds => (dispatch, getState) => {
     getRandomPoint(right, left),
     getRandomPoint(top, bottom)
   ])
-
-  gtmEmit({
-    event: "randomize-points",
-    pointCount
-  })
   dispatch(resetSolverState())
   dispatch(setPointsAction(points))
 }
 
 export const setDefaultMap = (...args) => dispatch => {
-  gtmEmit({
-    event: "set-default-map"
-  })
   dispatch(resetSolverState())
   dispatch(setDefaultMapAction())
-}
-
-export const goToSource = () => {
-  gtmEmit({
-    event: "go-to-source"
-  })
 }
