@@ -57,8 +57,12 @@ const MenuHeader = props => {
         </Typography>
       </Grid>
       <Typography variant="subtitle2" color="textSecondary">
-        Visualize the execution of different algorithms for solving the
-        traveling salesman problem
+        Visualize algorithms for the traveling salesman problem. Use the
+        controls below to plot points, choose an algorithm, and control
+        execution.
+        <br />
+        (Hint: try a construction alogorithm followed by an improvement
+        algorithm)
       </Typography>
     </MenuSection>
   )
