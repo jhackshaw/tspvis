@@ -4,12 +4,17 @@ import { Grid } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   section: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    // backgroundColor: ({ highlight = false }) =>
+    //   highlight ? theme.palette.grey[100] : theme.palette.paper,
+    border: ({ highlight = false }) =>
+      highlight ? `2px solid ${theme.palette.secondary.main}` : "none",
+    borderRadius: "10px"
   }
 }))
 
-const MenuSection = ({ children }) => {
-  const classes = useStyles()
+const MenuSection = ({ children, ...rest }) => {
+  const classes = useStyles(rest)
 
   return (
     <div className={classes.section}>

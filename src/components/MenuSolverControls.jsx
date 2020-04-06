@@ -71,147 +71,149 @@ const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
   }
 
   return (
-    <MenuSection>
-      <MenuItem title="Algorithm">
-        <Grid container alignItems="center">
-          <Grid item xs={11}>
-            <Select
-              value={selectedAlgorithm}
-              onChange={onAlgorithmChange}
-              disabled={running || definingPoints}
-              variant="outlined"
-              fullWidth
-              margin="dense"
-            >
-              <ListSubheader>Heuristic Construction</ListSubheader>
-              {algorithms
-                .filter(alg => alg.type === "heuristic-construction")
-                .map(alg => (
-                  <SelectItem value={alg.solverKey} key={alg.solverKey}>
-                    {alg.friendlyName}
-                  </SelectItem>
-                ))}
-              <ListSubheader>Heuristic Improvement</ListSubheader>
-              {algorithms
-                .filter(alg => alg.type === "heuristic-improvement")
-                .map(alg => (
-                  <SelectItem value={alg.solverKey} key={alg.solverKey}>
-                    {alg.friendlyName}
-                  </SelectItem>
-                ))}
-              <ListSubheader>Exhaustive</ListSubheader>
-              {algorithms
-                .filter(alg => alg.type === "exhaustive")
-                .map(alg => (
-                  <SelectItem value={alg.solverKey} key={alg.solverKey}>
-                    {alg.friendlyName}
-                  </SelectItem>
-                ))}
-            </Select>
-          </Grid>
-          <Grid item xs={1}>
-            <Typography align="right" color="textSecondary">
-              <IconButton edge="end" onClick={onShowAlgInfo}>
-                <FontAwesomeIcon icon={faQuestion} size="xs" />
-              </IconButton>
-            </Typography>
-          </Grid>
-        </Grid>
-      </MenuItem>
-
-      <MenuItem title="Controls">
-        <ButtonGroup
-          fullWidth
-          variant="outlined"
-          color="secondary"
-          size="large"
-        >
-          <Button
-            onClick={running ? onFullSpeed : onStart}
-            disabled={definingPoints || fullSpeed}
-          >
-            <FontAwesomeIcon
-              icon={running ? faFastForward : faPlay}
-              width="0"
-            />
-          </Button>
-          <Button onClick={onStop} disabled={!running || definingPoints}>
-            <FontAwesomeIcon icon={faStop} width="0" />
-          </Button>
-          <Button onClick={onReset} disabled={running || definingPoints}>
-            <FontAwesomeIcon icon={faRedo} width="0" />
-          </Button>
-        </ButtonGroup>
-      </MenuItem>
-
-      <MenuItem title="Delay">
-        <Slider
-          value={delay}
-          onChange={onDelayChange}
-          step={25}
-          min={0}
-          max={250}
-          valueLabelDisplay="auto"
-          color="secondary"
-          disabled={definingPoints || fullSpeed}
-        />
-      </MenuItem>
-
-      <MenuItem row>
-        <Grid item xs={10}>
-          <Typography variant="button" color="textSecondary" component="div">
-            Show Best Path
-          </Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Switch
-            checked={showBestPath}
-            onChange={onShowBestPathChange}
-            color="secondary"
-            disabled={definingPoints || fullSpeed}
-            id="show-best-path"
-          />
-        </Grid>
-
-        <Grid item xs={10}>
-          <Typography variant="button" color="textSecondary" component="div">
-            Show Evaluated Paths
-          </Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Switch
-            checked={evaluatingDetailLevel > 0}
-            onChange={onEvaluatingDetailLevelChange(1, 0)}
-            color="secondary"
-            disabled={definingPoints || fullSpeed}
-            id="show-evaluating-paths"
-          />
-        </Grid>
-
-        {maxEvaluatingDetailLevel > 1 && (
-          <>
-            <Grid item xs={10}>
-              <Typography
-                variant="button"
-                color="textSecondary"
-                component="div"
+    <>
+      <MenuSection highlight>
+        <MenuItem title="Algorithm">
+          <Grid container alignItems="center">
+            <Grid item xs={11}>
+              <Select
+                value={selectedAlgorithm}
+                onChange={onAlgorithmChange}
+                disabled={running || definingPoints}
+                variant="outlined"
+                fullWidth
+                margin="dense"
               >
-                Show Evaluated Steps
+                <ListSubheader>Heuristic Construction</ListSubheader>
+                {algorithms
+                  .filter(alg => alg.type === "heuristic-construction")
+                  .map(alg => (
+                    <SelectItem value={alg.solverKey} key={alg.solverKey}>
+                      {alg.friendlyName}
+                    </SelectItem>
+                  ))}
+                <ListSubheader>Heuristic Improvement</ListSubheader>
+                {algorithms
+                  .filter(alg => alg.type === "heuristic-improvement")
+                  .map(alg => (
+                    <SelectItem value={alg.solverKey} key={alg.solverKey}>
+                      {alg.friendlyName}
+                    </SelectItem>
+                  ))}
+                <ListSubheader>Exhaustive</ListSubheader>
+                {algorithms
+                  .filter(alg => alg.type === "exhaustive")
+                  .map(alg => (
+                    <SelectItem value={alg.solverKey} key={alg.solverKey}>
+                      {alg.friendlyName}
+                    </SelectItem>
+                  ))}
+              </Select>
+            </Grid>
+            <Grid item xs={1}>
+              <Typography align="right" color="textSecondary">
+                <IconButton edge="end" onClick={onShowAlgInfo}>
+                  <FontAwesomeIcon icon={faQuestion} size="xs" />
+                </IconButton>
               </Typography>
             </Grid>
-            <Grid item xs={2}>
-              <Switch
-                checked={evaluatingDetailLevel > 1}
-                onChange={onEvaluatingDetailLevelChange(2, 1)}
-                color="secondary"
-                disabled={definingPoints || fullSpeed}
-                id="show-evaluating-steps"
+          </Grid>
+        </MenuItem>
+
+        <MenuItem title="Controls">
+          <ButtonGroup
+            fullWidth
+            variant="outlined"
+            color="secondary"
+            size="large"
+          >
+            <Button
+              onClick={running ? onFullSpeed : onStart}
+              disabled={definingPoints || fullSpeed}
+            >
+              <FontAwesomeIcon
+                icon={running ? faFastForward : faPlay}
+                width="0"
               />
-            </Grid>
-          </>
-        )}
-      </MenuItem>
-    </MenuSection>
+            </Button>
+            <Button onClick={onStop} disabled={!running || definingPoints}>
+              <FontAwesomeIcon icon={faStop} width="0" />
+            </Button>
+            <Button onClick={onReset} disabled={running || definingPoints}>
+              <FontAwesomeIcon icon={faRedo} width="0" />
+            </Button>
+          </ButtonGroup>
+        </MenuItem>
+        <MenuItem title="Delay">
+          <Slider
+            value={delay}
+            onChange={onDelayChange}
+            step={25}
+            min={0}
+            max={250}
+            valueLabelDisplay="auto"
+            color="secondary"
+            disabled={definingPoints || fullSpeed}
+          />
+        </MenuItem>
+      </MenuSection>
+      <MenuSection>
+        <MenuItem row>
+          <Grid item xs={10}>
+            <Typography variant="button" color="textSecondary" component="div">
+              Show Best Path
+            </Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Switch
+              checked={showBestPath}
+              onChange={onShowBestPathChange}
+              color="secondary"
+              disabled={definingPoints || fullSpeed}
+              id="show-best-path"
+            />
+          </Grid>
+
+          <Grid item xs={10}>
+            <Typography variant="button" color="textSecondary" component="div">
+              Show Evaluated Paths
+            </Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Switch
+              checked={evaluatingDetailLevel > 0}
+              onChange={onEvaluatingDetailLevelChange(1, 0)}
+              color="secondary"
+              disabled={definingPoints || fullSpeed}
+              id="show-evaluating-paths"
+            />
+          </Grid>
+
+          {maxEvaluatingDetailLevel > 1 && (
+            <>
+              <Grid item xs={10}>
+                <Typography
+                  variant="button"
+                  color="textSecondary"
+                  component="div"
+                >
+                  Show Evaluated Steps
+                </Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Switch
+                  checked={evaluatingDetailLevel > 1}
+                  onChange={onEvaluatingDetailLevelChange(2, 1)}
+                  color="secondary"
+                  disabled={definingPoints || fullSpeed}
+                  id="show-evaluating-steps"
+                />
+              </Grid>
+            </>
+          )}
+        </MenuItem>
+      </MenuSection>
+    </>
   )
 }
 

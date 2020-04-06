@@ -30,7 +30,6 @@ const Menu = ({ onStart, onFullSpeed, onStop, onRandomizePoints }) => {
       <MenuHeader />
       <Divider />
       <MenuMetrics />
-      <Divider />
       <MenuSolverControls
         onStart={onStart}
         onStop={onStop}
