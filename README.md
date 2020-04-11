@@ -10,7 +10,8 @@ The traveling salesman problem (TSP) asks the question, "Given a list of cities 
 
 - Live at [tspvis.com](https://tspvis.com)
 - The goal of this site is to be an **educational** resource to help visualize, learn, and develop different algorithms for the traveling salesman problem in a way that's easily accessible
-- As you apply different algorithms, the current best path is saved and used as input to whatever you run next. (e.g. shortest path first -> branch and bound) The order in which you apply different algorithms to the problem is sometimes referred to the meta-heuristic strategy.
+- As you apply different algorithms, the current best path is saved and used as input to whatever you run next. The order in which you apply different algorithms to the problem is sometimes referred to the meta-heuristic strategy.
+- For example, apply nearest neighbor, then 2-opt inversion, then branch and bound
 
 ### Heuristic algorithms
 
@@ -18,7 +19,7 @@ Heuristic algorithms attempt to find a good approximation of the optimal path wi
 
 **Construction** - Build a path (e.g. shortest path)
 
-- Shortest Path
+- Nearest Neighbor
 - Arbitrary Insertion
 - Furthest Insertion
 - Nearest Insertion
@@ -26,8 +27,8 @@ Heuristic algorithms attempt to find a good approximation of the optimal path wi
 
 **Improvement** - Attempt to take an existing constructed path and improve on it
 
-- 2-Opt Inversion
-- 2-Opt Reciprcal Exchange\*
+- 2-Opt Reciprocal Exchange
+- 2-Opt Inversion*
 
 ### Exhaustive algorithms
 
@@ -36,7 +37,7 @@ Exhaustive algorithms will always find the best possible solution by evaluating 
 - Random Paths
 - Depth First Search (Brute Force)
 - Branch and Bound (Cost)
-- Branch and Bound (Cost, Intersections)\*
+- Branch and Bound (Cost, Intersections)*
 
 ## Dependencies
 
