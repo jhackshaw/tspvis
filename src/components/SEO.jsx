@@ -20,7 +20,7 @@ const SEO = ({ subtitle }) => {
       />
       <meta property="og:url" content="https://tspvis.com" />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content="https://i.imgur.com/F1cgYHm.png" />
+      <meta property="og:image" content="https://i.imgur.com/u4ibcsC.jpg" />
       <meta property="og:type" content="website" />
     </Helmet>
   )
