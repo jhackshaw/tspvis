@@ -1,4 +1,8 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e21365cc-96a9-4649-9ad2-a35bb42d4a9f/deploy-status)](https://app.netlify.com/sites/tspvis/deploys)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Live Demo](https://img.shields.io/badge/demo-online-green.svg)](https://tspvis.com)
+[![Contributors](https://img.shields.io/github/contributors/jhackshaw/tspvis)](https://github.com/jhackshaw/tspvis/graphs/contributors)
+![GitHub](https://img.shields.io/github/license/jhackshaw/tspvis)
 
 # Traveling Salesman Problem
 
