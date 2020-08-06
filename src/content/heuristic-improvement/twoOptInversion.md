@@ -10,9 +10,7 @@ defaults:
 
 # Two-Opt inversion
 
-This is a heuristic, genetic algorithm. It continuously evolves to a better path until it can't find a better evolution.
-
-It is also known as 2-opt, 2-opt mutation, and cross-aversion. The general goal is to find places where the path crosses over itself, and then "undo" that crossing. It repeats until there are no crossings. A characteristic of this algorithm is that afterwards the path is guaranteed to have no crossings.
+This algorithm is also known as 2-opt, 2-opt mutation, and cross-aversion. The general goal is to find places where the path crosses over itself, and then "undo" that crossing. It repeats until there are no crossings. A characteristic of this algorithm is that afterwards the path is guaranteed to have no crossings.
 
 1. While a better path has not been found.
 2. For each pair of points:
