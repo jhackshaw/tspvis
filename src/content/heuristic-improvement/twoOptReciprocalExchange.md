@@ -10,9 +10,7 @@ defaults:
 
 # Two-Opt Reciprocal Exchange
 
-This is a heuristic, genetic algorithm. It continuously evolves to a better path until it can't find a better evolution.
-
-It is similar to the 2-opt mutation or inversion algorithm, although generally will find a less optimal algorithm. However, the computational cost of calculating new solutions is less intensive.
+This algorithm is similar to the 2-opt mutation or inversion algorithm, although generally will find a less optimal path. However, the computational cost of calculating new solutions is less intensive.
 
 The big difference with 2-opt mutation is not reversing the path between the 2 points. This algorithm is **not** always going to find a path that doesn't cross itself.
 
