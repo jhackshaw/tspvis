@@ -21,7 +21,7 @@ The traveling salesman problem (TSP) asks the question, "Given a list of cities 
 
 Heuristic algorithms attempt to find a good approximation of the optimal path within a more _reasonable_ amount of time.
 
-**Construction** - Build a path (e.g. shortest path)
+**Construction** - Build a path
 
 - Nearest Neighbor
 - Arbitrary Insertion
