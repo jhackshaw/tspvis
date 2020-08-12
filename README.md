@@ -36,7 +36,7 @@ Heuristic algorithms attempt to find a good approximation of the optimal path wi
 
 ### Exhaustive algorithms
 
-Exhaustive algorithms will always find the best possible solution by evaluating every possible path. These algorithms are typically significantly more expensive then the heuristic algorithms discussed next. The exhaustive algorithms implemented so far include:
+Exhaustive algorithms will always find the best possible solution by evaluating every possible path. These algorithms are typically significantly more expensive then the heuristic algorithms discussed above. The exhaustive algorithms implemented so far include:
 
 - Random Paths
 - Depth First Search (Brute Force)
