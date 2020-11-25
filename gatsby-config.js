@@ -35,7 +35,7 @@ module.exports = {
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
-        display: `tspvis`,
+        display: `fullscreen`,
         icon: `src/images/favicon.png`
       }
     },
