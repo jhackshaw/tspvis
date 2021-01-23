@@ -2,7 +2,7 @@ import React from "react"
 import { useDispatch } from "react-redux"
 import { Grid, Typography, IconButton, Tooltip } from "@material-ui/core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faInfoCircle, faBriefcase } from "@fortawesome/free-solid-svg-icons"
+import { faInfoCircle, faBriefcase, faDonate } from "@fortawesome/free-solid-svg-icons"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import { makeStyles } from "@material-ui/styles"
 import MenuSection from "./MenuSection"
@@ -40,6 +40,15 @@ const MenuHeader = props => {
           <FontAwesomeIcon icon={faBriefcase} width="0" /> TSPVIS
         </Typography>
         <Typography gutterBottom display="inline" color="textSecondary">
+          <Tooltip title="Help with hosting costs">
+            <IconButton
+              target="_blank"
+              href="https://www.buymeacoffee.com/jhackshaw"
+            >
+              <FontAwesomeIcon icon={faDonate} size="xs" width="0" />
+            </IconButton>
+          </Tooltip>
+
           <Tooltip title="Source code">
             <IconButton
               target="_blank"
