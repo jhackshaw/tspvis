@@ -40,7 +40,7 @@ const MenuHeader = props => {
           <FontAwesomeIcon icon={faBriefcase} width="0" /> TSPVIS
         </Typography>
         <Typography gutterBottom display="inline" color="textSecondary">
-          <Tooltip title="Help with hosting costs">
+          <Tooltip title="Support this site">
             <IconButton
               target="_blank"
               href="https://www.buymeacoffee.com/jhackshaw"
