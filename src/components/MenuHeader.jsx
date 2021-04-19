@@ -2,7 +2,11 @@ import React from "react"
 import { useDispatch } from "react-redux"
 import { Grid, Typography, IconButton, Tooltip } from "@material-ui/core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faInfoCircle, faBriefcase, faDonate } from "@fortawesome/free-solid-svg-icons"
+import {
+  faInfoCircle,
+  faBriefcase,
+  faDonate
+} from "@fortawesome/free-solid-svg-icons"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import { makeStyles } from "@material-ui/styles"
 import MenuSection from "./MenuSection"

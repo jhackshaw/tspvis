@@ -28,11 +28,12 @@ Heuristic algorithms attempt to find a good approximation of the optimal path wi
 - Furthest Insertion
 - Nearest Insertion
 - Convex Hull Insertion\*
+- Simulated Annealing\*
 
 **Improvement** - Attempt to take an existing constructed path and improve on it
 
 - 2-Opt Reciprocal Exchange
-- 2-Opt Inversion*
+- 2-Opt Inversion\*
 
 ### Exhaustive algorithms
 
@@ -41,7 +42,7 @@ Exhaustive algorithms will always find the best possible solution by evaluating 
 - Random Paths
 - Depth First Search (Brute Force)
 - Branch and Bound (Cost)
-- Branch and Bound (Cost, Intersections)*
+- Branch and Bound (Cost, Intersections)\*
 
 ## Dependencies
 

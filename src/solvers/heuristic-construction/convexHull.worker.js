@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import makeSolver from "../makeSolver"
-import { pathCost, counterClockWise } from "../cost"
+import { pathCost, counterClockWise, rotateToStartingPoint } from "../cost"
 import {
   EVALUATING_PATH_COLOR,
   EVALUATING_SEGMENT_COLOR
@@ -109,8 +109,7 @@ const convexHull = async points => {
   }
 
   // rotate the array so that starting point is back first
-  const startIdx = path.findIndex(p => p === sp)
-  path.unshift(...path.splice(startIdx, path.length))
+  rotateToStartingPoint(path, sp)
 
   // go back home
   path.push(sp)

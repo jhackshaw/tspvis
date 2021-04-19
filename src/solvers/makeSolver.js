@@ -4,7 +4,7 @@ import * as actions from "../store/actions"
 const wrapSolver = solver => async (...args) => {
   await solver(...args)
   self.postMessage(actions.stopSolvingAction())
-  self.terminate()
+  // self.terminate()
 }
 
 export const makeSolver = solver => {

@@ -49,3 +49,8 @@ export const setDifference = (setA, setB) => {
   })
   return ret
 }
+
+export const rotateToStartingPoint = (path, startingPoint) => {
+  const startIdx = path.findIndex(p => p === startingPoint)
+  path.unshift(...path.splice(startIdx, path.length))
+}

@@ -22,6 +22,7 @@ Heuristic algorithms attempt to find a good approximation of the optimal path wi
 - Furthest Insertion
 - Nearest Insertion
 - Convex Hull Insertion\*
+- Simulated Annealing\*
 
 **Improvement** - Attempt to take an existing constructed path and improve on it
 

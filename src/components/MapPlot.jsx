@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useTheme } from "@material-ui/styles"
 import { useMediaQuery } from "@material-ui/core"
 import MapGL from "react-map-gl"
-import 'mapbox-gl/dist/mapbox-gl.css';
+import "mapbox-gl/dist/mapbox-gl.css"
 import DeckGL, { ScatterplotLayer, PathLayer } from "deck.gl"
 import { LinearProgress } from "@material-ui/core"
 import * as actions from "../store/actions"
