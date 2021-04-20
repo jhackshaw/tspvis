@@ -23,7 +23,14 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export const Menu = ({ onStart, onFullSpeed, onStop, onRandomizePoints }) => {
+export const Menu = ({
+  onStart,
+  onPause,
+  onUnPause,
+  onFullSpeed,
+  onStop,
+  onRandomizePoints
+}) => {
   const classes = useStyles()
 
   return (
@@ -33,6 +40,8 @@ export const Menu = ({ onStart, onFullSpeed, onStop, onRandomizePoints }) => {
       <MenuMetrics />
       <MenuSolverControls
         onStart={onStart}
+        onPause={onPause}
+        onUnPause={onUnPause}
         onStop={onStop}
         onFullSpeed={onFullSpeed}
       />

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback, useState } from "react"
+import React, { useRef, useEffect, useCallback, useState, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import {
   AlgorithmModals,
@@ -16,7 +16,6 @@ import * as actions from "../store/actions"
 const IndexPage = () => {
   const mapRef = useRef(null)
   const dispatch = useDispatch()
-  const [algTitle, setAlgTitle] = useState("")
 
   const algorithm = useSelector(selectors.selectAlgorithm)
   const algorithmInfo = useAlgorithmInfo()
@@ -49,6 +48,16 @@ const IndexPage = () => {
     solver.postMessage(actions.goFullSpeed())
   }, [solver, dispatch])
 
+  const pause = useCallback(() => {
+    dispatch(actions.pause())
+    solver.postMessage(actions.pause())
+  }, [solver, dispatch])
+
+  const unpause = useCallback(() => {
+    dispatch(actions.unpause())
+    solver.postMessage(actions.unpause())
+  }, [solver, dispatch])
+
   const stop = useCallback(() => {
     dispatch(actions.stopSolving())
     solver.terminate()
@@ -62,9 +71,9 @@ const IndexPage = () => {
     solver.postMessage(actions.setEvaluatingDetailLevel(evaluatingDetailLevel))
   }, [evaluatingDetailLevel, solver])
 
-  useEffect(() => {
+  const algTitle = useMemo(() => {
     const alg = algorithmInfo.find(alg => alg.solverKey === algorithm)
-    setAlgTitle(alg.friendlyName)
+    return alg.friendlyName;
   }, [algorithm, algorithmInfo])
 
   return (
@@ -74,6 +83,8 @@ const IndexPage = () => {
       <AlgorithmModals />
       <Menu
         onStart={start}
+        onPause={pause}
+        onUnPause={unpause}
         onFullSpeed={fullSpeed}
         onStop={stop}
         onRandomizePoints={onRandomizePoints}

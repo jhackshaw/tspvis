@@ -18,7 +18,8 @@ import {
   faStop,
   faRedo,
   faQuestion,
-  faFastForward
+  faFastForward,
+  faPause
 } from "@fortawesome/free-solid-svg-icons"
 
 import * as actions from "../store/actions"
@@ -27,7 +28,13 @@ import { MenuSection } from "./MenuSection"
 import { MenuItem } from "./MenuItem"
 import { useAlgorithmInfo } from "../hooks"
 
-export const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
+export const MenuSolverControls = ({
+  onStart,
+  onPause,
+  onUnPause,
+  onFullSpeed,
+  onStop
+}) => {
   const dispatch = useDispatch()
   const algorithms = useAlgorithmInfo()
   const selectedAlgorithm = useSelector(selectors.selectAlgorithm)
@@ -41,6 +48,7 @@ export const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
   const showBestPath = useSelector(selectors.selectShowBestPath)
   const running = useSelector(selectors.selectRunning)
   const fullSpeed = useSelector(selectors.selectFullSpeed)
+  const paused = useSelector(selectors.selectPaused)
   const definingPoints = useSelector(selectors.selectDefiningPoints)
 
   const onAlgorithmChange = event => {
@@ -128,7 +136,7 @@ export const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
             size="large"
           >
             <Button
-              onClick={running ? onFullSpeed : onStart}
+              onClick={paused ? onUnPause : running ? onFullSpeed : onStart}
               disabled={definingPoints || fullSpeed}
             >
               <FontAwesomeIcon
@@ -136,8 +144,8 @@ export const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
                 width="0"
               />
             </Button>
-            <Button onClick={onStop} disabled={!running || definingPoints}>
-              <FontAwesomeIcon icon={faStop} width="0" />
+            <Button onClick={paused ? onStop : onPause} disabled={!running || definingPoints}>
+              <FontAwesomeIcon icon={paused ? faStop : faPause} width="0" />
             </Button>
             <Button onClick={onReset} disabled={running || definingPoints}>
               <FontAwesomeIcon icon={faRedo} width="0" />
