@@ -1,13 +1,13 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
 
-import useAlgorithmInfo from "../hooks/useAlgorithmInfo"
+import { useAlgorithmInfo } from "../hooks"
 import * as selectors from "../store/selectors"
 import * as actions from "../store/actions"
 
-import InformationModal from "./InformationModal"
+import { InformationModal } from "./InformationModal"
 
-const AlgorithmModals = props => {
+export const AlgorithmModals = props => {
   const dispatch = useDispatch()
   const algorithms = useAlgorithmInfo()
   const selectedAlgorithm = useSelector(selectors.selectAlgorithm)
@@ -31,5 +31,3 @@ const AlgorithmModals = props => {
     </>
   )
 }
-
-export default AlgorithmModals

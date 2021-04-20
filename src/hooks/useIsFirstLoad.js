@@ -1,4 +1,4 @@
-export default (keyName = "isFirstVisit") => {
+export const useIsFirstLoad = (keyName = "isFirstVisit") => {
   if (!window.localStorage) {
     return false
   }

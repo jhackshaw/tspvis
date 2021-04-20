@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const InformationModal = ({ open, onClose, children }) => {
+export const InformationModal = ({ open, onClose, children }) => {
   const classes = useStyles()
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"))
@@ -53,5 +53,3 @@ const InformationModal = ({ open, onClose, children }) => {
     </Dialog>
   )
 }
-
-export default InformationModal

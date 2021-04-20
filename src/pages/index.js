@@ -1,16 +1,17 @@
 import React, { useRef, useEffect, useCallback, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import IntroductionModal from "../components/IntroductionModal"
-import AlgorithmModals from "../components/AlgorithmModals"
-import Layout from "../components/Layout"
-import MapPlot from "../components/MapPlot"
-import Menu from "../components/Menu"
-import SEO from "../components/SEO"
-
-import useSolverWorker from "../hooks/useSolverWorker"
+import {
+  AlgorithmModals,
+  IntroductionModal,
+  Layout,
+  MapPlot,
+  Menu,
+  SEO,
+  ThemeToggle
+} from "../components"
+import { useSolverWorker, useAlgorithmInfo } from "../hooks"
 import * as selectors from "../store/selectors"
 import * as actions from "../store/actions"
-import useAlgorithmInfo from "../hooks/useAlgorithmInfo"
 
 const IndexPage = () => {
   const mapRef = useRef(null)
@@ -77,7 +78,7 @@ const IndexPage = () => {
         onStop={stop}
         onRandomizePoints={onRandomizePoints}
       />
-      <MapPlot ref={mapRef} />
+      <MapPlot ref={mapRef}></MapPlot>
     </Layout>
   )
 }

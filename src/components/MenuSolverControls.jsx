@@ -23,11 +23,11 @@ import {
 
 import * as actions from "../store/actions"
 import * as selectors from "../store/selectors"
-import MenuSection from "./MenuSection"
-import MenuItem from "./MenuItem"
-import useAlgorithmInfo from "../hooks/useAlgorithmInfo"
+import { MenuSection } from "./MenuSection"
+import { MenuItem } from "./MenuItem"
+import { useAlgorithmInfo } from "../hooks"
 
-const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
+export const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
   const dispatch = useDispatch()
   const algorithms = useAlgorithmInfo()
   const selectedAlgorithm = useSelector(selectors.selectAlgorithm)
@@ -216,5 +216,3 @@ const MenuSolverControls = ({ onStart, onFullSpeed, onStop }) => {
     </>
   )
 }
-
-export default MenuSolverControls

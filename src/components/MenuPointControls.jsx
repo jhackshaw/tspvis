@@ -16,8 +16,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import MenuSection from "./MenuSection"
-import MenuItem from "./MenuItem"
+import { MenuSection } from "./MenuSection"
+import { MenuItem } from "./MenuItem"
 import * as selectors from "../store/selectors"
 import * as actions from "../store/actions"
 
@@ -47,7 +47,7 @@ const possRoutes = n => {
   return cache[n - 1]
 }
 
-const MenuPointControls = ({ onRandomizePoints }) => {
+export const MenuPointControls = ({ onRandomizePoints }) => {
   const classes = useStyles()
   const [possiblePaths, setPossiblePaths] = useState("0")
   const dispatch = useDispatch()
@@ -139,5 +139,3 @@ const MenuPointControls = ({ onRandomizePoints }) => {
     </MenuSection>
   )
 }
-
-export default MenuPointControls

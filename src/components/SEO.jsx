@@ -4,7 +4,7 @@ import Helmet from "react-helmet"
 const description =
   "Interactive solver for the traveling salesman problem to visualize different algorithms. Includes various Heuristic and Exhaustive algorithms."
 
-const SEO = ({ subtitle }) => {
+export const SEO = ({ subtitle }) => {
   return (
     <Helmet
       title={`${subtitle}${
@@ -25,5 +25,3 @@ const SEO = ({ subtitle }) => {
     </Helmet>
   )
 }
-
-export default SEO

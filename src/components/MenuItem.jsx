@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const MenuItem = ({ children, title = "", row = false }) => {
+export const MenuItem = ({ children, title = "", row = false }) => {
   const classes = useStyles()
 
   return (
@@ -36,5 +36,3 @@ const MenuItem = ({ children, title = "", row = false }) => {
     </div>
   )
 }
-
-export default MenuItem

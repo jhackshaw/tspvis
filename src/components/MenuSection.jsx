@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const MenuSection = ({ children, ...rest }) => {
+export const MenuSection = ({ children, ...rest }) => {
   const classes = useStyles(rest)
 
   return (
@@ -24,5 +24,3 @@ const MenuSection = ({ children, ...rest }) => {
     </div>
   )
 }
-
-export default MenuSection

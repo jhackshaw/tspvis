@@ -1,10 +1,11 @@
 import React from "react"
 import { makeStyles } from "@material-ui/styles"
 import { Paper, Divider } from "@material-ui/core"
-import MenuHeader from "./MenuHeader"
-import MenuSolverControls from "./MenuSolverControls"
-import MenuMetrics from "./MenuMetrics"
-import MenuPointControls from "./MenuPointControls"
+import { MenuHeader } from "./MenuHeader"
+import { MenuSolverControls } from "./MenuSolverControls"
+import { MenuMetrics } from "./MenuMetrics"
+import { MenuPointControls } from "./MenuPointControls"
+import { OtherControls } from "./OtherControls"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Menu = ({ onStart, onFullSpeed, onStop, onRandomizePoints }) => {
+export const Menu = ({ onStart, onFullSpeed, onStop, onRandomizePoints }) => {
   const classes = useStyles()
 
   return (
@@ -37,8 +38,8 @@ const Menu = ({ onStart, onFullSpeed, onStop, onRandomizePoints }) => {
       />
       <Divider />
       <MenuPointControls onRandomizePoints={onRandomizePoints} />
+      <Divider />
+      <OtherControls />
     </Paper>
   )
 }
-
-export default Menu

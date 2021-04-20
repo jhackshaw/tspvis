@@ -1,6 +1,5 @@
-import React, { useRef, useImperativeHandle, useEffect } from "react"
+import React, { useRef, useImperativeHandle, useEffect, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { useTheme } from "@material-ui/styles"
 import { useMediaQuery } from "@material-ui/core"
 import MapGL from "react-map-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
@@ -8,19 +7,27 @@ import DeckGL, { ScatterplotLayer, PathLayer } from "deck.gl"
 import { LinearProgress } from "@material-ui/core"
 import * as actions from "../store/actions"
 import * as selectors from "../store/selectors"
+import { useThemeContext } from "../context"
 
+// not secret
 const TOKEN =
   "pk.eyJ1IjoiaW50cmVwaWRldiIsImEiOiJjazBpa2M5YnowMHcyM21ubzgycW8zZHJmIn0.DCO2aRA6MJweC8HN-d_cgQ"
 
-const MapPlot = React.forwardRef((props, ref) => {
-  const theme = useTheme()
-  const matches = useMediaQuery(theme.breakpoints.down("sm"))
+export const MapPlot = React.forwardRef((props, ref) => {
+  const { children } = props
+  const { muiTheme, colorMode } = useThemeContext()
+  const matches = useMediaQuery(muiTheme.breakpoints.down("sm"))
   const mapGlRef = useRef()
   const plotPoints = useSelector(selectors.selectPointsDisplay)
   const plotPaths = useSelector(selectors.selectPlotPaths)
   const viewport = useSelector(selectors.selectViewport)
   const running = useSelector(selectors.selectRunning)
   const definingPoints = useSelector(selectors.selectDefiningPoints)
+  const mapStyle = useMemo(() =>
+    colorMode === "dark"
+      ? "mapbox://styles/mapbox/dark-v8"
+      : "mapbox://styles/mapbox/light-v8"
+  )
   const dispatch = useDispatch()
 
   useImperativeHandle(ref, () => ({
@@ -67,6 +74,7 @@ const MapPlot = React.forwardRef((props, ref) => {
       disableTokenWarning={true}
       onNativeClick={definingPoints && onDefinedPoint}
       doubleClickZoom={false}
+      mapStyle={mapStyle}
     >
       {running && <LinearProgress color="secondary" />}
       <DeckGL viewState={viewport}>
@@ -89,8 +97,7 @@ const MapPlot = React.forwardRef((props, ref) => {
           raduisMaxPixels={8}
         />
       </DeckGL>
+      {children}
     </MapGL>
   )
 })
-
-export default MapPlot

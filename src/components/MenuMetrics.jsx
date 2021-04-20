@@ -3,8 +3,8 @@ import { useSelector } from "react-redux"
 import { Grid, Typography } from "@material-ui/core"
 import * as selectors from "../store/selectors"
 
-import MenuSection from "./MenuSection"
-import MenuItem from "./MenuItem"
+import { MenuSection } from "./MenuSection"
+import { MenuItem } from "./MenuItem"
 import { makeStyles } from "@material-ui/styles"
 
 const useStyles = makeStyles(theme => ({
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const MenuMetrics = props => {
+export const MenuMetrics = props => {
   const classes = useStyles()
   const best = useSelector(selectors.selectBestCostDisplay)
   const evaluating = useSelector(selectors.selectEvaluatingCostDisplay)
@@ -120,5 +120,3 @@ const MenuMetrics = props => {
     </MenuSection>
   )
 }
-
-export default MenuMetrics

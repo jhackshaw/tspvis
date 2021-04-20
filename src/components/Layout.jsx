@@ -16,10 +16,8 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ContentRoot = ({ children }) => {
+export const Layout = ({ children }) => {
   const classes = useStyles()
 
   return <div className={classes.container}>{children}</div>
 }
-
-export default ContentRoot

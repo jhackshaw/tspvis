@@ -1,6 +1,6 @@
 import { useStaticQuery, graphql } from "gatsby"
 
-export default () => {
+export const useIntroductionInfo = () => {
   const {
     allMarkdownRemark: { edges: introductions }
   } = useStaticQuery(graphql`

@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import { makeStyles } from "@material-ui/styles"
-import MenuSection from "./MenuSection"
+import { MenuSection } from "./MenuSection"
 
 import * as actions from "../store/actions"
 
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const MenuHeader = props => {
+export const MenuHeader = props => {
   const classes = useStyles()
   const dispatch = useDispatch()
 
@@ -80,5 +80,3 @@ const MenuHeader = props => {
     </MenuSection>
   )
 }
-
-export default MenuHeader

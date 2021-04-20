@@ -1,7 +1,7 @@
 // https://stackoverflow.com/questions/55075604/react-hooks-useeffect-only-on-update
 import { useEffect, useRef } from "react"
 
-export default (effect, dependencies = []) => {
+export const useUpdateEffect = (effect, dependencies = []) => {
   const isInitialMount = useRef(true)
 
   useEffect(() => {

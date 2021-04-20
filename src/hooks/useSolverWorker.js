@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import solvers from "../solvers"
 
-export default (onSolverMessage, algorithm) => {
+export const useSolverWorker = (onSolverMessage, algorithm) => {
   const [solver, setSolver] = useState()
 
   const resetSolver = () => {
