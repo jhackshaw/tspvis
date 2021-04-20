@@ -1,17 +1,17 @@
-import React from "react"
-import { useDispatch } from "react-redux"
-import { Grid, Typography, IconButton, Tooltip } from "@material-ui/core"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Grid, Typography, IconButton, Tooltip } from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInfoCircle,
   faBriefcase,
   faDonate
-} from "@fortawesome/free-solid-svg-icons"
-import { faGithub } from "@fortawesome/free-brands-svg-icons"
-import { makeStyles } from "@material-ui/styles"
-import { MenuSection } from "./MenuSection"
+} from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { makeStyles } from "@material-ui/styles";
+import { MenuSection } from "./MenuSection";
 
-import * as actions from "../store/actions"
+import * as actions from "../store/actions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,15 +21,15 @@ const useStyles = makeStyles(theme => ({
   title: {
     fontSize: "1.2rem"
   }
-}))
+}));
 
 export const MenuHeader = props => {
-  const classes = useStyles()
-  const dispatch = useDispatch()
+  const classes = useStyles();
+  const dispatch = useDispatch();
 
   const onOpenSiteInfo = () => {
-    dispatch(actions.toggleSiteInfoOpen())
-  }
+    dispatch(actions.toggleSiteInfoOpen());
+  };
 
   return (
     <MenuSection>
@@ -78,5 +78,5 @@ export const MenuHeader = props => {
         algorithm)
       </Typography>
     </MenuSection>
-  )
-}
+  );
+};

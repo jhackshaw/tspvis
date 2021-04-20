@@ -1,6 +1,6 @@
-import React from "react"
-import { makeStyles } from "@material-ui/styles"
-import { Grid } from "@material-ui/core"
+import React from "react";
+import { makeStyles } from "@material-ui/styles";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   section: {
@@ -11,10 +11,10 @@ const useStyles = makeStyles(theme => ({
       highlight ? `2px solid ${theme.palette.secondary.main}` : "none",
     borderRadius: "10px"
   }
-}))
+}));
 
 export const MenuSection = ({ children, ...rest }) => {
-  const classes = useStyles(rest)
+  const classes = useStyles(rest);
 
   return (
     <div className={classes.section}>
@@ -22,5 +22,5 @@ export const MenuSection = ({ children, ...rest }) => {
         {children}
       </Grid>
     </div>
-  )
-}
+  );
+};

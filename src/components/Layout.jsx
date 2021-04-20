@@ -1,5 +1,5 @@
-import React from "react"
-import { makeStyles } from "@material-ui/styles"
+import React from "react";
+import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -14,10 +14,10 @@ const useStyles = makeStyles(theme => ({
       flexDirection: "column-reverse"
     }
   }
-}))
+}));
 
 export const Layout = ({ children }) => {
-  const classes = useStyles()
+  const classes = useStyles();
 
-  return <div className={classes.container}>{children}</div>
-}
+  return <div className={classes.container}>{children}</div>;
+};

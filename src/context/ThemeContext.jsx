@@ -1,19 +1,19 @@
-import React from "react"
-import { createContext, useCallback, useContext, useMemo } from "react"
-import { ThemeProvider as MUIThemeProvider } from "@material-ui/styles"
-import { CssBaseline, createMuiTheme } from "@material-ui/core"
-import blue from "@material-ui/core/colors/blue"
-import orange from "@material-ui/core/colors/orange"
+import React from "react";
+import { createContext, useCallback, useContext, useMemo } from "react";
+import { ThemeProvider as MUIThemeProvider } from "@material-ui/styles";
+import { CssBaseline, createMuiTheme } from "@material-ui/core";
+import blue from "@material-ui/core/colors/blue";
+import orange from "@material-ui/core/colors/orange";
 
-import { COLOR_MODE_KEY } from "../constants"
-import { usePersistentState } from "../hooks"
+import { COLOR_MODE_KEY } from "../constants";
+import { usePersistentState } from "../hooks";
 
-export const ThemeContext = createContext()
+export const ThemeContext = createContext();
 
 export const ThemeContextProvider = props => {
-  const { children } = props
+  const { children } = props;
 
-  const [colorMode, setColorMode] = usePersistentState(COLOR_MODE_KEY, "dark")
+  const [colorMode, setColorMode] = usePersistentState(COLOR_MODE_KEY, "dark");
 
   const muiTheme = useMemo(
     () =>
@@ -25,13 +25,11 @@ export const ThemeContextProvider = props => {
         }
       }),
     [colorMode]
-  )
+  );
 
   const toggleColorMode = useCallback(() => {
-    setColorMode(current => (current === "dark" ? "light" : "dark"))
-  }, [])
-
-  console.log(colorMode)
+    setColorMode(current => (current === "dark" ? "light" : "dark"));
+  }, []);
 
   return (
     <MUIThemeProvider theme={muiTheme}>
@@ -47,7 +45,7 @@ export const ThemeContextProvider = props => {
         {children}
       </ThemeContext.Provider>
     </MUIThemeProvider>
-  )
-}
+  );
+};
 
-export const useThemeContext = () => useContext(ThemeContext)
+export const useThemeContext = () => useContext(ThemeContext);

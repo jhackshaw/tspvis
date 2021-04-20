@@ -22,39 +22,39 @@ This algorithm is also known as 2-opt, 2-opt mutation, and cross-aversion. The g
 
 ```javascript
 const twoOptInversion = async path => {
-  path.push(path[0])
-  let best = pathCost(path)
-  let swapped = true
+  path.push(path[0]);
+  let best = pathCost(path);
+  let swapped = true;
 
   while (swapped) {
-    swapped = false
+    swapped = false;
     for (let pt1 = 1; pt1 < path.length - 1; pt1++) {
       for (let pt2 = pt1 + 1; pt2 < path.length - 1; pt2++) {
         // section of the path to reverse
-        const section = path.slice(pt1, pt2 + 1)
+        const section = path.slice(pt1, pt2 + 1);
 
         // reverse section in place
-        section.reverse()
+        section.reverse();
 
         // replace section of path with reversed section in place
-        path.splice(pt1, pt2 + 1 - pt1, ...section)
+        path.splice(pt1, pt2 + 1 - pt1, ...section);
 
         // calculate new cost
-        const newPath = path
-        const cost = pathCost(newPath)
+        const newPath = path;
+        const cost = pathCost(newPath);
 
         if (cost < best) {
           // found a better path after the swap, keep it
-          swapped = true
-          best = cost
-          self.setBestPath(newPath, best)
+          swapped = true;
+          best = cost;
+          self.setBestPath(newPath, best);
         } else {
           // un-reverse the section
-          section.reverse()
-          path.splice(pt1, pt2 + 1 - pt1, ...section)
+          section.reverse();
+          path.splice(pt1, pt2 + 1 - pt1, ...section);
         }
       }
     }
   }
-}
+};
 ```

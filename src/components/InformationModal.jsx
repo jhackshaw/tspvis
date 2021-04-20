@@ -1,14 +1,14 @@
-import React from "react"
-import { makeStyles } from "@material-ui/styles"
+import React from "react";
+import { makeStyles } from "@material-ui/styles";
 import {
   Dialog,
   DialogContent,
   IconButton,
   useMediaQuery,
   useTheme
-} from "@material-ui/core"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faWindowClose } from "@fortawesome/free-solid-svg-icons"
+} from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
 
 const useStyles = makeStyles(theme => ({
   closeButton: {
@@ -20,12 +20,12 @@ const useStyles = makeStyles(theme => ({
   root: {
     zIndex: "10000 !important"
   }
-}))
+}));
 
 export const InformationModal = ({ open, onClose, children }) => {
-  const classes = useStyles()
-  const theme = useTheme()
-  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"))
+  const classes = useStyles();
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Dialog
@@ -51,5 +51,5 @@ export const InformationModal = ({ open, onClose, children }) => {
         {children}
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};

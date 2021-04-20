@@ -37,38 +37,38 @@ const branchAndBoundOnCost = async (
 ) => {
   if (visited === null) {
     // initial call
-    path = [points.shift()]
-    points = new Set(points)
-    visited = new Set()
+    path = [points.shift()];
+    points = new Set(points);
+    visited = new Set();
   }
 
   // figure out which points are left
-  const available = setDifference(points, visited)
+  const available = setDifference(points, visited);
 
   // calculate the cost, from here, to go home
-  const backToStart = [...path, path[0]]
-  const cost = pathCost(backToStart)
+  const backToStart = [...path, path[0]];
+  const cost = pathCost(backToStart);
 
   if (cost > overallBest) {
     // we may not be done, but have already traveled further than the best path
     // no reason to continue
-    return [null, null]
+    return [null, null];
   }
 
   // still cheaper than the best, keep going deeper, and deeper, and deeper...
 
   if (available.size === 0) {
     // at the end of the path, return where we're at
-    return [cost, backToStart]
+    return [cost, backToStart];
   }
 
-  let [bestCost, bestPath] = [null, null]
+  let [bestCost, bestPath] = [null, null];
 
   // for every point yet to be visited along this path
   for (const p of available) {
     // go to that point
-    visited.add(p)
-    path.push(p)
+    visited.add(p);
+    path.push(p);
 
     // RECURSE - go through all the possible points from that point
     const [curCost, curPath] = await branchAndBoundOnCost(
@@ -76,24 +76,24 @@ const branchAndBoundOnCost = async (
       path,
       visited,
       overallBest
-    )
+    );
 
     // if that path is better and complete, keep it
     if (curCost && (!bestCost || curCost < bestCost)) {
-      ;[bestCost, bestPath] = [curCost, curPath]
+      [bestCost, bestPath] = [curCost, curPath];
 
       if (!overallBest || bestCost < overallBest) {
         // found a new best complete path
-        overallBest = bestCost
-        self.setBestPath(bestPath, bestCost)
+        overallBest = bestCost;
+        self.setBestPath(bestPath, bestCost);
       }
     }
 
     // go back up and make that point available again
-    visited.delete(p)
-    path.pop()
+    visited.delete(p);
+    path.pop();
   }
 
-  return [bestCost, bestPath]
-}
+  return [bestCost, bestPath];
+};
 ```

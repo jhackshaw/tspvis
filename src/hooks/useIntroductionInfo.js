@@ -1,4 +1,4 @@
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby";
 
 export const useIntroductionInfo = () => {
   const {
@@ -15,7 +15,7 @@ export const useIntroductionInfo = () => {
         }
       }
     }
-  `)
+  `);
 
-  return introductions[0].node.html
-}
+  return introductions[0].node.html;
+};

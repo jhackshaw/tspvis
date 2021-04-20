@@ -1,12 +1,12 @@
 export const useIsFirstLoad = (keyName = "isFirstVisit") => {
   if (!window.localStorage) {
-    return false
+    return false;
   }
 
   if (!localStorage[keyName]) {
-    localStorage.setItem(keyName, true)
-    return true
+    localStorage.setItem(keyName, true);
+    return true;
   }
 
-  return false
-}
+  return false;
+};

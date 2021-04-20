@@ -1,11 +1,11 @@
-import React from "react"
-import { makeStyles } from "@material-ui/styles"
-import { Paper, Divider } from "@material-ui/core"
-import { MenuHeader } from "./MenuHeader"
-import { MenuSolverControls } from "./MenuSolverControls"
-import { MenuMetrics } from "./MenuMetrics"
-import { MenuPointControls } from "./MenuPointControls"
-import { OtherControls } from "./OtherControls"
+import React from "react";
+import { makeStyles } from "@material-ui/styles";
+import { Paper, Divider } from "@material-ui/core";
+import { MenuHeader } from "./MenuHeader";
+import { MenuSolverControls } from "./MenuSolverControls";
+import { MenuMetrics } from "./MenuMetrics";
+import { MenuPointControls } from "./MenuPointControls";
+import { OtherControls } from "./OtherControls";
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   [theme.breakpoints.down("sm")]: {
     width: "100%"
   }
-}))
+}));
 
 export const Menu = ({
   onStart,
@@ -31,7 +31,7 @@ export const Menu = ({
   onStop,
   onRandomizePoints
 }) => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <Paper classes={{ root: classes.wrapper }}>
@@ -50,5 +50,5 @@ export const Menu = ({
       <Divider />
       <OtherControls />
     </Paper>
-  )
-}
+  );
+};

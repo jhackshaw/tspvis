@@ -2,7 +2,7 @@ exports.onCreateWebpackConfig = ({
   actions: { replaceWebpackConfig },
   getConfig
 }) => {
-  const config = getConfig()
+  const config = getConfig();
 
   config.module.rules.push({
     test: /\.worker\.js$/,
@@ -12,9 +12,9 @@ exports.onCreateWebpackConfig = ({
         inline: true
       }
     }
-  })
+  });
 
-  config.output.globalObject = "this"
+  config.output.globalObject = "this";
 
-  replaceWebpackConfig(config)
-}
+  replaceWebpackConfig(config);
+};

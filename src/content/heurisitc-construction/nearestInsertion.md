@@ -24,45 +24,45 @@ This is a heuristic construction algorithm. It selects the closest point to the 
 ```javascript
 const nearestInsertion = async points => {
   // from the starting point
-  const path = [points.shift()]
+  const path = [points.shift()];
 
   //
   // INITIALIZATION - go to the nearest point first
   //
-  points.sort((a, b) => distance(path[0], b) - distance(path[0], a))
-  path.push(points.pop())
+  points.sort((a, b) => distance(path[0], b) - distance(path[0], a));
+  path.push(points.pop());
 
   while (points.length > 0) {
     //
     // SELECTION - nearest point to the path
     //
-    let [selectedDistance, selectedIdx] = [Infinity, null]
+    let [selectedDistance, selectedIdx] = [Infinity, null];
     for (const [freePointIdx, freePoint] of points.entries()) {
       for (const pathPoint of path) {
-        const dist = distance(freePoint, pathPoint)
+        const dist = distance(freePoint, pathPoint);
         if (dist < selectedDistance) {
-          ;[selectedDistance, selectedIdx] = [dist, freePointIdx]
+          [selectedDistance, selectedIdx] = [dist, freePointIdx];
         }
       }
     }
 
     // get the next point to add
-    const [nextPoint] = points.splice(selectedIdx, 1)
+    const [nextPoint] = points.splice(selectedIdx, 1);
 
     //
     // INSERTION - find the insertion spot that minimizes distance
     //
-    let [bestCost, bestIdx] = [Infinity, null]
+    let [bestCost, bestIdx] = [Infinity, null];
     for (let i = 1; i < path.length; i++) {
-      const insertionCost = pathCost([path[i - 1], nextPoint, path[i]])
+      const insertionCost = pathCost([path[i - 1], nextPoint, path[i]]);
       if (insertionCost < bestCost) {
-        ;[bestCost, bestIdx] = [insertionCost, i]
+        [bestCost, bestIdx] = [insertionCost, i];
       }
     }
-    path.splice(bestIdx, 0, nextPoint)
+    path.splice(bestIdx, 0, nextPoint);
   }
 
   // return to start after visiting all other points
-  path.push(path[0])
-}
+  path.push(path[0]);
+};
 ```

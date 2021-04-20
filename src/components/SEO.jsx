@@ -1,8 +1,8 @@
-import React from "react"
-import Helmet from "react-helmet"
+import React from "react";
+import Helmet from "react-helmet";
 
 const description =
-  "Interactive solver for the traveling salesman problem to visualize different algorithms. Includes various Heuristic and Exhaustive algorithms."
+  "Interactive solver for the traveling salesman problem to visualize different algorithms. Includes various Heuristic and Exhaustive algorithms.";
 
 export const SEO = ({ subtitle }) => {
   return (
@@ -23,5 +23,5 @@ export const SEO = ({ subtitle }) => {
       <meta property="og:image" content="https://i.imgur.com/u4ibcsC.jpg" />
       <meta property="og:type" content="website" />
     </Helmet>
-  )
-}
+  );
+};

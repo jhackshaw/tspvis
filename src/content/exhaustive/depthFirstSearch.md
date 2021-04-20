@@ -38,50 +38,50 @@ This is a recursive, depth-first-search algorithm, as follows:
 const dfs = async (points, path = [], visited = null, overallBest = null) => {
   if (visited === null) {
     // initial call
-    path = [points.shift()]
-    points = new Set(points)
-    visited = new Set()
+    path = [points.shift()];
+    points = new Set(points);
+    visited = new Set();
   }
 
   // figure out what points are left from this point
-  const available = setDifference(points, visited)
+  const available = setDifference(points, visited);
 
   if (available.size === 0) {
     // this must be a complete path
-    const backToStart = [...path, path[0]]
+    const backToStart = [...path, path[0]];
 
     // calculate the cost of this path
-    const cost = pathCost(backToStart)
+    const cost = pathCost(backToStart);
 
     // return both the cost and the path where we're at
-    return [cost, backToStart]
+    return [cost, backToStart];
   }
 
-  let [bestCost, bestPath] = [null, null]
+  let [bestCost, bestPath] = [null, null];
 
   // for every point yet to be visited along this path
   for (const p of available) {
     // go to that point
-    visited.add(p)
-    path.push(p)
+    visited.add(p);
+    path.push(p);
 
     // RECURSE - go through all the possible points from that point
-    const [curCost, curPath] = await dfs(points, path, visited, overallBest)
+    const [curCost, curPath] = await dfs(points, path, visited, overallBest);
 
     // if that path is better, keep it
     if (bestCost === null || curCost < bestCost) {
-      ;[bestCost, bestPath] = [curCost, curPath]
+      [bestCost, bestPath] = [curCost, curPath];
 
       if (overallBest === null || bestCost < overallBest) {
         // found a new best complete path
-        overallBest = bestCost
+        overallBest = bestCost;
       }
     }
 
     // go back up and make that point available again
-    visited.delete(p)
-    path.pop()
+    visited.delete(p);
+    path.pop();
   }
-  return [bestCost, bestPath]
-}
+  return [bestCost, bestPath];
+};
 ```

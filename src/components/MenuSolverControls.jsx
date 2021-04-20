@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
   ButtonGroup,
   Button,
@@ -10,9 +10,9 @@ import {
   Switch,
   Grid,
   IconButton
-} from "@material-ui/core"
-import { useDispatch, useSelector } from "react-redux"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+} from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
   faStop,
@@ -20,13 +20,12 @@ import {
   faQuestion,
   faFastForward,
   faPause
-} from "@fortawesome/free-solid-svg-icons"
-
-import * as actions from "../store/actions"
-import * as selectors from "../store/selectors"
-import { MenuSection } from "./MenuSection"
-import { MenuItem } from "./MenuItem"
-import { useAlgorithmInfo } from "../hooks"
+} from "@fortawesome/free-solid-svg-icons";
+import { MenuSection } from "./MenuSection";
+import { MenuItem } from "./MenuItem";
+import { useAlgorithmInfo } from "../hooks";
+import * as actions from "../store/actions";
+import * as selectors from "../store/selectors";
 
 export const MenuSolverControls = ({
   onStart,
@@ -35,48 +34,51 @@ export const MenuSolverControls = ({
   onFullSpeed,
   onStop
 }) => {
-  const dispatch = useDispatch()
-  const algorithms = useAlgorithmInfo()
-  const selectedAlgorithm = useSelector(selectors.selectAlgorithm)
-  const delay = useSelector(selectors.selectDelay)
+  const dispatch = useDispatch();
+  const algorithms = useAlgorithmInfo();
+  const selectedAlgorithm = useSelector(selectors.selectAlgorithm);
+  const delay = useSelector(selectors.selectDelay);
   const evaluatingDetailLevel = useSelector(
     selectors.selectEvaluatingDetailLevel
-  )
+  );
   const maxEvaluatingDetailLevel = useSelector(
     selectors.selectMaxEvaluatingDetailLevel
-  )
-  const showBestPath = useSelector(selectors.selectShowBestPath)
-  const running = useSelector(selectors.selectRunning)
-  const fullSpeed = useSelector(selectors.selectFullSpeed)
-  const paused = useSelector(selectors.selectPaused)
-  const definingPoints = useSelector(selectors.selectDefiningPoints)
+  );
+  const showBestPath = useSelector(selectors.selectShowBestPath);
+  const running = useSelector(selectors.selectRunning);
+  const fullSpeed = useSelector(selectors.selectFullSpeed);
+  const paused = useSelector(selectors.selectPaused);
+  const definingPoints = useSelector(selectors.selectDefiningPoints);
 
   const onAlgorithmChange = event => {
-    const solverKey = event.target.value
-    const { defaults } = algorithms.find(alg => alg.solverKey === solverKey)
-    dispatch(actions.setAlgorithm(solverKey, defaults))
-  }
+    event.persist();
+    onStop();
+    const solverKey = event.target.value;
+    const { defaults } = algorithms.find(alg => alg.solverKey === solverKey);
+    dispatch(actions.setAlgorithm(solverKey, defaults));
+  };
 
   const onDelayChange = (_, newDelay) => {
-    dispatch(actions.setDelay(newDelay))
-  }
+    dispatch(actions.setDelay(newDelay));
+  };
 
   const onEvaluatingDetailLevelChange = (onLevel, offLevel) => event => {
-    const level = event.target.checked ? onLevel : offLevel
-    dispatch(actions.setEvaluatingDetailLevel(level))
-  }
+    const level = event.target.checked ? onLevel : offLevel;
+    dispatch(actions.setEvaluatingDetailLevel(level));
+  };
 
   const onShowBestPathChange = event => {
-    dispatch(actions.setShowBestPath(event.target.checked))
-  }
+    dispatch(actions.setShowBestPath(event.target.checked));
+  };
 
   const onReset = () => {
-    dispatch(actions.resetSolverState())
-  }
+    onStop();
+    dispatch(actions.resetSolverState());
+  };
 
   const onShowAlgInfo = () => {
-    dispatch(actions.toggleAlgInfoOpen())
-  }
+    dispatch(actions.toggleAlgInfoOpen());
+  };
 
   return (
     <>
@@ -87,7 +89,7 @@ export const MenuSolverControls = ({
               <Select
                 value={selectedAlgorithm}
                 onChange={onAlgorithmChange}
-                disabled={running || definingPoints}
+                disabled={running || paused || definingPoints}
                 variant="outlined"
                 fullWidth
                 margin="dense"
@@ -136,17 +138,25 @@ export const MenuSolverControls = ({
             size="large"
           >
             <Button
-              onClick={paused ? onUnPause : running ? onFullSpeed : onStart}
+              onClick={paused ? onUnPause : running ? onPause : onStart}
               disabled={definingPoints || fullSpeed}
             >
               <FontAwesomeIcon
-                icon={running ? faFastForward : faPlay}
+                icon={paused ? faPlay : running ? faPause : faPlay}
                 width="0"
               />
             </Button>
-            <Button onClick={paused ? onStop : onPause} disabled={!running || definingPoints}>
-              <FontAwesomeIcon icon={paused ? faStop : faPause} width="0" />
+
+            <Button
+              onClick={paused ? onStop : onFullSpeed}
+              disabled={(!running && !paused) || definingPoints}
+            >
+              <FontAwesomeIcon
+                icon={paused ? faStop : faFastForward}
+                width="0"
+              />
             </Button>
+
             <Button onClick={onReset} disabled={running || definingPoints}>
               <FontAwesomeIcon icon={faRedo} width="0" />
             </Button>
@@ -222,5 +232,5 @@ export const MenuSolverControls = ({
         </MenuItem>
       </MenuSection>
     </>
-  )
-}
+  );
+};

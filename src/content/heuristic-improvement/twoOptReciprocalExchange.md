@@ -26,32 +26,32 @@ It could be worthwhile to try this algorithm prior to 2-opt inversion because of
 
 ```javascript
 const twoOptReciprocalExchange = async path => {
-  path.push(path[0])
-  let best = pathCost(path)
-  let swapped = true
+  path.push(path[0]);
+  let best = pathCost(path);
+  let swapped = true;
 
-  self.setBestPath(path, best)
+  self.setBestPath(path, best);
 
   while (swapped) {
-    swapped = false
+    swapped = false;
     for (let pt1 = 1; pt1 < path.length - 1; pt1++) {
       for (let pt2 = pt1 + 1; pt2 < path.length - 1; pt2++) {
         // swap current pair of points
-        ;[path[pt1], path[pt2]] = [path[pt2], path[pt1]]
+        [path[pt1], path[pt2]] = [path[pt2], path[pt1]];
 
         // calculate new cost
-        const cost = pathCost(path)
+        const cost = pathCost(path);
 
         if (cost < best) {
           // found a better path after the swap, keep it
-          swapped = true
-          best = cost
+          swapped = true;
+          best = cost;
         } else {
           // swap back - this one's worse
-          ;[path[pt1], path[pt2]] = [path[pt2], path[pt1]]
+          [path[pt1], path[pt2]] = [path[pt2], path[pt1]];
         }
       }
     }
   }
-}
+};
 ```

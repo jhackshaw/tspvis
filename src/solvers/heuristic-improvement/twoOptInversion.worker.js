@@ -1,35 +1,35 @@
 /* eslint-disable no-restricted-globals */
-import makeSolver from "../makeSolver"
-import { pathCost } from "../cost"
+import makeSolver from "../makeSolver";
+import { pathCost } from "../cost";
 
 import {
   EVALUATING_PATH_COLOR,
   EVALUATING_SEGMENT_COLOR
-} from "../../constants"
+} from "../../constants";
 
 const twoOptInversion = async path => {
-  path.push(path[0])
-  let best = pathCost(path)
-  let swapped = true
+  path.push(path[0]);
+  let best = pathCost(path);
+  let swapped = true;
 
-  self.setBestPath(path, best)
+  self.setBestPath(path, best);
 
   while (swapped) {
-    swapped = false
+    swapped = false;
     for (let pt1 = 1; pt1 < path.length - 1; pt1++) {
       for (let pt2 = pt1 + 1; pt2 < path.length - 1; pt2++) {
         // section of the path to reverse
-        const section = path.slice(pt1, pt2 + 1)
+        const section = path.slice(pt1, pt2 + 1);
 
         // reverse section in place
-        section.reverse()
+        section.reverse();
 
         // replace section of path with reversed section in place
-        path.splice(pt1, pt2 + 1 - pt1, ...section)
+        path.splice(pt1, pt2 + 1 - pt1, ...section);
 
         // calculate new cost
-        const newPath = path
-        const cost = pathCost(newPath)
+        const newPath = path;
+        const cost = pathCost(newPath);
 
         self.setEvaluatingPaths(() => ({
           paths: [
@@ -46,27 +46,27 @@ const twoOptInversion = async path => {
             }
           ],
           cost
-        }))
-        await self.sleep()
+        }));
+        await self.sleep();
 
         if (cost < best) {
           // found a better path after the swap, keep it
-          swapped = true
-          best = cost
-          self.setBestPath(newPath, best)
+          swapped = true;
+          best = cost;
+          self.setBestPath(newPath, best);
         } else {
           // un-reverse the section
-          section.reverse()
-          path.splice(pt1, pt2 + 1 - pt1, ...section)
+          section.reverse();
+          path.splice(pt1, pt2 + 1 - pt1, ...section);
         }
 
         self.setEvaluatingPaths(() => ({
           paths: [{ path, color: EVALUATING_SEGMENT_COLOR }]
-        }))
-        await self.sleep()
+        }));
+        await self.sleep();
       }
     }
   }
-}
+};
 
-makeSolver(twoOptInversion)
+makeSolver(twoOptInversion);

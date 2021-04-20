@@ -1,4 +1,4 @@
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby";
 
 export const useAlgorithmInfo = () => {
   const {
@@ -36,10 +36,10 @@ export const useAlgorithmInfo = () => {
         }
       }
     }
-  `)
+  `);
 
   return algorithms.map(alg => ({
     ...alg.node.frontmatter,
     html: alg.node.html
-  }))
-}
+  }));
+};

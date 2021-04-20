@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react"
-import { useSelector } from "react-redux"
-import { Grid, Typography } from "@material-ui/core"
-import * as selectors from "../store/selectors"
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Grid, Typography } from "@material-ui/core";
+import * as selectors from "../store/selectors";
 
-import { MenuSection } from "./MenuSection"
-import { MenuItem } from "./MenuItem"
-import { makeStyles } from "@material-ui/styles"
+import { MenuSection } from "./MenuSection";
+import { MenuItem } from "./MenuItem";
+import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -16,23 +16,23 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0,
     width: "2rem"
   }
-}))
+}));
 
 export const MenuMetrics = props => {
-  const classes = useStyles()
-  const best = useSelector(selectors.selectBestCostDisplay)
-  const evaluating = useSelector(selectors.selectEvaluatingCostDisplay)
-  const startedRunningAt = useSelector(selectors.selectStartedRunningAt)
-  const [runningFor, setRunningFor] = useState(0)
+  const classes = useStyles();
+  const best = useSelector(selectors.selectBestCostDisplay);
+  const evaluating = useSelector(selectors.selectEvaluatingCostDisplay);
+  const startedRunningAt = useSelector(selectors.selectStartedRunningAt);
+  const [runningFor, setRunningFor] = useState(0);
 
   useEffect(() => {
     if (startedRunningAt) {
       const interval = setInterval(() => {
-        setRunningFor(Math.floor((Date.now() - startedRunningAt) / 1000))
-      }, 1000)
-      return () => clearInterval(interval)
+        setRunningFor(Math.floor((Date.now() - startedRunningAt) / 1000));
+      }, 1000);
+      return () => clearInterval(interval);
     }
-  }, [startedRunningAt])
+  }, [startedRunningAt]);
 
   return (
     <MenuSection>
@@ -118,5 +118,5 @@ export const MenuMetrics = props => {
         </Grid>
       </MenuItem>
     </MenuSection>
-  )
-}
+  );
+};

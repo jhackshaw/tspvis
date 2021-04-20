@@ -1,28 +1,28 @@
 /* eslint-disable no-restricted-globals */
-import makeSolver from "../makeSolver"
-import { pathCost } from "../cost"
+import makeSolver from "../makeSolver";
+import { pathCost } from "../cost";
 
 import {
   EVALUATING_PATH_COLOR,
   EVALUATING_SEGMENT_COLOR
-} from "../../constants"
+} from "../../constants";
 
 const twoOptReciprocalExchange = async path => {
-  path.push(path[0])
-  let best = pathCost(path)
-  let swapped = true
+  path.push(path[0]);
+  let best = pathCost(path);
+  let swapped = true;
 
-  self.setBestPath(path, best)
+  self.setBestPath(path, best);
 
   while (swapped) {
-    swapped = false
+    swapped = false;
     for (let pt1 = 1; pt1 < path.length - 1; pt1++) {
       for (let pt2 = pt1 + 1; pt2 < path.length - 1; pt2++) {
         // swap current pair of points
-        ;[path[pt1], path[pt2]] = [path[pt2], path[pt1]]
+        [path[pt1], path[pt2]] = [path[pt2], path[pt1]];
 
         // calculate new cost
-        const cost = pathCost(path)
+        const cost = pathCost(path);
 
         self.setEvaluatingPaths(() => ({
           paths: [
@@ -39,27 +39,27 @@ const twoOptReciprocalExchange = async path => {
             }
           ],
           cost
-        }))
-        await self.sleep()
+        }));
+        await self.sleep();
 
         if (cost < best) {
           // found a better path after the swap, keep it
-          swapped = true
-          best = cost
-          self.setBestPath(path, best)
+          swapped = true;
+          best = cost;
+          self.setBestPath(path, best);
         } else {
           // swap back - this one's worse
-          ;[path[pt1], path[pt2]] = [path[pt2], path[pt1]]
+          [path[pt1], path[pt2]] = [path[pt2], path[pt1]];
         }
 
         self.setEvaluatingPath(() => ({
           path: { path, color: EVALUATING_SEGMENT_COLOR }
-        }))
+        }));
 
-        await self.sleep()
+        await self.sleep();
       }
     }
   }
-}
+};
 
-makeSolver(twoOptReciprocalExchange)
+makeSolver(twoOptReciprocalExchange);
