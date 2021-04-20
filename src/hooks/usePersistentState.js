@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 export const usePersistentState = (key, defaultValue = undefined) => {
   const [value, setValue] = useState(() => {
-    const existing = localStorage.getItem(key)
+    const existing = localStorage?.getItem(key)
     if (existing) {
       return existing
     }

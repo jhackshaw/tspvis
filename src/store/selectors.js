@@ -28,6 +28,8 @@ export const selectRunning = state => state.running
 
 export const selectFullSpeed = state => state.fullSpeed
 
+export const selectPaused = state => state.paused
+
 export const selectStartedRunningAt = state => state.startedRunningAt
 
 //

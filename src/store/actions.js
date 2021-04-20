@@ -10,6 +10,8 @@ export const SET_EVALUATING_DETAIL_LEVEL = "SET_EVALUATING_DETAIL_LEVEL"
 export const SET_SHOW_BEST_PATH = "SET_SHOW_BEST_PATH"
 export const START_SOLVING = "START_SOLVING"
 export const GO_FULL_SPEED = "GO_FULL_SPEED"
+export const PAUSE = "PAUSE"
+export const UNPAUSE = "UNPAUSE"
 export const STOP_SOLVING = "STOP_SOLVING"
 
 export const SET_BEST_PATH = "SET_BEST_PATH"
@@ -113,6 +115,14 @@ export const startSolving = (...args) => (dispatch, getState) => {
 
 export const goFullSpeed = () => ({
   type: GO_FULL_SPEED
+})
+
+export const pause = () => ({
+  type: PAUSE
+})
+
+export const unpause = () => ({
+  type: UNPAUSE
 })
 
 export const stopSolving = () => dispatch => {

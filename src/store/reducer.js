@@ -55,6 +55,7 @@ const initialState = {
   evaluatingCost: null,
   running: false,
   fullSpeed: false,
+  paused: false,
   startedRunningAt: null,
 
   pointCount: usTop12.length,
@@ -144,6 +145,20 @@ export default (state = initialState, action) => {
         evaluatingDetailLevel: 0,
         evaluatingPaths: [],
         fullSpeed: true
+      }
+
+    case actions.PAUSE:
+      return {
+        ...state,
+        paused: true,
+        running: false
+      }
+
+    case actions.UNPAUSE:
+      return {
+        ...state,
+        paused: false,
+        running: true
       }
 
     case actions.STOP_SOLVING:
