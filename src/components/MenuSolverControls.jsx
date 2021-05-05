@@ -149,7 +149,7 @@ export const MenuSolverControls = ({
 
             <Button
               onClick={paused ? onStop : onFullSpeed}
-              disabled={(!running && !paused) || definingPoints}
+              disabled={(!running && !paused) || definingPoints || fullSpeed}
             >
               <FontAwesomeIcon
                 icon={paused ? faStop : faFastForward}
