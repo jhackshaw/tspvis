@@ -44,15 +44,6 @@ export const MenuHeader = props => {
           <FontAwesomeIcon icon={faBriefcase} width="0" /> TSPVIS
         </Typography>
         <Typography gutterBottom display="inline" color="textSecondary">
-          <Tooltip title="Support this site">
-            <IconButton
-              target="_blank"
-              href="https://www.buymeacoffee.com/jhackshaw"
-            >
-              <FontAwesomeIcon icon={faDonate} size="xs" width="0" />
-            </IconButton>
-          </Tooltip>
-
           <Tooltip title="Source code">
             <IconButton
               target="_blank"
