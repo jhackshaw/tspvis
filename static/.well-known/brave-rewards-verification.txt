@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: tspvis.com
+Token: b687d7e75fc19d979ab3ab8b264164a91d8206d0bb2ffa33334069d9092406b1
