@@ -23,7 +23,7 @@
     "gatsby-source-filesystem": "^2.11.1",
     "gatsby-transformer-remark": "^2.16.1",
     "gh-pages": "^2.2.0",
-    "prismjs": "^1.23.0",
+    "prismjs": "^1.25.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^5.2.1",
