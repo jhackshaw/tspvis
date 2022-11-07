@@ -112,7 +112,7 @@ export const MenuPointControls = ({ onRandomizePoints }) => {
           min={3}
           max={200}
           valueLabelDisplay="auto"
-          color="secondary"
+          color="red"
           disabled={running || definingPoints}
         />
       </MenuItem>
