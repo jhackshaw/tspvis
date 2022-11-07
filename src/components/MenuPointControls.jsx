@@ -20,11 +20,17 @@ import { MenuSection } from "./MenuSection";
 import { MenuItem } from "./MenuItem";
 import * as selectors from "../store/selectors";
 import * as actions from "../store/actions";
+import { GridLayer } from "deck.gl";
 
 const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 1
-  }
+  }, 
+  unselected: {
+    color: "gray",
+    borderColor: "gray", 
+    hoverColor: "secondary"
+  }, 
 }));
 
 // [0, 1/2, 1, 3, 12]
@@ -50,16 +56,33 @@ const possRoutes = n => {
 export const MenuPointControls = ({ onRandomizePoints }) => {
   const classes = useStyles();
   const [possiblePaths, setPossiblePaths] = useState("0");
+  const [selectedPointButton, setSelectedPointButton] = useState("Map")
   const dispatch = useDispatch();
   const pointCount = useSelector(selectors.selectPointCount);
   const running = useSelector(selectors.selectRunning);
   const definingPoints = useSelector(selectors.selectDefiningPoints);
+
+  const randomButtonHandler = () => {
+    onRandomizePoints();
+    setSelectedPointButton('Random');
+  };
+
+  const pointerButtonHandler = () => {
+    onToggleDefiningPoints();
+    setSelectedPointButton('Pointer');
+  };
+
+  const mapButtonHandler = () => {
+    onDefaultMap();
+    setSelectedPointButton('Map');
+  }
 
   const onDefaultMap = () => {
     dispatch(actions.setDefaultMap());
   };
 
   const onToggleDefiningPoints = () => {
+    console.log(pointCount);
     const action = definingPoints
       ? actions.stopDefiningPoints()
       : actions.startDefiningPoints();
@@ -68,6 +91,7 @@ export const MenuPointControls = ({ onRandomizePoints }) => {
 
   const onPointCountChange = (_, newCount) => {
     dispatch(actions.setPointCount(newCount));
+    onRandomizePoints();
   };
 
   useEffect(() => {
@@ -87,18 +111,25 @@ export const MenuPointControls = ({ onRandomizePoints }) => {
           disabled={running}
         >
           <Button
-            onClick={onRandomizePoints}
-            disabled={definingPoints || pointCount < 3}
+            classes={selectedPointButton !== "Random"? { root: classes.unselected } : null}
+            onClick={randomButtonHandler}
+            disabled={definingPoints}
           >
             <FontAwesomeIcon icon={faRandom} width="0" />
           </Button>
-          <Button onClick={onToggleDefiningPoints}>
+          <Button 
+            classes={selectedPointButton !== "Pointer"? { root: classes.unselected } : null}
+            onClick={pointerButtonHandler}
+          >
             <FontAwesomeIcon
               icon={definingPoints ? faSave : faMousePointer}
               width="0"
             />
           </Button>
-          <Button disabled={definingPoints} onClick={onDefaultMap}>
+          <Button 
+            classes={selectedPointButton !== "Map"? { root: classes.unselected } : null}
+            onClick={mapButtonHandler}
+          >
             <FontAwesomeIcon icon={faMapMarked} width="0" />
           </Button>
         </ButtonGroup>
@@ -113,8 +144,10 @@ export const MenuPointControls = ({ onRandomizePoints }) => {
           max={200}
           valueLabelDisplay="auto"
           color="secondary"
-          disabled={running || definingPoints}
-        />
+          disabled={(selectedPointButton !== "Random") ||
+                    running
+                  }
+          />
       </MenuItem>
       <MenuItem row>
         <Grid item container justify="space-between">
