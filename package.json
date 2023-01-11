@@ -21,7 +21,7 @@
     "gatsby-plugin-react-helmet": "^3.10.0",
     "gatsby-remark-prismjs": "^3.13.0",
     "gatsby-source-filesystem": "^2.11.1",
-    "gatsby-transformer-remark": "^2.16.1",
+    "gatsby-transformer-remark": "^5.25.1",
     "gh-pages": "^2.2.0",
     "prismjs": "^1.23.0",
     "react": "^16.13.1",
