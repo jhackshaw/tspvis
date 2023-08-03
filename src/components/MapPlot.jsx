@@ -77,25 +77,26 @@ export const MapPlot = React.forwardRef((props, ref) => {
       mapStyle={mapStyle}
     >
       {running && <LinearProgress color="secondary" />}
-      <DeckGL viewState={viewport}>
-        <PathLayer
-          id="path-layer"
-          data={plotPaths}
-          getPath={d => d.path}
-          getColor={d => d.color}
-          pickable={true}
-          widthMinPixels={4}
-          widthMaxPixels={8}
-        />
-        <ScatterplotLayer
-          id="scatter-layer"
-          data={plotPoints}
-          pickable={true}
-          opacity={0.8}
-          getFillColor={p => p.color}
-          radiusMinPixels={6}
-          raduisMaxPixels={8}
-        />
+      <DeckGL viewState={viewport} layers={[
+        new PathLayer({
+          id: "path-layer",
+          data: plotPaths,
+          getPath: d => d.path,
+          getColor: d => d.color,
+          pickable: true,
+          widthMinPixels: 4,
+          widthMaxPixels: 8,
+        }),
+        new ScatterplotLayer({
+          id: "scatter-layer",
+          data: plotPoints,
+          pickable: true,
+          opacity: 0.8,
+          getFillColor: p => p.color,
+          radiusMinPixels: 6,
+          radiusMaxPixels: 8
+        })
+      ]}>
       </DeckGL>
       {children}
     </MapGL>
