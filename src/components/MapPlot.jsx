@@ -62,7 +62,7 @@ export const MapPlot =  React.forwardRef((props, ref) => {
   const onDefinedPoint = ({ lngLat }) => {
     dispatch(actions.addDefinedPoint(lngLat));
   };
-  const layers = [
+  const layers = useMemo(() => [
     new PathLayer({
       id: "path-layer",
       data: plotPaths,
@@ -79,9 +79,10 @@ export const MapPlot =  React.forwardRef((props, ref) => {
       opacity: 0.8,
       getFillColor: p => p.color,
       radiusMinPixels: 6,
-      raduisMaxPixels: 8
+      radiusMaxPixels: 8
     })
-  ];
+  ], [plotPaths, plotPoints]);
+  
   return (
 
     <MapGL
