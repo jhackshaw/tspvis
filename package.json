@@ -15,7 +15,7 @@
     "gatsby": "^2.32.12",
     "gatsby-cli": "^2.19.2",
     "gatsby-plugin-google-tagmanager": "^2.11.0",
-    "gatsby-plugin-manifest": "^2.12.1",
+    "gatsby-plugin-manifest": "^5.13.1",
     "gatsby-plugin-material-ui": "^2.1.6",
     "gatsby-plugin-offline": "^3.10.2",
     "gatsby-plugin-react-helmet": "^3.10.0",
