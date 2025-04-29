@@ -1,5 +1,4 @@
 import gtmEmit from "./emitCustomEvent";
-import { UPDATE_POINTS } from './actionTypes';
 
 export const SET_VIEWPORT_STATE = "SET_VIEWPORT_STATE";
 
@@ -28,6 +27,8 @@ export const SET_DEFAULT_MAP = "SET_DEFAULT_MAP";
 
 export const TOGGLE_SITE_INFO_OPEN = "TOGGLE_SITE_INFO_OPEN";
 export const TOGGLE_ALG_INFO_OPEN = "TOGGLE_ALG_INFO_OPEN";
+
+export const UPDATE_POINTS = 'UPDATE_POINTS';
 
 const getRandomPoint = (max, min) => Math.random() * (max - min) + min;
 

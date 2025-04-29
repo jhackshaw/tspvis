@@ -1,5 +1,4 @@
 import * as actions from "./actions";
-import { UPDATE_POINTS } from '../store/actionTypes';
 
 const usTop12 = [
   [-73.85835427500902, 40.56507951957753],
@@ -237,7 +236,7 @@ const reducer = (state = initialState, action) => {
         pointCount: usTop12.length
       };
 
-    case UPDATE_POINTS:
+    case actions.UPDATE_POINTS:
       return {
         ...state,
         points: action.payload,
