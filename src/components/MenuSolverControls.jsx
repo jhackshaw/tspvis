@@ -81,10 +81,6 @@ export const MenuSolverControls = ({
     dispatch(actions.toggleAlgInfoOpen());
   };
 
-  const onUpdateCoordinates = () => {
-    // Add your logic to update coordinates here
-  };
-
   return (
     <>
       <MenuSection highlight>
