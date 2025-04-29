@@ -237,6 +237,15 @@ export const MenuSolverControls = ({
         </MenuItem>
       </MenuSection>
       <MenuSection title="Enter Coordinates">
+      <Grid item xs={10}>
+                <Typography
+                  variant="button"
+                  color="textSecondary"
+                  component="div"
+                >
+                  Add custom list of coordinates
+                </Typography>
+              </Grid>
         <CoordinateInput />
       </MenuSection>
     </>
