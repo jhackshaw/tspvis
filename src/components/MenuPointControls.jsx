@@ -117,7 +117,7 @@ export const MenuPointControls = ({ onRandomizePoints }) => {
         />
       </MenuItem>
       <MenuItem row>
-        <Grid item container justify="space-between">
+        <Grid item container justifyContent="space-between">
           <Typography
             display="inline"
             variant="button"

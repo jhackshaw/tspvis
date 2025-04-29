@@ -48,7 +48,7 @@ export const selectViewport = state => state.viewport;
 export const selectPoints = state => state.points;
 export const selectPointsDisplay = createSelector(selectPoints, points =>
   points.map((p, idx) => ({
-    position: [p[1], p[0]], // Ensure the order is [longitude, latitude]
+    position: [p[0], p[1]], // Correct order: [longitude, latitude]
     color: idx === 0 ? START_POINT_COLOR : POINT_COLOR
   }))
 );

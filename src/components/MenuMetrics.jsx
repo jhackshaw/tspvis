@@ -37,7 +37,7 @@ export const MenuMetrics = props => {
   return (
     <MenuSection>
       <MenuItem row>
-        <Grid item container justify="space-between">
+        <Grid item container justifyContent="space-between">
           <Typography
             display="inline"
             variant="button"
@@ -63,7 +63,7 @@ export const MenuMetrics = props => {
             km
           </Typography>
         </Grid>
-        <Grid item container justify="space-between">
+        <Grid item container justifyContent="space-between">
           <Typography
             display="inline"
             variant="button"
@@ -90,7 +90,7 @@ export const MenuMetrics = props => {
           </Typography>
         </Grid>
 
-        <Grid item container justify="space-between">
+        <Grid item container justifyContent="space-between">
           <Typography
             display="inline"
             variant="button"

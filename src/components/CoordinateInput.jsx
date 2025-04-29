@@ -10,23 +10,47 @@ const CoordinateInput = () => {
   const viewport = useSelector(selectors.selectViewport);
 
   const handleUpdate = () => {
+    console.log('Raw coordinates input:', coordinates);
+
     const parsedCoordinates = coordinates
       .split('\n')
       .map(line => {
         const [lat, lng] = line.split(',').map(coord => parseFloat(coord.trim()));
+        if (
+          isNaN(lat) ||
+          isNaN(lng) ||
+          lat < -90 ||
+          lat > 90 ||
+          lng < -180 ||
+          lng > 180
+        ) {
+          console.error(`Invalid coordinate: ${line}`);
+          return null;
+        }
         return [lat, lng];
       })
-      .filter(coord => !isNaN(coord[0]) && !isNaN(coord[1]));
+      .filter(coord => coord !== null);
+
+    console.log('Parsed coordinates:', parsedCoordinates);
 
     if (parsedCoordinates.length > 0) {
       dispatch(updatePoints(parsedCoordinates));
-      const [firstLat, firstLng] = parsedCoordinates[0];
-      dispatch(actions.setViewportState({
-        ...viewport,
+      const [firstLng, firstLat] = parsedCoordinates[0];
+      console.log('Updating viewport to:', {
         latitude: firstLat,
         longitude: firstLng,
         zoom: 10
-      }));
+      });
+      dispatch(
+        actions.setViewportState({
+          ...viewport,
+          latitude: firstLat,
+          longitude: firstLng,
+          zoom: 10
+        })
+      );
+    } else {
+      console.error('No valid coordinates provided.');
     }
   };
 

@@ -33,7 +33,7 @@ export const MenuHeader = props => {
 
   return (
     <MenuSection>
-      <Grid container justify="space-between" alignItems="center">
+      <Grid container justifyContent="space-between" alignItems="center">
         <Typography
           gutterBottom
           display="inline"
