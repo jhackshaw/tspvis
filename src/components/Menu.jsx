@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     flexWrap: "nowrap",
-    alginItems: "flex-start",
+    alignItems: "flex-start",
     zIndex: 100
   },
   [theme.breakpoints.down("sm")]: {
