@@ -44,6 +44,11 @@ const IndexPage = () => {
   }, [mapRef, dispatch, pointCount, definingPoints]);
 
   const start = useCallback(() => {
+    if (points.length < 2) {
+      console.error("Not enough points to start solving.");
+      return;
+    }
+
     dispatch(actions.startSolving(points, delay, evaluatingDetailLevel));
     solver.postMessage(
       actions.startSolvingAction(points, delay, evaluatingDetailLevel)
