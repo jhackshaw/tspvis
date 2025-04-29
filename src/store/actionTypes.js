@@ -1,0 +1,1 @@
+export const UPDATE_POINTS = 'UPDATE_POINTS';

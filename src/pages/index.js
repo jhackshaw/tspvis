@@ -13,7 +13,8 @@ import {
   MapPlot,
   Menu,
   SEO,
-  ThemeToggle
+  ThemeToggle,
+  CoordinateInput
 } from "../components";
 import { useSolverWorker, useAlgorithmInfo } from "../hooks";
 import * as selectors from "../store/selectors";
@@ -95,6 +96,7 @@ const IndexPage = () => {
         onStop={stop}
         onRandomizePoints={onRandomizePoints}
       />
+      <CoordinateInput />
       <MapPlot ref={mapRef}></MapPlot>
     </Layout>
   );

@@ -1,4 +1,6 @@
 import gtmEmit from "./emitCustomEvent";
+import { UPDATE_POINTS } from './actionTypes';
+
 export const SET_VIEWPORT_STATE = "SET_VIEWPORT_STATE";
 
 export const RESET_EVALUATING_STATE = "RESET_EVALUATING_STATE";
@@ -207,3 +209,8 @@ export const setDefaultMap = (...args) => dispatch => {
   dispatch(resetSolverState());
   dispatch(setDefaultMapAction());
 };
+
+export const updatePoints = (points) => ({
+  type: UPDATE_POINTS,
+  payload: points,
+});

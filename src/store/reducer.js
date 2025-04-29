@@ -1,4 +1,5 @@
 import * as actions from "./actions";
+import { UPDATE_POINTS } from '../store/actionTypes';
 
 const usTop12 = [
   [-73.85835427500902, 40.56507951957753],
@@ -65,7 +66,7 @@ const initialState = {
   algInfoOpen: false
 };
 
-export default (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.TOGGLE_SITE_INFO_OPEN:
       return {
@@ -236,7 +237,16 @@ export default (state = initialState, action) => {
         pointCount: usTop12.length
       };
 
+    case UPDATE_POINTS:
+      return {
+        ...state,
+        points: action.payload,
+        pointCount: action.payload.length,
+      };
+
     default:
       return state;
   }
 };
+
+export default reducer;
