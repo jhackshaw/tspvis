@@ -1,4 +1,3 @@
-
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e21365cc-96a9-4649-9ad2-a35bb42d4a9f/deploy-status)](https://app.netlify.com/sites/tspvis/deploys)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Live Demo](https://img.shields.io/badge/demo-online-green.svg)](https://tspvis.com)
@@ -64,3 +63,51 @@ These are the main tools used to build this site:
 ## Contributing
 
 Pull requests are always welcome! Also, feel free to raise any ideas, suggestions, or bugs as an issue.
+
+## Instructions on How to Install
+
+To set up the project locally, follow these steps:
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/jhackshaw/tspvis.git
+   cd tspvis
+   ```
+
+2. **Install libvips**:
+   On macOS, you can install libvips using Homebrew:
+   ```bash
+   brew install vips
+   ```
+
+3. **Install dependencies**:
+   Ensure you have [Node.js](https://nodejs.org/) installed. Then, run:
+   ```bash
+   npm install
+   ```
+
+4. **Start the development server**:
+   To run the project locally, use:
+   ```bash
+   npm run develop
+   ```
+   This will start a local development server, typically accessible at `http://localhost:8000`.
+
+5. **Build for production**:
+   If you want to create a production build, run:
+   ```bash
+   npm run build
+   ```
+   The output will be in the `public/` directory.
+
+6. **Serve the production build**:
+   To test the production build locally, use:
+   ```bash
+   npm run serve
+   ```
+
+7. **Clean the cache**:
+   If you encounter issues, you can clean the Gatsby cache and public directories:
+   ```bash
+   npm run clean
+   ```
