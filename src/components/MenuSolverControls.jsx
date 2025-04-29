@@ -26,6 +26,7 @@ import { MenuItem } from "./MenuItem";
 import { useAlgorithmInfo } from "../hooks";
 import * as actions from "../store/actions";
 import * as selectors from "../store/selectors";
+import CoordinateInput from './CoordinateInput';
 
 export const MenuSolverControls = ({
   onStart,
@@ -78,6 +79,10 @@ export const MenuSolverControls = ({
 
   const onShowAlgInfo = () => {
     dispatch(actions.toggleAlgInfoOpen());
+  };
+
+  const onUpdateCoordinates = () => {
+    // Add your logic to update coordinates here
   };
 
   return (
@@ -230,6 +235,9 @@ export const MenuSolverControls = ({
             </>
           )}
         </MenuItem>
+      </MenuSection>
+      <MenuSection title="Enter Coordinates">
+        <CoordinateInput />
       </MenuSection>
     </>
   );

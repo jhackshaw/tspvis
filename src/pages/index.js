@@ -101,7 +101,6 @@ const IndexPage = () => {
         onStop={stop}
         onRandomizePoints={onRandomizePoints}
       />
-      <CoordinateInput />
       <MapPlot ref={mapRef}></MapPlot>
     </Layout>
   );
