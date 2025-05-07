@@ -29,6 +29,7 @@ export const Menu = ({
   onUnPause,
   onFullSpeed,
   onStop,
+  onStep,
   onRandomizePoints
 }) => {
   const classes = useStyles();
@@ -43,6 +44,7 @@ export const Menu = ({
         onPause={onPause}
         onUnPause={onUnPause}
         onStop={onStop}
+        onStep={onStep} 
         onFullSpeed={onFullSpeed}
       />
       <Divider />
