@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {ButtonGroup, Button, TextField} from "@material-ui/core";
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePoints } from '../store/actions';
 import * as selectors from '../store/selectors';
@@ -56,28 +57,29 @@ const CoordinateInput = () => {
 
   return (
     <>
-      <textarea
+      <TextField
         placeholder="Enter coordinates (lat,lng) one per line"
         value={coordinates}
         onChange={e => setCoordinates(e.target.value)}
+        multiline
         rows={10}
-        cols={30}
-        style={{
-          width: '100%',
-          padding: '8px',
-          fontSize: '14px',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
-          boxSizing: 'border-box',
-          marginBottom: '10px'
-        }}
+        fullWidth
+        variant="outlined"
+        color="secondary"
       />
-      <button
-        onClick={handleUpdate}
-        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlinedSecondary MuiButton-outlinedSecondary MuiButton-outlinedSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+      <br />
+      <ButtonGroup
+          fullWidth
+          variant="outlined"
+          color="secondary"
+          size="large"
       >
-        Update Coordinates
-      </button>
+        <Button
+          onClick={handleUpdate}
+        >
+          Update Coordinates
+        </Button>
+      </ButtonGroup>
     </>
   );
 };
