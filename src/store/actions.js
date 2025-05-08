@@ -1,4 +1,5 @@
 import gtmEmit from "./emitCustomEvent";
+
 export const SET_VIEWPORT_STATE = "SET_VIEWPORT_STATE";
 
 export const RESET_EVALUATING_STATE = "RESET_EVALUATING_STATE";
@@ -27,6 +28,8 @@ export const SET_DEFAULT_MAP = "SET_DEFAULT_MAP";
 
 export const TOGGLE_SITE_INFO_OPEN = "TOGGLE_SITE_INFO_OPEN";
 export const TOGGLE_ALG_INFO_OPEN = "TOGGLE_ALG_INFO_OPEN";
+
+export const UPDATE_POINTS = 'UPDATE_POINTS';
 
 const getRandomPoint = (max, min) => Math.random() * (max - min) + min;
 
@@ -211,3 +214,8 @@ export const setDefaultMap = (...args) => dispatch => {
   dispatch(resetSolverState());
   dispatch(setDefaultMapAction());
 };
+
+export const updatePoints = (points) => ({
+  type: UPDATE_POINTS,
+  payload: points,
+});

@@ -33,7 +33,7 @@ export const MenuHeader = props => {
 
   return (
     <MenuSection>
-      <Grid container justify="space-between" alignItems="center">
+      <Grid container justifyContent="space-between" alignItems="center">
         <Typography
           gutterBottom
           display="inline"
@@ -65,7 +65,7 @@ export const MenuHeader = props => {
         controls below to plot points, choose an algorithm, and control
         execution.
         <br />
-        (Hint: try a construction alogorithm followed by an improvement
+        (Hint: try a construction algorithm followed by an improvement
         algorithm)
       </Typography>
     </MenuSection>

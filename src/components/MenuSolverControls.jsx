@@ -27,6 +27,7 @@ import { MenuItem } from "./MenuItem";
 import { useAlgorithmInfo } from "../hooks";
 import * as actions from "../store/actions";
 import * as selectors from "../store/selectors";
+import CoordinateInput from './CoordinateInput';
 
 export const MenuSolverControls = ({
   onStart,
@@ -226,6 +227,18 @@ export const MenuSolverControls = ({
             </>
           )}
         </MenuItem>
+      </MenuSection>
+      <MenuSection title="Enter Coordinates">
+      <Grid item xs={10}>
+                <Typography
+                  variant="button"
+                  color="textSecondary"
+                  component="div"
+                >
+                  Add custom list of coordinates
+                </Typography>
+              </Grid>
+        <CoordinateInput />
       </MenuSection>
     </>
   );

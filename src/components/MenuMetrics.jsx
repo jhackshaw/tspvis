@@ -28,8 +28,11 @@ export const MenuMetrics = props => {
   useEffect(() => {
     if (startedRunningAt) {
       const interval = setInterval(() => {
-        setRunningFor(Math.floor((Date.now() - startedRunningAt) / 1000));
-      }, 1000);
+        const elapsed = Date.now() - startedRunningAt;
+        const seconds = Math.floor(elapsed / 1000);
+        const milliseconds = Math.floor((elapsed % 1000) / 10); // Get two decimal places
+        setRunningFor(`${seconds}.${milliseconds.toString().padStart(2, '0')}`);
+      }, 100);
       return () => clearInterval(interval);
     }
   }, [startedRunningAt]);
@@ -37,7 +40,7 @@ export const MenuMetrics = props => {
   return (
     <MenuSection>
       <MenuItem row>
-        <Grid item container justify="space-between">
+        <Grid item container justifyContent="space-between">
           <Typography
             display="inline"
             variant="button"
@@ -63,7 +66,7 @@ export const MenuMetrics = props => {
             km
           </Typography>
         </Grid>
-        <Grid item container justify="space-between">
+        <Grid item container justifyContent="space-between">
           <Typography
             display="inline"
             variant="button"
@@ -90,7 +93,7 @@ export const MenuMetrics = props => {
           </Typography>
         </Grid>
 
-        <Grid item container justify="space-between">
+        <Grid item container justifyContent="space-between">
           <Typography
             display="inline"
             variant="button"

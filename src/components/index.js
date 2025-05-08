@@ -13,3 +13,4 @@ export * from "./MenuSolverControls";
 export * from "../context/PreSetTheme";
 export * from "./SEO";
 export * from "./ThemeToggle";
+export { default as CoordinateInput } from './CoordinateInput';

@@ -8,7 +8,7 @@ defaults:
   maxEvaluatingDetailLevel: 1
 ---
 
-# Arbitrary Insertion
+# Heuristic Construction: Arbitrary Insertion
 
 This is a heuristic construction algorithm. It select a random point, and then figures out where the best place to put it will be.
 

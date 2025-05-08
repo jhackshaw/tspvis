@@ -55,6 +55,12 @@ export const MapPlot =  React.forwardRef((props, ref) => {
     }
   }, [matches, dispatch]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    if (!viewport.latitude || !viewport.longitude) {
+      dispatch(actions.setViewportState(initialViewport));
+    }
+  }, [viewport, dispatch]);
+
   const onViewportChanged = viewport => {
     dispatch(actions.setViewportState(viewport));
   };
