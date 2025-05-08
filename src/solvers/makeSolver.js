@@ -13,12 +13,15 @@ export const makeSolver = solver => {
     detailLevel: 0,
     delay: 10,
     fullSpeed: false,
-    paused: false
-  };
+    paused: false,
+    stepRequested: false
+    };
+  
 
   self.setBestPath = (...args) => {
     self.postMessage(actions.setBestPath(...args));
   };
+  
 
   self.setEvaluatingPaths = (getPaths, level = 1) => {
     if (self.solverConfig.detailLevel >= level) {
@@ -34,30 +37,40 @@ export const makeSolver = solver => {
     }
   };
 
+
   self.waitPause = async () => {
-    while (self.solverConfig.paused) {
-      await new Promise(resolve => setTimeout(resolve, 500));
+    while (self.solverConfig.paused && !self.solverConfig.stepRequested) {
+      await new Promise(r => setTimeout(r, 50));
     }
   };
 
+
   self.sleep = async () => {
     if (self.solverConfig.paused) {
-      return await self.waitPause();
+      await self.waitPause();
     }
-    const duration = self.solverConfig.fullSpeed
-      ? 0
-      : self.solverConfig.delay || 10;
-    return new Promise(resolve => {
-      setTimeout(resolve, duration);
-    });
+
+    if (self.solverConfig.stepRequested) {
+      self.solverConfig.stepRequested = false;
+      return;
+    }
+
+    const ms = self.solverConfig.fullSpeed ? 0 : self.solverConfig.delay || 10;
+    return new Promise(r => setTimeout(r, ms));
   };
+
+
 
   self.onmessage = async ({ data: action }) => {
     switch (action.type) {
       case actions.START_SOLVING:
-        self.solverConfig.delay = action.delay;
-        self.solverConfig.detailLevel = action.evaluatingDetailLevel;
-        self.solverConfig.fullSpeed = action.fullSpeed;
+        Object.assign(self.solverConfig, {
+          delay: action.delay,
+          detailLevel: action.evaluatingDetailLevel,
+          fullSpeed: action.fullSpeed,
+          paused: false,
+          stepRequested: false
+        });
         run(action.points);
         break;
 
@@ -70,8 +83,9 @@ export const makeSolver = solver => {
         break;
 
       case actions.GO_FULL_SPEED:
-        self.solverConfig.evaluatingDetailLevel = 0;
         self.solverConfig.fullSpeed = true;
+        self.solverConfig.paused = false;
+        self.solverConfig.stepRequested = false;
         break;
 
       case actions.PAUSE:
@@ -80,6 +94,10 @@ export const makeSolver = solver => {
 
       case actions.UNPAUSE:
         self.solverConfig.paused = false;
+        break;
+
+      case actions.STEP_SOLVING:
+        self.solverConfig.stepRequested = true;
         break;
 
       default:

@@ -14,6 +14,7 @@ export const GO_FULL_SPEED = "GO_FULL_SPEED";
 export const PAUSE = "PAUSE";
 export const UNPAUSE = "UNPAUSE";
 export const STOP_SOLVING = "STOP_SOLVING";
+export const STEP_SOLVING = "STEP_SOLVING";
 
 export const SET_BEST_PATH = "SET_BEST_PATH";
 export const SET_EVALUATING_PATHS = "SET_EVALUATING_PATHS";
@@ -78,6 +79,9 @@ export const startSolvingAction = (points, delay, evaluatingDetailLevel) => ({
 
 export const stopSolvingAction = () => ({
   type: STOP_SOLVING
+});
+export const stepSolving = () => ({
+  type: STEP_SOLVING
 });
 
 export const setAlgorithm = (algorithm, defaults = {}) => dispatch => {

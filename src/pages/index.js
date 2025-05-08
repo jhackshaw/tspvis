@@ -75,6 +75,12 @@ const IndexPage = () => {
     solver.terminate();
   }, [solver, dispatch]);
 
+  const step = useCallback(() => {
+    dispatch(actions.stepSolving());
+     solver.postMessage(actions.stepSolving());
+   }, [solver, dispatch]);
+
+
   useEffect(() => {
     solver.postMessage(actions.setDelay(delay));
   }, [delay, solver]);
@@ -99,6 +105,7 @@ const IndexPage = () => {
         onUnPause={unpause}
         onFullSpeed={fullSpeed}
         onStop={stop}
+        onStep={step}
         onRandomizePoints={onRandomizePoints}
       />
       <MapPlot ref={mapRef}></MapPlot>

@@ -19,7 +19,8 @@ import {
   faRedo,
   faQuestion,
   faFastForward,
-  faPause
+  faPause,
+  faStepForward
 } from "@fortawesome/free-solid-svg-icons";
 import { MenuSection } from "./MenuSection";
 import { MenuItem } from "./MenuItem";
@@ -33,7 +34,8 @@ export const MenuSolverControls = ({
   onPause,
   onUnPause,
   onFullSpeed,
-  onStop
+  onStop,
+  onStep
 }) => {
   const dispatch = useDispatch();
   const algorithms = useAlgorithmInfo();
@@ -132,36 +134,30 @@ export const MenuSolverControls = ({
         </MenuItem>
 
         <MenuItem title="Controls">
-          <ButtonGroup
-            fullWidth
-            variant="outlined"
-            color="secondary"
-            size="large"
-          >
-            <Button
-              onClick={paused ? onUnPause : running ? onPause : onStart}
-              disabled={definingPoints || fullSpeed}
-            >
-              <FontAwesomeIcon
-                icon={paused ? faPlay : running ? faPause : faPlay}
-                width="0"
-              />
-            </Button>
+        <ButtonGroup fullWidth variant="outlined" color="secondary" size="large">
+  <Button
+    onClick={paused ? onUnPause : running ? onPause : onStart}
+    disabled={definingPoints || fullSpeed}
+  >
+    <FontAwesomeIcon icon={paused ? faPlay : running ? faPause : faPlay} width="0" />
+  </Button>
+  <Button
+    onClick={paused ? onStop : onFullSpeed}
+    disabled={(!running && !paused) || definingPoints || fullSpeed}
+  >
+    <FontAwesomeIcon icon={paused ? faStop : faFastForward} width="0" />
+  </Button>
+  <Button
+    onClick={onStep}
+    disabled={!paused || definingPoints || fullSpeed}
+  >
+    <FontAwesomeIcon icon={faStepForward} width="0" />
+  </Button>
+  <Button onClick={onReset} disabled={running || definingPoints}>
+    <FontAwesomeIcon icon={faRedo} width="0" />
+  </Button>
+</ButtonGroup>
 
-            <Button
-              onClick={paused ? onStop : onFullSpeed}
-              disabled={(!running && !paused) || definingPoints || fullSpeed}
-            >
-              <FontAwesomeIcon
-                icon={paused ? faStop : faFastForward}
-                width="0"
-              />
-            </Button>
-
-            <Button onClick={onReset} disabled={running || definingPoints}>
-              <FontAwesomeIcon icon={faRedo} width="0" />
-            </Button>
-          </ButtonGroup>
         </MenuItem>
         <MenuItem title="Delay">
           <Slider
