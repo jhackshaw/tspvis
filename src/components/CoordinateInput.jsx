@@ -36,7 +36,7 @@ const CoordinateInput = () => {
 
     if (parsedCoordinates.length > 0) {
       dispatch(updatePoints(parsedCoordinates));
-      const [firstLng, firstLat] = parsedCoordinates[0];
+      const [firstLat, firstLng] = parsedCoordinates[0];
       console.log('Updating viewport to:', {
         latitude: firstLat,
         longitude: firstLng,
