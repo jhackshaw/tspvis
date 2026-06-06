@@ -10,9 +10,10 @@ import * as actions from "../store/actions";
 import * as selectors from "../store/selectors";
 import { useThemeContext } from "../context";
 
-// not secret
-const TOKEN =
-  "pk.eyJ1IjoiaW50cmVwaWRldiIsImEiOiJjazBpa2M5YnowMHcyM21ubzgycW8zZHJmIn0.DCO2aRA6MJweC8HN-d_cgQ";
+const MAP_STYLES = {
+  dark: "https://tiles.openfreemap.org/styles/dark",
+  light: "https://tiles.openfreemap.org/styles/positron"
+};
 
 export const MapPlot =  React.forwardRef((props, ref) => {
   const { children } = props;
@@ -26,8 +27,9 @@ export const MapPlot =  React.forwardRef((props, ref) => {
   const definingPoints = useSelector(selectors.selectDefiningPoints);
   const mapStyle = useMemo(() =>
     colorMode === "dark"
-      ? "mapbox://styles/mapbox/dark-v8"
-      : "mapbox://styles/mapbox/light-v8"
+      ? MAP_STYLES.dark
+      : MAP_STYLES.light,
+    [colorMode]
   );
   const dispatch = useDispatch();
 
@@ -98,7 +100,6 @@ export const MapPlot =  React.forwardRef((props, ref) => {
       height={matches ? "50%" : "100%"}
       maxPitch={0}
       onViewportChange={onViewportChanged}
-      mapboxApiAccessToken={TOKEN}
       disableTokenWarning={true}
       onNativeClick={definingPoints && onDefinedPoint}
       doubleClickZoom={false}

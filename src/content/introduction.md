@@ -47,7 +47,8 @@ These are the main tools used to build this site:
 - [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)
 - [material-ui](https://material-ui.com/)
 - [deck.gl](https://deck.gl/#/)
-- [mapbox](https://www.mapbox.com/)
+- [OpenFreeMap](https://openfreemap.org/)
+- [OpenStreetMap](https://www.openstreetmap.org/)
 
 ## Contributing
 
