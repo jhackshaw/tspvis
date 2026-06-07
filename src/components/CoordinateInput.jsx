@@ -28,7 +28,7 @@ const CoordinateInput = () => {
           console.error(`Invalid coordinate: ${line}`);
           return null;
         }
-        return [lat, lng];
+        return [lng, lat];
       })
       .filter(coord => coord !== null);
 
